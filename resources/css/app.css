@@ -1,0 +1,424 @@
+body{
+    background-color: rgb(0 , 221, 170, 0.4);
+    min-width: 403px;
+}
+
+p {
+    word-break: break-word;
+}
+
+.contenedorDeP {
+    overflow-y: scroll;
+}
+
+section{
+    min-width: 403px;
+}
+
+main{
+    margin: auto;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.miTextArea textarea{
+    resize: none;
+    margin: 5%;
+    width: 90%;
+    height: 100px;
+}
+
+.imagenGERC{
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+#imagenGER {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.formStyle{
+    margin-top: 50px;
+    margin: 30px;
+    display : grid;
+    gap: 20px;
+}
+
+@media screen and (max-width: 992px){
+    .formStyle{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 700px){
+    main {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .mostrar{
+        display: flex;
+        margin-left: 10px;
+    }
+}
+
+/*aDrian*/
+
+#contenedor {
+    position: relative;
+    height: 900px;
+}
+
+#lbDetalles{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 50px;
+    margin-right: 185px;
+    margin-bottom: 20px;
+}
+
+.labels{
+    
+    position: relative;
+    padding: 15px;
+    width: 180px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.texto{
+    width: 250px;
+    color: black;
+    border-color: rgb(240, 255, 240, 0.4);
+    border-bottom: 2px solid;
+    border-bottom-color: black;
+    text-align: center;
+}
+
+#tarjeta-datos{
+    display: block;
+    transition: .5s ease all;
+    background-color: rgb( 240, 255, 240, 0.7);
+    border-color: rgb( 240, 255, 240, 0.4);
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 15%;
+    padding: 30px;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 40px;
+    transition: 0.3s;
+}
+
+#img-usuario{
+    position: absolute;
+    background-color: white;
+    border-width: 2px;
+    border-color: #22ddaa;
+    width: 26%;
+    height: 200px;
+    top: 5%;
+    left: 5%;
+}
+
+#imagen{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1150px) {
+    #tarjeta-datos{
+        top: 100px;
+        left: 9%;
+        right: 9%;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #tarjeta-datos{
+        top: 50px;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    #contenedor { 
+        height: 1180px;
+    }
+
+    #lbDetalles{
+        display: block;
+        text-align: center;
+        padding-top: 300px;
+        padding-right: 0px;
+        margin: 0 auto;
+    }
+
+    #tarjeta-datos{
+        padding: 0%;
+        padding-bottom: 20px;
+    }
+
+    .labels{
+        display: block;
+        position: relative;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .texto{
+        display: block;
+        position: relative;
+        width: 80%;
+        height: 30px;
+        padding: 0%;
+        margin: 0 auto;
+    }
+
+    #img-usuario{
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 5%;
+        left: 0%;
+        right: 0%;
+        margin: 0 auto;
+    }
+}
+
+/*LOGIN*/
+
+#main-login {
+    display: block;
+}
+
+#contenedor-login {
+    position: relative;
+    height: 700px;
+}
+
+#label-login-logo {
+    color: #22ddaa;
+    text-align: center;
+    transition: 0.6s;
+}
+
+#cont-label-logo {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+#cont-logo {
+    width: 50%;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+#cont-datos-login {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.input-login {
+    margin-top: 20px;
+    margin-right: 10%;
+    width: 100%;
+}
+
+#boton-login {
+    margin-top: 20px;
+    margin-right: 10%;
+    width: 80%;
+}
+
+#cont-label-login {
+    text-align: center;
+    padding: 0 10%;
+    margin-top: 20px;
+}
+
+#label-login {
+    font-size: 20px;
+    text-align: center;
+}
+
+.link-login {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 17px;
+    padding: 0 10%;
+}
+
+@media only screen and (max-width: 840px) {
+    #cont-label-logo {
+        font-size: 30px;
+    }
+
+    #contenedor-login {
+        height: 625px;
+    }
+}
+
+#fondo {
+    display: flex;
+    justify-content: center;
+}
+
+#cont-icono-editar {
+    position: relative;
+    width: 60px;
+    top: 35px;
+    margin-left: 90%;
+    border: 2px solid #22ddaa;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#icono-editar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#cont-iconos-edicion {
+    margin-top: 30px;
+}
+
+#cont-icono-atras {
+    position: relative;
+    width: 50px;
+    float: left;
+    margin-left: 20px;
+    border: 2px solid red;
+    cursor: pointer;
+}
+
+#icono-atras {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#cont-icono-guardar {
+    position: relative;
+    width: 50px;
+    margin-right: 20px;
+    float: right;
+    border: 2px solid #00f;
+    cursor: pointer;
+}
+
+#icono-guardar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#input-file {
+    display: none;
+}
+
+#cont-input-imagen {
+    position: relative;
+    text-align: center;
+    top: 240px;
+    width: 30%;
+}
+
+.btm-input-file {
+    transition: .3s ease all;
+    border-radius: 5px;
+    color: white;
+    border-style: solid;
+    background-color: rgb(0, 221, 170);
+    border-color: rgb(0, 221, 170);
+    padding: 5px;
+}
+
+.btm-input-file:hover {
+    color: black;
+    border-color: rgb(240 , 255, 240);
+    background-color: rgb(240 , 255, 240);
+}
+
+.texto:focus {
+    border-bottom: 4px solid rgb(0 , 221, 170);
+    outline: none;
+    box-shadow: 5px 5px 5px;
+}
+
+#tarjeta-datos input[type="text"]:invalid,#tarjeta-datos input[type="password"]:invalid {
+    transition: 0.3s ease all;
+    border-bottom-color: red !important;
+}
+
+#tarjeta-datos input[type="text"]:valid,#tarjeta-datos input[type="password"]:valid{
+    transition: 0.3s ease all;
+    border-bottom-color: #6aff00 !important;
+}
+
+@media only screen and (max-width: 840px) {
+    #cont-icono-editar {
+        top: 65px;
+        margin-left: 80%;
+    }
+
+    #cont-input-imagen {
+        text-align: center;
+        top: 270px;
+        margin: 0 auto;
+    }
+    
+    .btm-input-file {
+        margin-left: 0%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #cont-icono-editar {
+        transition: 0s;
+        top: 280px;
+        margin: 0 auto;
+    }
+}
+
+#nuevoDebate{
+    transform-origin: left top;
+}
+
+.nuevoDebate--mostrar {
+    animation: 300ms ease desplegar 1;
+  }
+  
+  @keyframes desplegar {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+.nuevoDebate--ocultar {
+    display: none;
+}
+
+.separadorFlex{
+    display: flex;
+    justify-content: center;
+    gap : 10px
+}
+
+.separadorGrid{
+    display: grid;
+    padding: 10px;
+    gap:10px
+}

@@ -1,0 +1,114 @@
+body{
+    background-color: #66ddaa;
+}
+
+#lbDetalles{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 50px;
+    margin-right: 185px;
+    margin-bottom: 20px;
+}
+
+.labels{
+    display: inline-block;
+    position: relative;
+    padding: 15px;
+    width: 180px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.texto{
+    width: 250px;
+    color: black;
+    border-color: rgb(240, 255, 240, 0.4);
+    border-bottom: 2px solid;
+    border-bottom-color: black;
+    text-align: center;
+}
+
+#tarjeta-datos{
+    display: block;
+    transition: .5s ease all;
+    background-color: rgb( 240, 255, 240, 0.7);
+    border-color: rgb( 240, 255, 240, 0.4);
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 10%;
+    padding: 30px;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 40px;
+    transition: 0.3s;
+}
+
+#img-usuario{
+    position: absolute;
+    background-color: white;
+    border-width: 2px;
+    border-color: #22ddaa;
+    width: 26%;
+    top: 5%;
+    left: 5%;
+}
+
+#imagen{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 1150px) {
+    #tarjeta-datos{
+        left: 9%;
+        right: 9%;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+    #lbDetalles{
+        display: block;
+        text-align: center;
+        padding-top: 300px;
+        padding-right: 0px;
+        margin: 0 auto;
+    }
+
+    #tarjeta-datos{
+        left: 10%;
+        right: 10%;
+        padding: 0%;
+        padding-bottom: 50px;
+    }
+
+    .labels{
+        display: block;
+        position: relative;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .texto{
+        display: block;
+        position: relative;
+        width: 80%;
+        height: 30px;
+        padding: 0%;
+        margin: 0 auto;
+    }
+
+    #img-usuario{
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 5%;
+        left: 0%;
+        right: 0%;
+        margin: 0 auto;
+    }
+}
