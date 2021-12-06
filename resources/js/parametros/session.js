@@ -19,10 +19,10 @@ const isSessionActive = async () => {
     return false;
 };
 
-const createSession = async(id) => {
+const createSession = (id) => {
     const data = new FormData();
     data.append('idUser', id);
-    await fetch('api/crearSession', {
+    fetch('api/crearSession', {
         method: 'POST',
         body:data
     }).then((response) => response.json()).then( (json) => {
