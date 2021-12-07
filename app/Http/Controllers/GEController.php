@@ -7,6 +7,8 @@ use App\Models\GrupoEmpresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Elemento;
+
 class GEController extends Controller
 {
     public function viewGEValida()
@@ -95,6 +97,33 @@ class GEController extends Controller
             $ge = GrupoEmpresa::find($value->idGE);
             $ge->valido = true;
             $ge->save();
+
+            $element = new Elemento;
+            $element->nombre = "Propuestas";
+            $element->tipo = "carpeta";
+            $element->link = "#";
+            $element->idGE = $ge->idGE;
+
+            $element->save();
+
+            $element2 = new Elemento;
+            $element2->nombre = "Avances";
+            $element2->tipo = "carpeta";
+            $element2->link = "#";
+            $element2->idGE = $ge->idGE;
+
+            $element2->save();
+
+            $element3 = new Elemento;
+            $element3->nombre = "Socios";
+            $element3->tipo = "carpeta";
+            $element3->link = "#";
+            $element3->idGE = $ge->idGE;
+
+            $element3->save();
+
+
+
         }
         return response(200);
     }
