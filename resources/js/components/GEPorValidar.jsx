@@ -1,6 +1,6 @@
-import React from 'react';
+import { React } from 'react';
 import { useState, useEffect } from 'react';
-import { Boton } from './../elementos/registro';
+import { Boton } from '../elementos/registro';
 
 
 const GEPorValidar = (props) => {
@@ -21,7 +21,12 @@ const GEPorValidar = (props) => {
             });
     }, [])
     const onClick = () => {
-        console.log(grupo_empresa);
+        const dat = new FormData();
+        dat.append('id', sessionStorage.getItem('id'));
+        fetch('api/validarGrupoEmpresas', {
+            method: 'POST',
+            body: dat
+        })
     }
 
     return (

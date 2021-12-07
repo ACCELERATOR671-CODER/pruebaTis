@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GrupoEmpresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -77,4 +78,25 @@ class GEController extends Controller
         }
         return response()->json($res);
     }
+
+    function validarGrupoEmpresas(Request $req){
+        $grupo = DB::table('Usuario')
+            ->select('Usuario.idGrupo')
+            ->where('idUsuario','=',$req->id)
+            ->first();
+        $dat = DB::table('Grupo_Empresa')
+            ->join('Usuario', 'Usuario.idUsuario', '=','Grupo_Empresa.duenio')
+            ->select('Grupo_Empresa.idGE')
+            ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
+            ->where('Grupo_Empresa.valido', '=', 'false')
+            ->get();
+
+        foreach ($dat as $value){
+            $ge = GrupoEmpresa::find($value->idGE);
+            $ge->valido = true;
+            $ge->save();
+        }
+        return response(200);
+    }
+
 }

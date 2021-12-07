@@ -82,6 +82,8 @@ Route::post('obtenerCarpetasBasicas', [EspacioDeAsesoramientoController::class, 
 
 Route::post('obtenerGrupoEmpresasValidas', [GEController::class, 'obtenerGrupoEmpresasValidas']);
 Route::post('obtenerTodasGrupoEmpresas', [GEController::class, 'obtenerTodasGrupoEmpresas']);
+Route::post('validarGrupoEmpresas', [GEController::class, 'validarGrupoEmpresas']);
+
 Route::post('agregarEvento',[CalendarioController::class, 'agregarEvento']);
 Route::post('obtenerEventos',[CalendarioController::class, 'obtenerEventos']);
 Route::post('editarEvento', [CalendarioController::class, 'editarEvento']);
