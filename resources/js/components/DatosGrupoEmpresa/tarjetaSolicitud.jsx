@@ -39,7 +39,7 @@ const TarjetaSolicitud = ({nombre, imagen, idInvitacion, solicitudes, setSolicit
 
     return (
         <TarjetaSolcitudStyle>
-            <ImagenPerfilS src={ (imagen) ? "./resources/socios/"+imagen:"./resources/PerfilDefecto.png" }/>
+            <ImagenPerfilS src={ (imagen) ? "./resources/socios/"+imagen:"./resources/perfilDefecto.png" }/>
             <label>{ nombre }</label>
             <ContenedorButtonS>
                 <Boton className=' bg-success'

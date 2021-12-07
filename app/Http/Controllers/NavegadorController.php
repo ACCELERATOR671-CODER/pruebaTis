@@ -21,9 +21,11 @@ class NavegadorController extends Controller
                 if(isset($usuario->idGE)){
                     $ge = GrupoEmpresa::find($usuario->idGE);
                     if($ge->valido){
-                        return response()->json(['navegador' => 'CGEV']);
+                        return response()->json(['navegador' => 'CGEV',
+                                                    'ge' => $ge->nombre]);
                     } else {
-                        return response()->json(['navegador' => 'CGE']);
+                        return response()->json(['navegador' => 'CGE',
+                                                    'ge' => $ge->nombre]);
                     }
                 } else {
                     return response()->json(['navegador' => 'SGE']);

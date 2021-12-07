@@ -35,8 +35,10 @@ const Session = () => {
                 setOpcionesUsuario(opcionesUsuarioA);
             } else if(json.navegador == 'CGEV'){
                 setOpcionesUsuario(opcionesUsuarioCGEV);
+                sessionStorage.setItem('ge', json.nombre);
             } else if(json.navegador == 'CGE'){
                 setOpcionesUsuario(opcionesUsuarioCGE);
+                sessionStorage.setItem('ge', json.nombre);
             } else {
                 setOpcionesUsuario(opcionesUsuarioSGE);
             }
