@@ -17,7 +17,6 @@ const GEPorValidar = (props) => {
             .then((response) => response.json())
             .then((json) => {
                 setGrupoEmpresa(json);
-                console.log(json);
             });
     }, [])
     const onClick = () => {
@@ -46,7 +45,7 @@ const GEPorValidar = (props) => {
                         </thead>
                         <tbody>
 
-                            {(grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
+                            {(grupo_empresa) && ((grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
                                 <><tr>
                                     <td>
                                         <div className="col-12 text-left">
@@ -75,7 +74,7 @@ const GEPorValidar = (props) => {
                                     </td>
                                 </tr></>
                             ))) : (<tr><td colSpan="5">No hay grupo Empresas Registradas</td></tr>)) :
-                                (<tr><td colSpan="5">Cargando...</td></tr>)}
+                                (<tr><td colSpan="5">Cargando...</td></tr>))}
                         </tbody>
                     </div>
 

@@ -45,7 +45,7 @@ const GEvalida = (props) => {
                     </thead>
                     <tbody>
 
-                        {(grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
+                        {(grupo_empresa) && ((grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
                             <><tr>
                                 <td>
                                     <div className="col-12 text-left">
@@ -74,7 +74,7 @@ const GEvalida = (props) => {
                                 </td>
                             </tr></>
                         ))) : (<tr><td colSpan="5">No hay grupo Empresas Registradas</td></tr>)) :
-                            (<tr><td colSpan="5">Cargando...</td></tr>)}
+                            (<tr><td colSpan="5">Cargando...</td></tr>))}
 
 
                     </tbody>
