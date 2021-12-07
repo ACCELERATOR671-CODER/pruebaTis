@@ -13,6 +13,7 @@ import CalendarioEG from './CalendarioEG/CalendarioEG';
 
 
 
+
           
 
 const EspacioGeneral = () => {
@@ -36,41 +37,87 @@ const EspacioGeneral = () => {
         recursos: null,
         evaluacion:"Participacion del equipo en el espacio de asesoramiento"
     }]);
-
+    
+    const [usuario,setUsuario] = useState (null)
+    const formulario = useRef(null);
+    useEffect(()=>{
+            const form = new FormData();
+            form.append('idUsuario', sessionStorage.getItem('id'));
+            fetch('api/getFullUser', {
+                method: 'POST',
+                body: form
+            })
+            .then((response)=> response.json())
+            .then((json) => {
+                setUsuario(json);
+            })
+        },[]) 
     const contenidoAnuncio=() => {
         return (<>
-            <TextArea></TextArea>
-            <div>
-                <Boton>Enviar</Boton>
-            </div>
-                
-        </>)
+            {
+                (usuario) && ((usuario.nombreRol == 'Consultor')?(
+                    <div>
+                        <TextArea></TextArea>
+                        <div>
+                            <Boton>Enviar</Boton>
+                        </div>
+                    </div>
+                ):(<p>AQUI ESTAN LOS ANUNCIOS</p>))                         
+                }
+            </>)
     }
 
     const contenidoDescripcion = () => {
-
-        const enviarAnuncio = () => {
+        const Submit = () =>{
+            const data = new FormData (document.getElementById('anuncioId1'));
+            fetch ('api/registrarDescrip',{
+                method: 'POST',
+                body:data
+            })
+            .then (()=>{ 
+            });        
+        }
+        
+        const enviarDescripcion = () => {
+            
 
             const valor = document.getElementById('anuncioId1');
 
             if(valor.value.length<140 && valor.value.length > 0){
                 alert("enviado con exito");
-                desplegarAnuncio();ñ
+                desplegarAnuncio();
             } else {
                 alert("error, contenido debe tener un tamaño inferior 140 caracteres y no debe estar vacio");
             }
         }
 
         return (<>
-            <TextArea id='anuncioId1'></TextArea>
-            <div>
-                <Boton onClick= { enviarAnuncio } >Enviar</Boton>
-            </div>
+        
+            { (usuario) && ((usuario.nombreRol == 'Consultor') ? 
+                (<form   
+                    ref={formulario}
+                    id='formulario'
+                    onSubmit={Submit}
+                    method='POST'
+                    >
+                <TextArea id='anuncioId1'></TextArea>
+
+                <div>
+                    <Boton id='botonSub' type = 'submit'onClick= { enviarDescripcion } >Enviar</Boton>
+                </div>
+            </form>):(<p>DESCRIPCION</p>))}    
         </>)
     }
 
     const contenidoDocumentacion = () => {
-        return (<input type='file'/>)
+        return (<>
+        {
+            (usuario) && ((usuario.nombreRol == 'Consultor') ?
+            (<input type='file'/>):
+            (<p>AQUI ESTAN LOS DOCUMENTOS PARA DESCARGAR</p>))
+        }
+        
+        </>)
     }
     
     return(
@@ -88,9 +135,10 @@ const EspacioGeneral = () => {
                             
                         </Accordion>
                     </div>
-
-            </CardEG>  
-            
+                    <div padding-top = '200px'>
+                    <a href="/ForoDudas">Seccion de Dudas</a>
+                    </div>
+            </CardEG>
         </main>
     );
 

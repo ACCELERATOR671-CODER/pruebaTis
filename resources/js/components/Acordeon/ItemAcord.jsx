@@ -1,4 +1,4 @@
-import React,{ useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Acordeon, Panel, MarcoIcono, TextArea } from '../../elementos/espacioGeneral';
 import { Boton } from '../../elementos/registro';
 import {faPlus, 

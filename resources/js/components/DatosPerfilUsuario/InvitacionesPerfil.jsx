@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '../../elementos/card';
 import { ContenedorInvi } from './estilos/estilosPerfil';
 import Invitacion from './Invitacion';
+import SolicitudRechazada from './SolicitudRechazada';
 
 const InvitacionesPerfil = () => {
     const [invitaciones, setInvitaciones] = useState(null);
@@ -63,22 +64,55 @@ const InvitacionesPerfil = () => {
         location.reload();
     }
 
+    const eliminar = (id, pend, setPend) => {
+        const data = new FormData();
+        data.append('id', id);
+        fetch('api/eliminarInvitacion', {
+            method: 'POST',
+             body: data
+        }).then((response) => {
+            if(response.ok){
+                const nuevo = pend.filter((dat) => dat.idInvitacion != id);
+                if(nuevo.length>0){
+                    setPend(nuevo);
+                } else {
+                    setPend(null);
+                }
+              } else {    
+                alert("error, vuelva a intentarlo luego");
+              }
+        })
+    }
+
     return(
         <Card style={{margin: "100px auto", height: "600px"}}>
             <label style={{fontSize: "35px"}}>INVITACIONES</label>
             <ContenedorInvi>
                 {
-                    (invitaciones != null && invitaciones.length != 0) ? (invitaciones.map((inv) => (
-                        <Invitacion 
-                            idInv={ inv.idInvitacion }
-                            nombreGE={inv.nombre}
-                            logo={inv.logo}
-                            descripcion={inv.descripcion}
-                            aceptar={ aceptar }
-                            rechazar={ quitar }
-                            invitaciones={ invitaciones }
-                            setInvitaciones={ setInvitaciones }
-                        />
+                    (invitaciones != null && invitaciones.length != 0) ? 
+                    (invitaciones.map((inv) => (
+                        (inv.invitacion == false && inv.estado == 'Rechazado')?(
+                            <SolicitudRechazada
+                                idInv={ inv.idInvitacion }
+                                nombreGE={ inv.nombre }
+                                logo={ inv.logo }
+                                eliminar={ eliminar }
+                                invitaciones={ invitaciones }
+                                setInvitaciones={ setInvitaciones }
+                            />
+                        ):
+                        (
+                            <Invitacion 
+                                idInv={ inv.idInvitacion }
+                                nombreGE={inv.nombre}
+                                logo={inv.logo}
+                                descripcion={inv.descripcion}
+                                aceptar={ aceptar }
+                                rechazar={ quitar }
+                                invitaciones={ invitaciones }
+                                setInvitaciones={ setInvitaciones }
+                            />
+                        )
                     )))
                     : (<div style={{margin: '34% auto'}}>
                         <p style={{fontSize: '25px'}}>SIN INVITACIONES</p>

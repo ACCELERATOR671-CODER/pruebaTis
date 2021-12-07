@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const Fecha = ({name = 'fecha_registro' , estado, cambiarEstado}) => {
+const Fecha = ({name = 'fecha_registro', cargarFecha = null, max = null, min = '1999-01-01'}) => {
 
     const ref = useRef(null);
     const [date,setDate] = useState({campo:''});
@@ -10,8 +10,19 @@ const Fecha = ({name = 'fecha_registro' , estado, cambiarEstado}) => {
     };
 
     useEffect(() => {
-        setDate({campo : validarCalendario()});
+        if (cargarFecha != null) {
+            setDate({campo: cargarFecha})
+        } else {
+            setDate({campo : validarCalendario()});
+        }
     }, [])
+
+    useEffect(() => {
+        if (cargarFecha != null) {
+            setDate({campo: cargarFecha})
+        }
+    },[cargarFecha]);
+
     const validarCalendario = () => {
         const convertirDig = (n) => {
             return (n < 10) ? '0'+n : n;
@@ -28,8 +39,13 @@ const Fecha = ({name = 'fecha_registro' , estado, cambiarEstado}) => {
             <input name={name}
                     type='date' 
                     value= { date.campo }
-                    max={validarCalendario()} 
-                    min='1999-01-01'
+                    max={
+                        max == null? 
+                        validarCalendario()
+                        :
+                        max
+                    } 
+                    min={ min }
                     ref = {ref}
                     onChange = { onChange}/><br/><br/>   
         </>

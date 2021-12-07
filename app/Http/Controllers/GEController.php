@@ -26,19 +26,24 @@ class GEController extends Controller
     }
 
     function obtenerTodasGrupoEmpresas(Request $req){
+        $grupo = DB::table('Usuario')
+            ->select('Usuario.idGrupo')
+            ->where('idUsuario','=',$req->id)
+            ->first();
         $dat = DB::table('Grupo_Empresa')
-                    ->join('Usuario', 'Usuario.idUsuario', '=','Grupo_Empresa.duenio')
-                    ->select('Grupo_Empresa.idGE',
-                                'Grupo_Empresa.nombre',
-                                'Grupo_Empresa.nombreAb')
-                    /* ->where('Grupo_Empresa.valida','=', 'Valida') */
+            ->join('Usuario', 'Usuario.idUsuario', '=','Grupo_Empresa.duenio')
+            ->select('Grupo_Empresa.idGE',
+                    'Grupo_Empresa.nombre',
+                    'Grupo_Empresa.nombreAb',
+                    'Grupo_Empresa.valido')
+                    ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
                     ->get();
         $res = [];
         foreach ($dat as $value){
             $integrantes = DB::table('Usuario')
-                                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
-                                ->where('Usuario.idGE','=', $value->idGE)
-                                ->count();
+                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                ->where('Usuario.idGE','=', $value->idGE)
+                ->count();
             $val2 = (array)$value;
             $val2['integrantes'] = $integrantes;
             array_push($res, $val2);
@@ -46,19 +51,26 @@ class GEController extends Controller
         return response()->json($res);
     }
 
-    function obtenerGrupoEmpresasValidas(){
+    function obtenerGrupoEmpresasValidas(Request $req){
+        $grupo = DB::table('Usuario')
+            ->select('Usuario.idGrupo')
+            ->where('idUsuario','=',$req->id)
+            ->first();
         $dat = DB::table('Grupo_Empresa')
-                    ->join('Usuario', 'Usuario.idUsuario', '=','Grupo_Empresa.duenio')
-                    ->select('Grupo_Empresa.idGE',
-                                'Grupo_Empresa.nombre',
-                                'Grupo_Empresa.nombreAb')
+            ->join('Usuario', 'Usuario.idUsuario', '=','Grupo_Empresa.duenio')
+            ->select('Grupo_Empresa.idGE',
+                    'Grupo_Empresa.nombre',
+                    'Grupo_Empresa.nombreAb',
+                    'Grupo_Empresa.valido')
+                    ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
+                    ->where('Grupo_Empresa.valido', '=', 'true')
                     ->get();
         $res = [];
         foreach ($dat as $value){
             $integrantes = DB::table('Usuario')
-                                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
-                                ->where('Usuario.idGE','=', $value->idGE)
-                                ->count();
+                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                ->where('Usuario.idGE','=', $value->idGE)
+                ->count();
             $val2 = (array)$value;
             $val2['integrantes'] = $integrantes;
             array_push($res, $val2);

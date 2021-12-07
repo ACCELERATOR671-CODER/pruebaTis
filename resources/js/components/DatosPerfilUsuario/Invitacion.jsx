@@ -20,10 +20,12 @@ const Invitacion = ({idInv, nombreGE, logo, descripcion, rechazar, aceptar, invi
             <CajaBotones>
                 <Aceptar 
                     onClick={() => {aceptar(idInv,invitaciones,setInvitaciones,nombreGE)}} 
-                    icon={faCheckCircle} />
+                    icon={faCheckCircle}
+                />
                 <Quitar
                     onClick={() => {rechazar(idInv,invitaciones,setInvitaciones)}} 
-                    icon={faMinusCircle} />
+                    icon={faMinusCircle} 
+                />
             </CajaBotones>
         </CajaInvitacion>
     );

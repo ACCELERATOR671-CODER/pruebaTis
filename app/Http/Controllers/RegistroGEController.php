@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calendario;
 use App\Models\GrupoEmpresa;
 use App\Models\socio;
 use Illuminate\Http\Request;
@@ -41,6 +42,11 @@ class RegistroGEController extends Controller
         $us = Usuario::find($id->idUser);
         $us->idGE = $idge->idGE;
         $us->save();
+
+        $calendario = new Calendario();
+        $calendario->idGE = $idge->idGE;
+        $calendario->save();
+
         return response(20);
     }
 

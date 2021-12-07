@@ -25,6 +25,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "1",
                 "idGrupo" => "1",
                 "administrador" => "false",
+                "idRol" => null,
                 "registrado" => "false"
             ],[
                 "idUsuario" => "2",
@@ -38,6 +39,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "1",
                 "idGrupo" => "1",
                 "administrador" => "false",
+                "idRol" => null,
                 "registrado" => "false"
             ],[
                 "idUsuario" => "3",
@@ -51,6 +53,35 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "1",
                 "idGrupo" => "1",
                 "administrador" => "false",
+                "idRol" => null,
+                "registrado" => "false"
+            ],[
+                "idUsuario" => "4",
+                "nombreC" => "Adrian Ricardo Crespo",
+                "email" => "201400004@est.umss.edu",
+                "telefono" => null,
+                "codSis" => "201400004",
+                "foto_perfil" => null,
+                "nombreUsuario" => "adrian123",
+                "contrasenia" => "Adrian123",
+                "idCarrera" => "1",
+                "idGrupo" => "1",
+                "administrador" => "false",
+                "idRol" => "1",
+                "registrado" => "true"
+            ],[
+                "idUsuario" => "5",
+                "nombreC" => "Carlos Cardenas Lopez",
+                "email" => "201400005@est.umss.edu",
+                "telefono" => null,
+                "codSis" => "201400005",
+                "foto_perfil" => null,
+                "nombreUsuario" => null,
+                "contrasenia" => null,
+                "idCarrera" => "1",
+                "idGrupo" => "1",
+                "administrador" => "false",
+                "idRol" => null,
                 "registrado" => "false"
             ],
         ]);

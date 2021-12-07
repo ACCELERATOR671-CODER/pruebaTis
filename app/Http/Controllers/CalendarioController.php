@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Calendario;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,12 +28,28 @@ class CalendarioController extends Controller
         $calendario = DB::table('Calendario')
                         ->where('idGE','=',$request->idGE)
                         ->first();
-        error_log("p1");
         $eventos = DB::table('Evento')
                         ->select('*')
                         ->where('idCalendario','=',$calendario->idCalendario)
                         ->orderBy('fecha_inicio', 'ASC')
                         ->get();
         return response()->json($eventos);
+    }
+
+    public function editarEvento(Request $request){
+        $evento = Evento::find($request->idEvento);
+        $evento->fecha_inicio = $request->fecha_inicio;
+        $evento->fecha_final = $request->fecha_final;
+        $evento->nombre = $request->nombre;
+        $evento->save();
+
+        return response(200);
+    }
+
+    public function quitarEvento(Request $request){
+        $evento = Evento::find($request->idEvento);
+        $evento->delete();
+
+        return response(200);
     }
 }

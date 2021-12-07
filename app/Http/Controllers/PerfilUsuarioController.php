@@ -41,8 +41,6 @@ class PerfilUsuarioController extends Controller
         $invitaciones = DB::table('Invitacion')
                             ->join('Grupo_Empresa','Grupo_Empresa.idGE','=','Invitacion.idGE')
                             ->where('Invitacion.idUsuario','=',$request->id)
-                            ->where('Invitacion.estado','=','Pendiente')
-                            ->where('Invitacion.invitacion','=', true)
                             ->get();
         return response()->json($invitaciones);    
     }
@@ -60,6 +58,17 @@ class PerfilUsuarioController extends Controller
         $inv = Invitacion::findOrFail($request->idInv);
         $usuario = Usuario::find($inv->idUsuario);
         $usuario->idGE = $inv->idGE;
+        $invitaciones = Invitacion::where('idUsuario','=',$usuario->idUsuario)->get();
+
+        foreach($invitaciones as $invitacion){
+            if ($invitacion->invitacion) {
+                $invitacion->estado = 'Rechazado';
+                $invitacion->save();
+            } else {
+                $invitacion->delete();
+            }
+        }
+
         $inv->delete();
         $usuario->save();
 

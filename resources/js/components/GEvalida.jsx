@@ -17,8 +17,11 @@ const GEvalida = (props) => {
     const [grupo_empresa, setGrupoEmpresa] = useState(null)
 
     useEffect(() => {
+        const dat = new FormData();
+        dat.append('id', sessionStorage.getItem('id'));
         fetch('api/obtenerGrupoEmpresasValidas', {
-            method: 'POST'
+            method: 'POST',
+            body:dat
         })
             .then((response) => response.json())
             .then((json) => {
@@ -42,33 +45,31 @@ const GEvalida = (props) => {
                     </thead>
                     <tbody>
 
-                        {(grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((dato) => (
+                        {(grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
                             <><tr>
                                 <td>
                                     <div className="col-12 text-left">
-                                        {dato.nombre}
+                                        {empresa.nombre}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="col-12 text-left">
-                                        {dato.nombreAb}
+                                        {empresa.nombreAb}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="col-12 text-left">
-                                        {dato.integrantes}
+                                        {empresa.integrantes}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="col-12 text-left">
-                                        valido
-                                        {/* {dato.estado} */}
+                                        {(empresa.valido) ? <>Valido</> : <>No Valido</>}
                                     </div>
                                 </td>
                                 <td>
                                     <div className="col-12 text-left">
-                                        con espacio
-                                        {/* {dato.espacio} */}
+                                        {(empresa.valido) ? <>Sin Espacio</> : <>Sin espacio</>}
                                     </div>
                                 </td>
                             </tr></>

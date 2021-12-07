@@ -15,7 +15,11 @@ const MensajeAlerta = ({mensajeRep}) => {
 
     return (
         <>
-            <Icon icon={faExclamationTriangle} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+            <Icon 
+                icon={faExclamationTriangle} 
+                onMouseOver={onMouseOver} 
+                onMouseOut={onMouseOut}
+            />
             <MensajeGlobo ref = {mensaje}>
                 <ol>
                     {
