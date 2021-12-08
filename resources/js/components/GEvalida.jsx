@@ -21,7 +21,7 @@ const GEvalida = (props) => {
         dat.append('id', sessionStorage.getItem('id'));
         fetch('api/obtenerGrupoEmpresasValidas', {
             method: 'POST',
-            body:dat
+            body: dat
         })
             .then((response) => response.json())
             .then((json) => {
@@ -32,7 +32,7 @@ const GEvalida = (props) => {
 
     return (
         <main>
-            <div className="row border border-dark bg-light table-responsive">
+            <div className="row border border-dark bg-light table-responsive mt-5">
                 <table className="table table-bordered table-striped align-middle">
                     <thead>
                         <tr>
@@ -45,11 +45,13 @@ const GEvalida = (props) => {
                     </thead>
                     <tbody>
 
-                        {(grupo_empresa) && ((grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
+                        {(grupo_empresa) ? ((grupo_empresa.length > 0) ? (grupo_empresa.map((empresa) => (
                             <><tr>
                                 <td>
                                     <div className="col-12 text-left">
-                                        {empresa.nombre}
+                                        <a href={'Esp-de-Asesoramiento-' + empresa.nombre}>
+                                            {empresa.nombre}
+                                        </a>
                                     </div>
                                 </td>
                                 <td>
@@ -69,12 +71,12 @@ const GEvalida = (props) => {
                                 </td>
                                 <td>
                                     <div className="col-12 text-left">
-                                        {(empresa.valido) ? <>Sin Espacio</> : <>Sin espacio</>}
+                                        {(empresa.valido) ? <>Con Espacio</> : <>Sin espacio</>}
                                     </div>
                                 </td>
                             </tr></>
                         ))) : (<tr><td colSpan="5">No hay grupo Empresas Registradas</td></tr>)) :
-                            (<tr><td colSpan="5">Cargando...</td></tr>))}
+                            (<tr><td colSpan="5">Cargando...</td></tr>)}
 
 
                     </tbody>

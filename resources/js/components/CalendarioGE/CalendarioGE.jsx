@@ -77,7 +77,8 @@ const CalendarioGE = () => {
         setFechaFinEvt(null);
     };
 
-    const agregarUnEvento = () => {
+    const agregarUnEvento = (e) => {
+        e.preventDefault();
         validarEvento();
         if (cmpValido) {
             setNombreEvt(nombreEvt.trim().replace(/\s\s+/g, ' '));
@@ -118,7 +119,8 @@ const CalendarioGE = () => {
         }
     };
     
-    const editarEvento = () => {
+    const editarEvento = (e) => {
+        e.preventDefault();
         validarEvento();
         if (cmpValido) {
             setNombreEvt(nombreEvt.trim().replace(/\s\s+/g, ' '));
@@ -156,6 +158,7 @@ const CalendarioGE = () => {
     };
 
     const quitarEvento = (idEvento) => {
+        cancEvt();
         const conf = confirm("Se quitará el evento del calendario");
         if (conf) {
             const datos = new FormData();
@@ -166,6 +169,7 @@ const CalendarioGE = () => {
             })
             .then((res) => {
                 if (res.ok) {
+                    
                 } else {
                     alert('No se pudo quitar el evento del calendario');
                 }
@@ -208,6 +212,7 @@ const CalendarioGE = () => {
                 {
                     (agEvento || edEvento) && (
                         <form
+                            onSubmit={agEvento? agregarUnEvento: editarEvento}
                             ref={formulario}
                             id='formulario'
                             className='formStyle' 
@@ -250,7 +255,7 @@ const CalendarioGE = () => {
                                     <ContBtmDerecho onClick={cancEvt}>
                                         <IconoAtras/>
                                     </ContBtmDerecho>
-                                    <ContBtmIzquierdo onClick={agEvento? agregarUnEvento: editarEvento}>
+                                    <ContBtmIzquierdo type= 'submit'>
                                         <IconoGuardar/>
                                     </ContBtmIzquierdo>
                                 </ContIconos>

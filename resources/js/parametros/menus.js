@@ -26,12 +26,6 @@ const opcionesUsuarioSGE = [{
     img:faAddressCard,
     onClick: null
 },{
-    link : "FundaEmpresa",
-    name:'',
-    contenido:'Funda-Empresa',
-    img:faClipboard,
-    onClick: null
-},{
     link : "#",
     name:'cerrarSession',
     contenido:'Cerrar Session',
@@ -50,12 +44,6 @@ const opcionesUsuarioCGE = [{
     name:'grupoEmpresa',
     contenido:'Mi Grupo Empresa',
     img:faUsers,
-    onClick: null
-},{
-    link : "FundaEmpresa",
-    name:'',
-    contenido:'Funda-Empresa',
-    img:faClipboard,
     onClick: null
 },{
     link : "#",
@@ -78,12 +66,6 @@ const opcionesUsuarioCGEV = [{
     img:faUsers,
     onClick: null
 },{
-    link : "FundaEmpresa",
-    name:'',
-    contenido:'Funda-Empresa',
-    img:faClipboard,
-    onClick: null
-},{
     link : "Esp-de-Asesoramiento-"+sessionStorage.getItem('ge'),
     name:'espacioTrabajo',
     contenido:'Mi Espacio de trabajo',
@@ -102,12 +84,6 @@ const opcionesUsuarioA = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
-    onClick: null
-},{
-    link : "FundaEmpresa",
-    name:'',
-    contenido:'Funda-Empresa',
-    img:faClipboard,
     onClick: null
 },{
     link : "VentanaAdmin-"+sessionStorage.getItem('id'),
@@ -142,12 +118,6 @@ const opcionesUsuarioC = [{
     img:faUsers,
     onClick: null
 },{
-    link : "FundaEmpresa",
-    name:'',
-    contenido:'Funda-Empresa',
-    img:faClipboard,
-    onClick: null
-},{
     link : "#",
     name:'cerrarSession',
     contenido:'Cerrar Session',
@@ -169,9 +139,6 @@ const datosNavegador = [
     {
         nombre:'Grupo Empresas',
         link : "/GrupoEmpresas"
-    },{
-        nombre:'FundaEmpresa',
-        link : "FundaEmpresa"
     },{
         nombre:'Inscritos en la materia',
         link : "Inscritos"

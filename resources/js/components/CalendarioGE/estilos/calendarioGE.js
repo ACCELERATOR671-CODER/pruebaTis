@@ -20,7 +20,10 @@ const ContIconos = styled.div`
     grid-template-columns: 0.5fr 0.5fr;
 `;
 
-const ContBtmIzquierdo = styled.div`
+const ContBtmIzquierdo = styled.button`
+    padding:0;
+    border-style: none;
+    background-color: transparent;
     width: 50px;
     height: 50px;
     margin: 0 auto;

@@ -3,11 +3,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Elemento;
 use App\Models\GrupoEmpresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use App\Models\Elemento;
 
 class GEController extends Controller
 {
@@ -98,34 +97,28 @@ class GEController extends Controller
             $ge->valido = true;
             $ge->save();
 
-            $element = new Elemento;
-            $element->nombre = "Propuestas";
-            $element->tipo = "carpeta";
-            $element->link = "#";
-            $element->idGE = $ge->idGE;
+            $elemento = new Elemento;
+            $elemento->nombre = "Propuestas";
+            $elemento->tipo = "carpeta";
+            $elemento->link = "#";
+            $elemento->idGE = $ge->idGE; 
+            $elemento->save();
+        
+            $elemento2 = new Elemento;
+            $elemento2->nombre = "Avances";
+            $elemento2->tipo = "carpeta";
+            $elemento2->link = "#";
+            $elemento2->idGE = $ge->idGE;
+            $elemento2->save();
 
-            $element->save();
-
-            $element2 = new Elemento;
-            $element2->nombre = "Avances";
-            $element2->tipo = "carpeta";
-            $element2->link = "#";
-            $element2->idGE = $ge->idGE;
-
-            $element2->save();
-
-            $element3 = new Elemento;
-            $element3->nombre = "Socios";
-            $element3->tipo = "carpeta";
-            $element3->link = "#";
-            $element3->idGE = $ge->idGE;
-
-            $element3->save();
-
-
-
+            $elemento3 = new Elemento;
+            $elemento3->nombre = "Socios";
+            $elemento3->tipo = "carpeta";
+            $elemento3->link = "#";
+            $elemento3->idGE = $ge->idGE;
+            $elemento3->save();
         }
-        return response(200);
+        return view('VistaGEValida');
     }
 
 }

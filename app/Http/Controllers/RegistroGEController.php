@@ -195,7 +195,7 @@ class RegistroGEController extends Controller
         if(isset($ge->idGE)){
             $usuario = Usuario::find($req->idUsuario);
             if(isset($usuario->idUsuario)){ 
-                if($ge->idGE == $usuario->idGE){
+                if(($ge->idGE == $usuario->idGE) || ($usuario->idRol == 2)){
                     return response()->json($ge);
                 } else {
                     return response()->json(['mensaje' => 'No tienes permisos para ingresar a esta sala']);
