@@ -15,6 +15,7 @@ use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VistaInscritosController;
 use App\Http\Controllers\GEController;
+use App\Http\Controllers\ImpExpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +63,7 @@ Route::post('obtenerInvitaciones',[PerfilUsuarioController::class, 'obtenerInvit
 Route::post('aceptarInvitacion',[PerfilUsuarioController::class, 'aceptarInvitacion']);
 Route::post('rechazarInvitacion',[PerfilUsuarioController::class, 'rechazarInvitacion']);
 Route::post('import-list-excel' ,[FundaEmpresaController::class, 'importExcel'] )   ->name ('users.import.excel');
-Route::get('datosFundaEmpresa', [UserController::class,'obtenerDatos']);
+Route::get('obtenerDatosFE', [UserController::class,'obtenerDatosFE']);
 
 Route::post('getUsuariosMismoGrupo',[VistaInscritosController::class, 'getUsuariosMismoGrupo']);
 
@@ -99,3 +100,8 @@ Route::post('actualizarRol', [AdminController::class, 'actualizarRol']);
 Route::get('getUsuarios', [AdminController::class, 'getUsuarios']);
 Route::post('registrarDescrip', [EspacioGeneralController::class, 'RegistroDescripcion']);
 Route::post('getFullUser', [AdminController::class, 'getFullUser']);
+
+Route::post('importarExelUsuarios', [ImpExpController::class, 'importarExelUsuarios']);
+Route::post('importarExelEmpresas', [ImpExpController::class, 'importarExelEmpresas']);
+
+

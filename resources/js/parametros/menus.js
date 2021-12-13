@@ -5,7 +5,8 @@ faBriefcase,
 faPowerOff,
 faClipboard,
 faUsersCog,
-faEdit} from '@fortawesome/free-solid-svg-icons'
+faEdit,
+faFileImport} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -92,6 +93,12 @@ const opcionesUsuarioA = [{
     img:faUsersCog,
     onClick: null
 },{
+    link : "ImportarDatos",
+    name:'',
+    contenido:'Importar Datos',
+    img:faFileImport,
+    onClick: null
+},{
     link : "#",
     name:'cerrarSession',
     contenido:'Cerrar Session',
@@ -142,6 +149,9 @@ const datosNavegador = [
     },{
         nombre:'Inscritos en la materia',
         link : "Inscritos"
+    },{
+        nombre:'FundaEmpresa',
+        link : "FundaEmpresa"
     }
 ];
 

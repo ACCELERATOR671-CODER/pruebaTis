@@ -14,7 +14,7 @@ class Usuario extends Migration
     public function up()
     {
         Schema::create('Usuario', function(Blueprint $table){
-            $table->id('idUsuario')->autoIncrement();
+            $table->bigIncrements('idUsuario');
             $table->Integer('idGE')->nullable();
             $table->foreign('idGE')->references('idGE')->on('Grupo_Empresa');
             $table->string('nombreC');

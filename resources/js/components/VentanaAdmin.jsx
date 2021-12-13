@@ -54,7 +54,7 @@ const VentanaAdmin = () => {
                                     return (index%2==0) ? 
                                             (<><RowSecundary>
                                                 <td width='25' height='10'>{index+1}</td>
-                                                <td height='10'><a href={`Socio-${ data.nombreC }`} >{data.nombreC}</a></td>
+                                                <td height='10'><a href={`Socio-${ data.idUsuario }`} >{data.nombreC}</a></td>
                                                 <td height='10'>{data.email}</td>
                                                 <td width='25' height='10'>{data.idGrupo}</td>
                                                 <td height='10'>
@@ -64,7 +64,7 @@ const VentanaAdmin = () => {
                                             :
                                             (<><RowPrimary>
                                                 <td width='25' height='10'>{index+1}</td>
-                                                <td height='10'><a href={`Socio-${ data.nombreC }`} >{data.nombreC}</a></td>
+                                                <td height='10'><a href={`Socio-${ data.idUsuario }`} >{data.nombreC}</a></td>
                                                 <td height='10'>{data.email}</td>
                                                 <td width='25' height='10'>{data.idGrupo}</td>
                                                 <td height='10'>

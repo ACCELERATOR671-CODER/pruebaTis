@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FundaEmpresa;
 use Illuminate\Http\Request;
 use App\Models\session;
 use Illuminate\Support\Facades\DB;
@@ -189,6 +190,11 @@ class UserController extends Controller
                     ->where('invitacion', '=', false)
                     ->first();
         return response()->json($inv);
+    }
+
+    public function obtenerDatosFE(){
+        $datos = FundaEmpresa::all();
+        return response()->json($datos);
     }
 
 }

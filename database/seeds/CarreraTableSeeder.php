@@ -14,11 +14,11 @@ class CarreraTableSeeder extends Seeder
     {
         return DB::table('Carrera')->insert([
             [
-                "idCarrera" => "1",
+                "idCarrera" => "134111",
                 "nomCarrera" => "Ing. Informatica"
             ],
             [
-                "idCarrera" => "2",
+                "idCarrera" => "411702",
                 "nomCarrera" => "Ing. de Sistemas"
             ]
         ]);

@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VistaInscritosController;
 use App\Http\Controllers\IngresoGEController;
 use App\Http\Controllers\GEController;
+use App\Http\Controllers\ImpExpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,5 @@ Route::get('/ValidarGE', [GEController::class, 'viewValidarGE']);
 Route::get('/Esp-de-Asesoramiento-{id}', [EspacioDeAsesoramientoController::class, 'viewEspAsesoramiento']);
 
 Route::get('/VentanaAdmin-{id}',[AdminController::class, 'getView']);
+
+Route::get('/ImportarDatos', [ImpExpController::class, 'getView']);
