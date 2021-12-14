@@ -8,7 +8,7 @@ import { faFolder,
          faExternalLinkAlt,
          faTimes as faCross } from '@fortawesome/free-solid-svg-icons';
 
-const ElementoAdmin = ({contenido, hijos, setHijos, estado}) => {
+const ElementoAdmin = ({contenido, hijos, setHijos}) => {
 
     const [contenidoInt, setContenidoInt] = useState(contenido);
     const [hijosInt, setHijosInt] = useState(contenido.hijos);
@@ -65,8 +65,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, estado}) => {
 
     const construirHijo = (dato) => (<ElementoAdmin contenido={dato} 
                                                hijos={ hijosInt } 
-                                               setHijos={ setHijosInt }
-                                               estado = { estado }/>); 
+                                               setHijos={ setHijosInt }/>); 
 
     const eliminarElemento = () => {
         if(hijosInt.length <= 0){
@@ -102,13 +101,13 @@ const ElementoAdmin = ({contenido, hijos, setHijos, estado}) => {
                         <div>{ contenidoInt.nombre }</div>
                         <MarcoIcono icon={ (!desplegado) ? faPlus:faMinus }/>
                     </ContenedorElemento>
-                {(contenidoInt.idPadre) && ((estado == 'eliminar') && (<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>))}
+                {(contenidoInt.idPadre) && (<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
                 
                 </ContenedorElemento>
                 <div id={ 'id'+contenidoInt.idElemento } className=' nuevoDebate--ocultar'>
                     {(hijosInt) && (hijosInt.length>0) && 
                     hijosInt.map((datos) => construirHijo(datos))}
-                    {(estado == 'crear') && (<><ContenedorElemento onClick={ desplegarNE } >
+                    {(<><ContenedorElemento onClick={ desplegarNE } >
                         <MarcoIcono icon={ (!desplegadoNE) ? faPlus:faMinus }/>
                         <div className=' text-success'>Crear Nuevo elemento</div>
                     </ContenedorElemento>
@@ -137,7 +136,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, estado}) => {
                     <MarcoIcono icon={ faExternalLinkAlt }/>
                     <a href={ contenidoInt.link } target='blank'>{ contenidoInt.nombre }</a>
                 </ContenedorElemento>
-                {(estado == 'eliminar') && (<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
+                {(<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
             </ContenedorElemento>)}
             {(contenidoInt.tipo == 'pdf') && (
             <ContenedorElemento>
@@ -146,7 +145,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, estado}) => {
                     <a href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
                     <MarcoIcono icon={ faPlus }/>
                 </ContenedorElemento>
-                {(estado == 'eliminar') && (<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
+                {(<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
             </ContenedorElemento>)}
         </div>
     </>)

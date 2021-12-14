@@ -69,3 +69,5 @@ Route::get('/Esp-de-Asesoramiento-{id}', [EspacioDeAsesoramientoController::clas
 Route::get('/VentanaAdmin-{id}',[AdminController::class, 'getView']);
 
 Route::get('/ImportarDatos', [ImpExpController::class, 'getView']);
+
+Route::get('/RegitroUsuarioAdmin', [AdminController::class, 'getViewRegister']);

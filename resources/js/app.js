@@ -44,6 +44,8 @@ import GEPorValidar from './components/GEPorValidar';
 import EspacioDeAsesoramiento from './components/EspacioDeAsesoramiento';
 import VentanaAdmin from './components/VentanaAdmin';
 import ImpExp from './components/ImpExp';
+
+import RegistroUsuarioAdmin from './components/RegistroUsuarioAdmin';
 //import Login from "./components/Login/Login"
 
 /*
@@ -201,4 +203,8 @@ if(document.getElementById('VenAd')){
 
 if(document.getElementById('impexp')){
     ReactDOM.render(<ImpExp />,document.getElementById('impexp'));
+}
+
+if(document.getElementById('rua')){
+    ReactDOM.render(<RegistroUsuarioAdmin />,document.getElementById('rua'));
 }

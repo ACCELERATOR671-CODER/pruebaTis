@@ -10827,7 +10827,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "body{\r\n    background-color: rgb(0 , 221, 170, 0.4);\r\n    min-width: 403px;\r\n}\r\n\r\np {\r\n    word-break: break-word;\r\n}\r\n\r\n.contenedorDeP {\r\n    overflow-y: scroll;\r\n}\r\n\r\nsection{\r\n    min-width: 403px;\r\n}\r\n\r\nmain{\r\n    margin: auto;\r\n    padding: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.miTextArea textarea{\r\n    resize: none;\r\n    margin: 5%;\r\n    width: 90%;\r\n    height: 100px;\r\n}\r\n\r\n.imagenGERC{\r\n    width: 100%;\r\n    text-align: center;\r\n    justify-content: center;\r\n}\r\n\r\n#imagenGER {\r\n    width: 100%;\r\n    height: 200px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n}\r\n\r\n.formStyle{\r\n    margin-top: 50px;\r\n    margin: 30px;\r\n    display : grid;\r\n    gap: 20px;\r\n}\r\n\r\n@media screen and (max-width: 992px){\r\n    .formStyle{\r\n        grid-template-columns: 1fr;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 700px){\r\n    main {\r\n        padding: 0;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 992px){\r\n    .mostrar{\r\n        display: flex;\r\n        margin-left: 10px;\r\n    }\r\n}\r\n\r\n/*aDrian*/\r\n\r\n#contenedor {\r\n    position: relative;\r\n    height: 900px;\r\n}\r\n\r\n#lbDetalles{\r\n    display: inline-block;\r\n    font-size: 20px;\r\n    font-weight: bold;\r\n    text-align: left;\r\n    padding-top: 50px;\r\n    margin-right: 185px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.labels{\r\n    \r\n    position: relative;\r\n    padding: 15px;\r\n    width: 180px;\r\n    font-weight: bold;\r\n    text-align: left;\r\n}\r\n\r\n.texto{\r\n    width: 250px;\r\n    color: black;\r\n    border-color: rgb(240, 255, 240, 0.4);\r\n    border-bottom: 2px solid;\r\n    border-bottom-color: black;\r\n    text-align: center;\r\n}\r\n\r\n#tarjeta-datos{\r\n    display: block;\r\n    transition: .5s ease all;\r\n    background-color: rgb( 240, 255, 240, 0.7);\r\n    border-color: rgb( 240, 255, 240, 0.4);\r\n    border-radius: 30px;\r\n    box-shadow: 10px 10px 10px;\r\n    position: absolute;\r\n    left: 20%;\r\n    right: 20%;\r\n    top: 15%;\r\n    padding: 30px;\r\n    text-align: right;\r\n    padding-top: 10px;\r\n    padding-right: 40px;\r\n    transition: 0.3s;\r\n}\r\n\r\n#img-usuario{\r\n    position: absolute;\r\n    background-color: white;\r\n    border-width: 2px;\r\n    border-color: #22ddaa;\r\n    width: 26%;\r\n    height: 200px;\r\n    top: 5%;\r\n    left: 5%;\r\n}\r\n\r\n#imagen{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n@media only screen and (max-width: 1150px) {\r\n    #tarjeta-datos{\r\n        top: 100px;\r\n        left: 9%;\r\n        right: 9%;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 991px) {\r\n    #tarjeta-datos{\r\n        top: 50px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #contenedor { \r\n        height: 1180px;\r\n    }\r\n\r\n    #lbDetalles{\r\n        display: block;\r\n        text-align: center;\r\n        padding-top: 300px;\r\n        padding-right: 0px;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    #tarjeta-datos{\r\n        padding: 0%;\r\n        padding-bottom: 20px;\r\n    }\r\n\r\n    .labels{\r\n        display: block;\r\n        position: relative;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    .texto{\r\n        display: block;\r\n        position: relative;\r\n        width: 80%;\r\n        height: 30px;\r\n        padding: 0%;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    #img-usuario{\r\n        position: absolute;\r\n        width: 200px;\r\n        height: 200px;\r\n        top: 5%;\r\n        left: 0%;\r\n        right: 0%;\r\n        margin: 0 auto;\r\n    }\r\n}\r\n\r\n/*LOGIN*/\r\n\r\n#main-login {\r\n    display: block;\r\n}\r\n\r\n#contenedor-login {\r\n    position: relative;\r\n    height: 700px;\r\n}\r\n\r\n#label-login-logo {\r\n    color: #22ddaa;\r\n    text-align: center;\r\n    transition: 0.6s;\r\n}\r\n\r\n#cont-label-logo {\r\n    text-align: center;\r\n    font-size: 40px;\r\n    margin-top: 20px;\r\n}\r\n\r\n#cont-logo {\r\n    width: 50%;\r\n    min-width: 200px;\r\n    margin: 0 auto;\r\n}\r\n\r\n#cont-datos-login {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.input-login {\r\n    margin-top: 20px;\r\n    margin-right: 10%;\r\n    width: 100%;\r\n}\r\n\r\n#boton-login {\r\n    margin-top: 20px;\r\n    margin-right: 10%;\r\n    width: 80%;\r\n}\r\n\r\n#cont-label-login {\r\n    text-align: center;\r\n    padding: 0 10%;\r\n    margin-top: 20px;\r\n}\r\n\r\n#label-login {\r\n    font-size: 20px;\r\n    text-align: center;\r\n}\r\n\r\n.link-login {\r\n    margin-top: 20px;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 17px;\r\n    padding: 0 10%;\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #cont-label-logo {\r\n        font-size: 30px;\r\n    }\r\n\r\n    #contenedor-login {\r\n        height: 625px;\r\n    }\r\n}\r\n\r\n#fondo {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#cont-icono-editar {\r\n    position: relative;\r\n    width: 60px;\r\n    top: 35px;\r\n    margin-left: 90%;\r\n    border: 2px solid #22ddaa;\r\n    transition: 0.3s;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-editar {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#cont-iconos-edicion {\r\n    margin-top: 30px;\r\n}\r\n\r\n#cont-icono-atras {\r\n    position: relative;\r\n    width: 50px;\r\n    float: left;\r\n    margin-left: 20px;\r\n    border: 2px solid red;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-atras {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#cont-icono-guardar {\r\n    position: relative;\r\n    width: 50px;\r\n    margin-right: 20px;\r\n    float: right;\r\n    border: 2px solid #00f;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-guardar {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#input-file {\r\n    display: none;\r\n}\r\n\r\n#cont-input-imagen {\r\n    position: relative;\r\n    text-align: center;\r\n    top: 240px;\r\n    width: 30%;\r\n}\r\n\r\n.btm-input-file {\r\n    transition: .3s ease all;\r\n    border-radius: 5px;\r\n    color: white;\r\n    border-style: solid;\r\n    background-color: rgb(0, 221, 170);\r\n    border-color: rgb(0, 221, 170);\r\n    padding: 5px;\r\n}\r\n\r\n.btm-input-file:hover {\r\n    color: black;\r\n    border-color: rgb(240 , 255, 240);\r\n    background-color: rgb(240 , 255, 240);\r\n}\r\n\r\n.texto:focus {\r\n    border-bottom: 4px solid rgb(0 , 221, 170);\r\n    outline: none;\r\n    box-shadow: 5px 5px 5px;\r\n}\r\n\r\n#tarjeta-datos input[type=\"text\"]:invalid,#tarjeta-datos input[type=\"password\"]:invalid {\r\n    transition: 0.3s ease all;\r\n    border-bottom-color: red !important;\r\n}\r\n\r\n#tarjeta-datos input[type=\"text\"]:valid,#tarjeta-datos input[type=\"password\"]:valid{\r\n    transition: 0.3s ease all;\r\n    border-bottom-color: #6aff00 !important;\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #cont-icono-editar {\r\n        top: 65px;\r\n        margin-left: 80%;\r\n    }\r\n\r\n    #cont-input-imagen {\r\n        text-align: center;\r\n        top: 270px;\r\n        margin: 0 auto;\r\n    }\r\n    \r\n    .btm-input-file {\r\n        margin-left: 0%;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 480px) {\r\n    #cont-icono-editar {\r\n        transition: 0s;\r\n        top: 280px;\r\n        margin: 0 auto;\r\n    }\r\n}\r\n\r\n#nuevoDebate{\r\n    transform-origin: left top;\r\n}\r\n\r\n.nuevoDebate--mostrar {\r\n    -webkit-animation: 300ms ease desplegar 1;\r\n            animation: 300ms ease desplegar 1;\r\n  }\r\n  \r\n  @-webkit-keyframes desplegar {\r\n    from {\r\n      transform: scaleY(0);\r\n    }\r\n  }\r\n  \r\n  @keyframes desplegar {\r\n    from {\r\n      transform: scaleY(0);\r\n    }\r\n  }\r\n\r\n.nuevoDebate--ocultar {\r\n    display: none;\r\n}\r\n\r\n.separadorFlex{\r\n    display: flex;\r\n    justify-content: center;\r\n    gap : 10px\r\n}\r\n\r\n.separadorGrid{\r\n    display: grid;\r\n    padding: 10px;\r\n    gap:10px\r\n}", ""]);
+exports.push([module.i, "body{\r\n    background-color: rgba(86, 240, 204, 0.4);\r\n    /*;\r\n       rgb(0 , 221, 170, 0.4)*/\r\n    min-width: 403px;\r\n}\r\n\r\np {\r\n    word-break: break-word;\r\n}\r\n\r\n.contenedorDeP {\r\n    overflow-y: scroll;\r\n}\r\n\r\nsection{\r\n    min-width: 403px;\r\n}\r\n\r\nmain{\r\n    margin: auto;\r\n    padding: 40px;\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.miTextArea textarea{\r\n    resize: none;\r\n    margin: 5%;\r\n    width: 90%;\r\n    height: 100px;\r\n}\r\n\r\n.imagenGERC{\r\n    width: 100%;\r\n    text-align: center;\r\n    justify-content: center;\r\n}\r\n\r\n#imagenGER {\r\n    width: 100%;\r\n    height: 200px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n}\r\n\r\n.formStyle{\r\n    margin-top: 50px;\r\n    margin: 30px;\r\n    display : grid;\r\n    gap: 20px;\r\n}\r\n\r\n@media screen and (max-width: 992px){\r\n    .formStyle{\r\n        grid-template-columns: 1fr;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 700px){\r\n    main {\r\n        padding: 0;\r\n    }\r\n}\r\n\r\n@media screen and (max-width: 992px){\r\n    .mostrar{\r\n        display: flex;\r\n        margin-left: 10px;\r\n    }\r\n}\r\n\r\n/*aDrian*/\r\n\r\n#contenedor {\r\n    position: relative;\r\n    height: 900px;\r\n}\r\n\r\n#lbDetalles{\r\n    display: inline-block;\r\n    font-size: 20px;\r\n    font-weight: bold;\r\n    text-align: left;\r\n    padding-top: 50px;\r\n    margin-right: 185px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n.labels{\r\n    \r\n    position: relative;\r\n    padding: 15px;\r\n    width: 180px;\r\n    font-weight: bold;\r\n    text-align: left;\r\n}\r\n\r\n.texto{\r\n    width: 250px;\r\n    color: black;\r\n    border-color: rgb(240, 255, 240, 0.4);\r\n    border-bottom: 2px solid;\r\n    border-bottom-color: black;\r\n    text-align: center;\r\n}\r\n\r\n#tarjeta-datos{\r\n    display: block;\r\n    transition: .5s ease all;\r\n    background-color: rgb( 240, 255, 240, 0.7);\r\n    border-color: rgb( 240, 255, 240, 0.4);\r\n    border-radius: 30px;\r\n    box-shadow: 10px 10px 10px;\r\n    position: absolute;\r\n    left: 20%;\r\n    right: 20%;\r\n    top: 15%;\r\n    padding: 30px;\r\n    text-align: right;\r\n    padding-top: 10px;\r\n    padding-right: 40px;\r\n    transition: 0.3s;\r\n}\r\n\r\n#img-usuario{\r\n    position: absolute;\r\n    background-color: white;\r\n    border-width: 2px;\r\n    border-color: #22ddaa;\r\n    width: 26%;\r\n    height: 200px;\r\n    top: 5%;\r\n    left: 5%;\r\n}\r\n\r\n#imagen{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n@media only screen and (max-width: 1150px) {\r\n    #tarjeta-datos{\r\n        top: 100px;\r\n        left: 9%;\r\n        right: 9%;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 991px) {\r\n    #tarjeta-datos{\r\n        top: 50px;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #contenedor { \r\n        height: 1180px;\r\n    }\r\n\r\n    #lbDetalles{\r\n        display: block;\r\n        text-align: center;\r\n        padding-top: 300px;\r\n        padding-right: 0px;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    #tarjeta-datos{\r\n        padding: 0%;\r\n        padding-bottom: 20px;\r\n    }\r\n\r\n    .labels{\r\n        display: block;\r\n        position: relative;\r\n        text-align: center;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    .texto{\r\n        display: block;\r\n        position: relative;\r\n        width: 80%;\r\n        height: 30px;\r\n        padding: 0%;\r\n        margin: 0 auto;\r\n    }\r\n\r\n    #img-usuario{\r\n        position: absolute;\r\n        width: 200px;\r\n        height: 200px;\r\n        top: 5%;\r\n        left: 0%;\r\n        right: 0%;\r\n        margin: 0 auto;\r\n    }\r\n}\r\n\r\n/*LOGIN*/\r\n\r\n#main-login {\r\n    display: block;\r\n}\r\n\r\n#contenedor-login {\r\n    position: relative;\r\n    height: 700px;\r\n}\r\n\r\n#label-login-logo {\r\n    color: #22ddaa;\r\n    text-align: center;\r\n    transition: 0.6s;\r\n}\r\n\r\n#cont-label-logo {\r\n    text-align: center;\r\n    font-size: 40px;\r\n    margin-top: 20px;\r\n}\r\n\r\n#cont-logo {\r\n    width: 50%;\r\n    min-width: 200px;\r\n    margin: 0 auto;\r\n}\r\n\r\n#cont-datos-login {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n}\r\n\r\n.input-login {\r\n    margin-top: 20px;\r\n    margin-right: 10%;\r\n    width: 100%;\r\n}\r\n\r\n#boton-login {\r\n    margin-top: 20px;\r\n    margin-right: 10%;\r\n    width: 80%;\r\n}\r\n\r\n#cont-label-login {\r\n    text-align: center;\r\n    padding: 0 10%;\r\n    margin-top: 20px;\r\n}\r\n\r\n#label-login {\r\n    font-size: 20px;\r\n    text-align: center;\r\n}\r\n\r\n.link-login {\r\n    margin-top: 20px;\r\n    text-align: center;\r\n    text-decoration: underline;\r\n    font-size: 17px;\r\n    padding: 0 10%;\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #cont-label-logo {\r\n        font-size: 30px;\r\n    }\r\n\r\n    #contenedor-login {\r\n        height: 625px;\r\n    }\r\n}\r\n\r\n#fondo {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n#cont-icono-editar {\r\n    position: relative;\r\n    width: 60px;\r\n    top: 35px;\r\n    margin-left: 90%;\r\n    border: 2px solid #22ddaa;\r\n    transition: 0.3s;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-editar {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#cont-iconos-edicion {\r\n    margin-top: 30px;\r\n}\r\n\r\n#cont-icono-atras {\r\n    position: relative;\r\n    width: 50px;\r\n    float: left;\r\n    margin-left: 20px;\r\n    border: 2px solid red;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-atras {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#cont-icono-guardar {\r\n    position: relative;\r\n    width: 50px;\r\n    margin-right: 20px;\r\n    float: right;\r\n    border: 2px solid #00f;\r\n    cursor: pointer;\r\n}\r\n\r\n#icono-guardar {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#input-file {\r\n    display: none;\r\n}\r\n\r\n#cont-input-imagen {\r\n    position: relative;\r\n    text-align: center;\r\n    top: 240px;\r\n    width: 30%;\r\n}\r\n\r\n.btm-input-file {\r\n    transition: .3s ease all;\r\n    border-radius: 5px;\r\n    color: white;\r\n    border-style: solid;\r\n    background-color: rgb(0, 221, 170);\r\n    border-color: rgb(0, 221, 170);\r\n    padding: 5px;\r\n}\r\n\r\n.btm-input-file:hover {\r\n    color: black;\r\n    border-color: rgb(240 , 255, 240);\r\n    background-color: rgb(240 , 255, 240);\r\n}\r\n\r\n.texto:focus {\r\n    border-bottom: 4px solid rgb(0 , 221, 170);\r\n    outline: none;\r\n    box-shadow: 5px 5px 5px;\r\n}\r\n\r\n#tarjeta-datos input[type=\"text\"]:invalid,#tarjeta-datos input[type=\"password\"]:invalid {\r\n    transition: 0.3s ease all;\r\n    border-bottom-color: red !important;\r\n}\r\n\r\n#tarjeta-datos input[type=\"text\"]:valid,#tarjeta-datos input[type=\"password\"]:valid{\r\n    transition: 0.3s ease all;\r\n    border-bottom-color: #6aff00 !important;\r\n}\r\n\r\n@media only screen and (max-width: 840px) {\r\n    #cont-icono-editar {\r\n        top: 65px;\r\n        margin-left: 80%;\r\n    }\r\n\r\n    #cont-input-imagen {\r\n        text-align: center;\r\n        top: 270px;\r\n        margin: 0 auto;\r\n    }\r\n    \r\n    .btm-input-file {\r\n        margin-left: 0%;\r\n    }\r\n}\r\n\r\n@media only screen and (max-width: 480px) {\r\n    #cont-icono-editar {\r\n        transition: 0s;\r\n        top: 280px;\r\n        margin: 0 auto;\r\n    }\r\n}\r\n\r\n#nuevoDebate{\r\n    transform-origin: left top;\r\n}\r\n\r\n.nuevoDebate--mostrar {\r\n    -webkit-animation: 300ms ease desplegar 1;\r\n            animation: 300ms ease desplegar 1;\r\n  }\r\n  \r\n  @-webkit-keyframes desplegar {\r\n    from {\r\n      transform: scaleY(0);\r\n    }\r\n  }\r\n  \r\n  @keyframes desplegar {\r\n    from {\r\n      transform: scaleY(0);\r\n    }\r\n  }\r\n\r\n.nuevoDebate--ocultar {\r\n    display: none;\r\n}\r\n\r\n.separadorFlex{\r\n    display: flex;\r\n    justify-content: center;\r\n    gap : 10px\r\n}\r\n\r\n.separadorGrid{\r\n    display: grid;\r\n    padding: 10px;\r\n    gap:10px\r\n}", ""]);
 
 // exports
 
@@ -70516,6 +70516,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_EspacioDeAsesoramiento__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/EspacioDeAsesoramiento */ "./resources/js/components/EspacioDeAsesoramiento.jsx");
 /* harmony import */ var _components_VentanaAdmin__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/VentanaAdmin */ "./resources/js/components/VentanaAdmin.jsx");
 /* harmony import */ var _components_ImpExp__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/ImpExp */ "./resources/js/components/ImpExp.jsx");
+/* harmony import */ var _components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/RegistroUsuarioAdmin */ "./resources/js/components/RegistroUsuarioAdmin.jsx");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
@@ -70529,6 +70530,7 @@ __webpack_require__.r(__webpack_exports__);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //require('./components/Example');
+
 
 
 
@@ -70677,6 +70679,10 @@ if (document.getElementById('VenAd')) {
 
 if (document.getElementById('impexp')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImpExp__WEBPACK_IMPORTED_MODULE_29__["default"], null), document.getElementById('impexp'));
+}
+
+if (document.getElementById('rua')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_30__["default"], null), document.getElementById('rua'));
 }
 
 /***/ }),
@@ -74864,8 +74870,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ElementoAdmin = function ElementoAdmin(_ref) {
   var contenido = _ref.contenido,
       hijos = _ref.hijos,
-      setHijos = _ref.setHijos,
-      estado = _ref.estado;
+      setHijos = _ref.setHijos;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(contenido),
       _useState2 = _slicedToArray(_useState, 2),
@@ -74946,8 +74951,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ElementoAdmin, {
       contenido: dato,
       hijos: hijosInt,
-      setHijos: setHijosInt,
-      estado: estado
+      setHijos: setHijosInt
     });
   };
 
@@ -74984,7 +74988,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     icon: !desplegado ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolder"] : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, contenidoInt.nombre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: !desplegado ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"] : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMinus"]
-  })), contenidoInt.idPadre && estado == 'eliminar' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
+  })), contenidoInt.idPadre && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimes"],
     onClick: eliminarElemento
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74992,7 +74996,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     className: " nuevoDebate--ocultar"
   }, hijosInt && hijosInt.length > 0 && hijosInt.map(function (datos) {
     return construirHijo(datos);
-  }), estado == 'crear' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], {
     onClick: desplegarNE
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: !desplegadoNE ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"] : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMinus"]
@@ -75038,7 +75042,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: contenidoInt.link,
     target: "blank"
-  }, contenidoInt.nombre)), estado == 'eliminar' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
+  }, contenidoInt.nombre)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimes"],
     onClick: eliminarElemento
   })), contenidoInt.tipo == 'pdf' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
@@ -75048,7 +75052,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     target: "blank"
   }, contenidoInt.nombre), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"]
-  })), estado == 'eliminar' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoEliminar"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTimes"],
     onClick: eliminarElemento
   }))));
@@ -75097,12 +75101,6 @@ var Espacio = function Espacio(_ref) {
       elementos = _useState2[0],
       setElementos = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('vista'),
-      _useState4 = _slicedToArray(_useState3, 2),
-      estado = _useState4[0],
-      setEstado = _useState4[1];
-
-  var refEstado = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var post = new FormData();
     post.append('nombreGE', nombreGE);
@@ -75115,20 +75113,9 @@ var Espacio = function Espacio(_ref) {
       setElementos(json);
     });
   }, []);
-
-  var cambiarEstado = function cambiarEstado() {
-    setEstado(refEstado.current.value);
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, id == sessionStorage.getItem('id') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: " d-flex justify-content-center p-3 mt-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_3__["Select"], {
-    ref: refEstado,
-    onChange: cambiarEstado
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "vista"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "eliminar"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "crear"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_3__["Backgroundesp"], null, elementos.map(function (datos) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_3__["Backgroundesp"], null, elementos.map(function (datos) {
     return id == sessionStorage.getItem('id') ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ElementoAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      contenido: datos,
-      estado: estado
+      contenido: datos
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Elemento__WEBPACK_IMPORTED_MODULE_1__["default"], {
       contenido: datos
     });
@@ -75369,11 +75356,9 @@ var EspacioGeneral = function EspacioGeneral() {
     contenido: contenidoDocumentacion
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Acordeon_ItemAcord__WEBPACK_IMPORTED_MODULE_7__["default"], {
     titulo: "Calendario",
-    contenido: function contenido() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CalendarioEG_CalendarioEG__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        ges: datosC
-      });
-    }
+    contenido: function contenido() {}
+    /*() => <CalendarioEG ges={ datosC }/>*/
+
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     "padding-top": "200px"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -76703,7 +76688,7 @@ var RegistroGE = function RegistroGE() {
     }
 
     if (estate.campo.length < 7 || estate.campo.length > 8) {
-      validar.push('el numero de telefono debe contener un minimo de 7 digitos y un maximo de 8 digitos');
+      validar.push('el numero de telefono debe contener entre 7 y 8 caracteres');
     }
 
     if (!regex.test(estate.campo) && estate.campo.length > 7 && estate.campo.length < 9) {
@@ -76721,7 +76706,7 @@ var RegistroGE = function RegistroGE() {
     }
 
     if (estate.campo.length < 5 || estate.campo.length > 100) {
-      validar.push("la direccion debe contener un minimo de 5 caracteres y un maximo de 100 caracteres");
+      validar.push("la direccion debe contener entre 5 y 100 caracteres");
     }
 
     if (!regex.test(estate.campo) && estate.campo.length > 4) {
@@ -76739,7 +76724,7 @@ var RegistroGE = function RegistroGE() {
     }
 
     if (estate.campo.length < 10 || estate.campo.length > 100) {
-      validar.push("el objetivo debe contener un minimo de 10 caracteres y un maximo de 100 caracteres");
+      validar.push("el objetivo debe contener entre 10 y 100 caracteres");
     }
 
     if (!regex.test(estate.campo) && estate.campo.length > 4) {
@@ -76775,7 +76760,7 @@ var RegistroGE = function RegistroGE() {
     }
 
     if (estate.campo.length > 30 || estate.campo.length < 3) {
-      validar.push('Solo se permite un minimo de 3 caracteres y un maximo de 30 caracteres');
+      validar.push('el campo debe contener entre 3 y 30 caracteres');
     }
 
     if (!regex.test(estate.campo) && estate.campo.length > 2 && estate.campo.length < 31) {
@@ -76797,7 +76782,7 @@ var RegistroGE = function RegistroGE() {
     }
 
     if (estate.campo.length > 30 || estate.campo.length < 3) {
-      validar.push('Solo se permite un minimo de 2 caracteres y un maximo de 20 caracteres');
+      validar.push('el campo debe contener entre 2 y 20 caracteres');
     }
 
     if (!regex.test(estate.campo) && estate.campo.length > 1 && estate.campo.length < 21) {
@@ -77788,6 +77773,220 @@ var RegistroUsuario = function RegistroUsuario() {
 
 /***/ }),
 
+/***/ "./resources/js/components/RegistroUsuarioAdmin.jsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/RegistroUsuarioAdmin.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _elementos_card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../elementos/card */ "./resources/js/elementos/card.js");
+/* harmony import */ var _elementos_rua__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../elementos/rua */ "./resources/js/elementos/rua.js");
+/* harmony import */ var _elementos_registro__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elementos/registro */ "./resources/js/elementos/registro.js");
+/* harmony import */ var _rua_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rua/Input */ "./resources/js/components/rua/Input.jsx");
+/* harmony import */ var _rua_SelectRua__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rua/SelectRua */ "./resources/js/components/rua/SelectRua.jsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var RegistroUsuarioAdmin = function RegistroUsuarioAdmin() {
+  //crear el estado, crear la validacion, mandar en el input los 
+  //datos creados junto a su expReg y añadir en verificar inputs
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    campo: '',
+    valido: null
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      nombre = _useState2[0],
+      setNombre = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    campo: '',
+    valido: null,
+    existe: 'false'
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      codsis = _useState4[0],
+      setCodsis = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    campo: '',
+    valido: null,
+    existe: 'false'
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      setEmail = _useState6[1];
+
+  var validarCorreo = function validarCorreo(estate, regex) {
+    var validar = [];
+
+    if (estate.campo.length < 1) {
+      validar.push('Debes llenar este campo');
+    }
+
+    if (!regex.test(estate.campo) && estate.campo.length > 1) {
+      validar.push('Debe ingresar un formato de correo electronico valido');
+    }
+
+    if (estate.existe === 'true' && estate.campo.length > 5 && estate.campo.length < 30) {
+      validar.push('el email ya esta en uso');
+    }
+
+    return validar;
+  };
+
+  var validarCodSis = function validarCodSis(estate, regex) {
+    var validar = [];
+
+    if (estate.campo.length < 1) {
+      validar.push('Debe llenar este campo');
+    }
+
+    if (estate.campo.length != 9) {
+      validar.push('el codigosis debe contener 9 caracteres');
+    }
+
+    if (!regex.test(estate.campo) && estate.campo.length == 9) {
+      validar.push('Hay caracteres invalidos en el campo');
+    }
+
+    if (estate.existe == 'true') {
+      validar.push('el codigo sis ya esta registrado');
+    }
+
+    return validar;
+  };
+
+  var validarNombre = function validarNombre(estate, regex) {
+    var validar = [];
+
+    if (estate.campo.length < 1) {
+      validar.push('Debes llenar este campo');
+    }
+
+    if (estate.campo.length > 50 || estate.campo.length < 3) {
+      validar.push('el campo debe contener entre 3 y 30 caracteres');
+    }
+
+    if (!regex.test(estate.campo) && estate.campo.length > 2 && estate.campo.length < 51) {
+      validar.push('El nombre solo puede contener caracteres alfabeticos y espacios');
+    }
+
+    return validar;
+  };
+
+  var verificarInputs = function verificarInputs() {
+    if (!nombre.valido) {
+      setNombre(_objectSpread(_objectSpread({}, nombre), {}, {
+        valido: 'false'
+      }));
+    }
+
+    if (!codsis.valido) {
+      setCodsis(_objectSpread(_objectSpread({}, codsis), {}, {
+        valido: 'false'
+      }));
+    }
+
+    if (!email.valido) {
+      setEmail(_objectSpread(_objectSpread({}, email), {}, {
+        valido: 'false'
+      }));
+    }
+  };
+
+  var expresiones = {
+    nombre: /^[a-zA-Z\s]{3,50}$/,
+    correo: /^[a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    codigoSis: /^\d{9,9}$/
+  };
+
+  var registrar = function registrar(e) {
+    e.preventDefault();
+    verificarInputs();
+
+    if (nombre.valido == 'true' && codsis.valido == 'true' && email.valido == 'true') {
+      var form = new FormData(e.currentTarget);
+      fetch('api/createUser', {
+        method: 'POST',
+        body: form
+      }).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        console.log(json);
+      });
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_card__WEBPACK_IMPORTED_MODULE_1__["Card"], {
+    className: "p-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_rua__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+    onSubmit: registrar
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Registrar Usuario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    estado: nombre,
+    cambiarEstado: setNombre,
+    regex: expresiones.nombre,
+    nombre: "nombreUsuario",
+    placeholder: "Nombre Completo",
+    tipo: "text",
+    funcValidar: validarNombre
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_rua__WEBPACK_IMPORTED_MODULE_2__["Cuadro"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    estado: codsis,
+    cambiarEstado: setCodsis,
+    regex: expresiones.codigoSis,
+    nombre: "codsis",
+    placeholder: "Codigo Sis",
+    tipo: "number",
+    funcValidar: validarCodSis
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    estado: email,
+    cambiarEstado: setEmail,
+    regex: expresiones.correo,
+    nombre: "email",
+    placeholder: "Correo Electronico",
+    tipo: "email",
+    funcValidar: validarCorreo
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_SelectRua__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    name: "grupo",
+    defaultValue: "---seleccione una grupo---"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_SelectRua__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    name: "carrera",
+    defaultValue: "---seleccione una carrera---"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_3__["Boton"], {
+    type: "submit"
+  }, "Registrar"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RegistroUsuarioAdmin);
+
+/***/ }),
+
 /***/ "./resources/js/components/SeccionDudas.jsx":
 /*!**************************************************!*\
   !*** ./resources/js/components/SeccionDudas.jsx ***!
@@ -78470,6 +78669,180 @@ var VistaGrupoEmpresa = function VistaGrupoEmpresa() {
 
 /***/ }),
 
+/***/ "./resources/js/components/rua/Input.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/components/rua/Input.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _elementos_registro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../elementos/registro */ "./resources/js/elementos/registro.js");
+/* harmony import */ var _RegistroGE_MensajeAlerta__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RegistroGE/MensajeAlerta */ "./resources/js/components/RegistroGE/MensajeAlerta.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var Input = function Input(_ref) {
+  var estado = _ref.estado,
+      cambiarEstado = _ref.cambiarEstado,
+      tipo = _ref.tipo,
+      nombre = _ref.nombre,
+      placeholder = _ref.placeholder,
+      regex = _ref.regex,
+      funcValidar = _ref.funcValidar;
+  var ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+
+  var onChange = function onChange() {
+    cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+      campo: ref.current.value !== ' ' ? ref.current.value : ''
+    }));
+  };
+
+  var validacion = function validacion() {
+    cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+      valido: null,
+      existe: 'false'
+    }));
+
+    if (regex) {
+      if (regex.test(estado.campo)) {
+        if ((nombre == 'codsis' || nombre == 'email') && estado.campo.length > 0) {
+          var nombreCampo = nombre == 'codsis' ? 'verificarCodSis' : 'verificarEmail';
+          var datos = new FormData();
+          datos.append(nombre, estado.campo);
+          fetch('api/' + nombreCampo, {
+            method: 'POST',
+            body: datos
+          }).then(function (response) {
+            return response.json();
+          }).then(function (dat) {
+            if (dat.mensaje == 'true') {
+              cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+                valido: 'false',
+                existe: 'true'
+              }));
+            } else {
+              cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+                valido: 'true',
+                existe: 'false'
+              }));
+            }
+          });
+        } else {
+          cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+            valido: 'true'
+          }));
+        }
+      } else {
+        cambiarEstado(_objectSpread(_objectSpread({}, estado), {}, {
+          valido: 'false'
+        }));
+      }
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_1__["InputStyle"], {
+    type: tipo,
+    onChange: onChange,
+    placeholder: placeholder,
+    name: nombre,
+    id: nombre,
+    ref: ref,
+    value: estado.campo,
+    onBlur: validacion,
+    valido: estado.valido,
+    onSubmit: validacion
+  }), estado.valido === 'false' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RegistroGE_MensajeAlerta__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    mensajeRep: funcValidar(estado, regex)
+  }));
+};
+
+Input.propTypes = {
+  estado: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+  cambiarEstado: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  tipo: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  nombre: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  funcValidar: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func
+};
+/* harmony default export */ __webpack_exports__["default"] = (Input);
+
+/***/ }),
+
+/***/ "./resources/js/components/rua/SelectRua.jsx":
+/*!***************************************************!*\
+  !*** ./resources/js/components/rua/SelectRua.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var SelectRua = function SelectRua(_ref) {
+  var name = _ref.name,
+      defaultValue = _ref.defaultValue;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      contenido = _useState2[0],
+      setContenido = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var api = name == 'carrera' ? 'getCarrera' : 'getGroups';
+    fetch('api/' + api).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      setContenido(json);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    name: name,
+    defaultValue: defaultValue,
+    required: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, defaultValue), contenido && contenido.map(function (data) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: data.idGrupo || data.idCarrera
+    }, data.idGrupo || data.idCarrera, "-", data.nomGrupo || data.nomCarrera);
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SelectRua);
+
+/***/ }),
+
 /***/ "./resources/js/components/subir_PDF/pdf_component.jsx":
 /*!*************************************************************!*\
   !*** ./resources/js/components/subir_PDF/pdf_component.jsx ***!
@@ -78780,7 +79153,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var Card = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    max-width: 700px;\n    min-width: 700px;\n    margin-top: 5%;\n    text-align: center;\n    transition: .5s ease all;\n    background-color: rgb(", ", ", ", ", ", 0.7);\n    border-color: rgb(", ", ", ", ", ", 0.4);\n    border-radius: 30px;\n    box-shadow: 10px 10px 10px;\n    @media (max-width:700px){\n        min-width: 0;\n        width: 100%;\n        margin: auto;\n    }\n"])), _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].r, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].g, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].b, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].r, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].g, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].b);
-var Fondo = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].img(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: block;\n    opacity: 0.3;\n    position: fixed;\n    z-index: -100;\n    height: 100%;\n    object-fit: cover;\n"])));
+var Fondo = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].img(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: block;\n    opacity: 0.1;\n    position: fixed;\n    z-index: -100;\n    height: 100%;\n    object-fit: cover;\n"])));
 
 
 /***/ }),
@@ -78994,7 +79367,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var ContenedorBloqueForo = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 95%;\n    display: block;\n    gap: 40px;\n    padding: 10px;\n    margin: 10px;\n    @media (max-width:611px){\n        margin:10px;\n        padding: 0;\n        width: 100%;\n    }\n"])));
 var ContenedorInputs = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding-top: 20px;\n    transition: .3s ease all;\n    padding-bottom: 20px;\n    display: grid;\n    grid-template-columns: 1fr 10fr;\n    gap: 10px;\n"])));
 var TextArea = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].textarea(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 10px;\n    resize: none;\n"])));
-var ContenedorBotonesDeb = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    gap: 10px;\n    justify-content: end;\n"])));
+var ContenedorBotonesDeb = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    flex-wrap: wrap;\n    gap: 10px;\n    justify-content: center;\n"])));
 var TarjetaDebate = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    display: grid;\n    gap: 10px;\n    background-color: rgb(", ", ", ", ", ");\n    margin: 100px;\n    padding: 30px;\n    border-style: solid;\n    border-color: black;\n    min-width: 700px;\n    @media (max-width:700px){\n        width: 100%;\n        min-width: 403px;\n    }\n"])), _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].r, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].g, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorPrimary"].b);
 var ImagenDebate = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].img(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 90px;\n    height: 90px;\n    border-radius: 50%;\n    border-style: solid;\n    border-color: rgb(", ",", ",", ");\n"])), _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorSecundary"].r, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorSecundary"].g, _parametros_colores__WEBPACK_IMPORTED_MODULE_1__["colorSecundary"].b);
 var ContenedorBloqueDebate = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: 4fr 1fr;\n    gap: 10px;\n"])));
@@ -79192,6 +79565,29 @@ var ContenedorInputs = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"]
 var ContenedorElementos = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: 2fr 1fr;\n    gap: 20px;\n    @media (max-width: 992px){\n        grid-template-columns: 1fr;\n    }\n"])));
 var ContenedorPrincipal = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: grid;\n    gap: 20px;\n"])));
 var ContenedorBoton = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: grid;\n    grid-template-columns: 3fr 1fr 3fr;\n    @media (max-width: 992px){\n        grid-template-columns: 1fr;\n    }\n\n"])));
+
+
+/***/ }),
+
+/***/ "./resources/js/elementos/rua.js":
+/*!***************************************!*\
+  !*** ./resources/js/elementos/rua.js ***!
+  \***************************************/
+/*! exports provided: Cuadro, Grid */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cuadro", function() { return Cuadro; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return Grid; });
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+var _templateObject, _templateObject2;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+var Cuadro = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display:grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 20px;\n    @media(max-width:600px){\n        grid-template-columns:1fr;\n    }\n"])));
+var Grid = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display:grid;\n    gap : 20px;\n"])));
 
 
 /***/ }),

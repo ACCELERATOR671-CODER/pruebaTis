@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Grupo;
+use App\Models\Carrera;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,5 +54,19 @@ class AdminController extends Controller
                         ->first();
 
         return response()->json($usuario);
+    }
+
+    public function getViewRegister(){
+        return view('rua');
+    }
+
+    public function getGroups(){
+        $grupos = Grupo::all();
+        return response()->json($grupos);
+    }
+
+    public function getCarrera(){
+        $carrera = Carrera::all();
+        return response()->json($carrera);
     }
 }

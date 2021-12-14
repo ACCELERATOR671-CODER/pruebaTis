@@ -20,7 +20,7 @@ const Card = styled.div`
 
 const Fondo = styled.img`
     display: block;
-    opacity: 0.3;
+    opacity: 0.1;
     position: fixed;
     z-index: -100;
     height: 100%;

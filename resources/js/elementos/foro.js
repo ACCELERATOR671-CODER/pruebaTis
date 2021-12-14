@@ -32,7 +32,7 @@ const ContenedorBotonesDeb = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: end;
+    justify-content: center;
 `;
 
 const TarjetaDebate = styled.div`

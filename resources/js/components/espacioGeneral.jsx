@@ -131,7 +131,7 @@ const EspacioGeneral = () => {
                             <ItemAcord titulo='Descripcion' contenido={ contenidoDescripcion } />
                             <ItemAcord titulo='Anuncios' contenido={ contenidoAnuncio }/>
                             <ItemAcord titulo='Documentacion' contenido={ contenidoDocumentacion }/>
-                            <ItemAcord titulo='Calendario' contenido={ () => <CalendarioEG ges={ datosC }/> }/>
+                            <ItemAcord titulo='Calendario' contenido={ () => {}/*() => <CalendarioEG ges={ datosC }/>*/ }/>
                             
                         </Accordion>
                     </div>

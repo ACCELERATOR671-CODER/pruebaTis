@@ -104,4 +104,11 @@ Route::post('getFullUser', [AdminController::class, 'getFullUser']);
 Route::post('importarExelUsuarios', [ImpExpController::class, 'importarExelUsuarios']);
 Route::post('importarExelEmpresas', [ImpExpController::class, 'importarExelEmpresas']);
 
+Route::get('getGroups', [AdminController::class, 'getGroups']);
+Route::get('getCarrera', [AdminController::class, 'getCarrera']);
+Route::post('createUser', [UserController::class, 'createUser']);
+
+Route::post('verificarCodSis', [UserController::class, 'verificarCodSis']);
+Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
+
 

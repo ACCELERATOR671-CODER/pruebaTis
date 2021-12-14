@@ -197,4 +197,41 @@ class UserController extends Controller
         return response()->json($datos);
     }
 
+    public function createUser(Request $req){
+
+        $usuario = new Usuario;
+        $usuario->idUsuario = $req->codsis;
+        $usuario->nombreC = $req->nombreUsuario;
+        $usuario->email = $req->email;
+        $usuario->codSis = $req->codsis;
+        $usuario->idCarrera = $req->carrera;
+        $usuario->idGrupo = $req->grupo;
+
+        $usuario->save();
+
+        return response()->json($usuario);
+    }
+
+    public function verificarCodSis(Request $req){
+        $usuario = DB::table('Usuario')
+                        ->where('codSis', '=' , $req->codsis)
+                        ->first();
+        if(isset($usuario->idUsuario)){
+            return response()->json(['mensaje' => 'true']);
+        } else {
+            return response()->json(['mensaje' => 'false']);
+        }
+    }
+
+    public function verificarEmail(Request $req){
+        $usuario = DB::table('Usuario')
+                        ->where('email', '=' , $req->email)
+                        ->first();
+        if(isset($usuario->idUsuario)){
+            return response()->json(['mensaje' => 'true']);
+        } else {
+            return response()->json(['mensaje' => 'false']);
+        }
+    }
+
 }

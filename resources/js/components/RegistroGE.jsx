@@ -49,7 +49,7 @@ const RegistroGE = () => {
             validar.push('Debe llenar este campo');
         }
         if(estate.campo.length < 7 || estate.campo.length>8){
-            validar.push('el numero de telefono debe contener un minimo de 7 digitos y un maximo de 8 digitos');
+            validar.push('el numero de telefono debe contener entre 7 y 8 caracteres');
         }
         if(!regex.test(estate.campo) && estate.campo.length >7 && estate.campo.length <9){
             validar.push('Hay caracteres invalidos en el campo');
@@ -63,7 +63,7 @@ const RegistroGE = () => {
             validar.push("Debe llenar este campo");
         }
         if(estate.campo.length < 5 || estate.campo.length>100){
-            validar.push("la direccion debe contener un minimo de 5 caracteres y un maximo de 100 caracteres");
+            validar.push("la direccion debe contener entre 5 y 100 caracteres");
         }
         if(!regex.test(estate.campo) && estate.campo.length>4){
             validar.push("hay caracteres invalidos en el campo");
@@ -77,7 +77,7 @@ const RegistroGE = () => {
             validar.push("Debe llenar este campo");
         }
         if(estate.campo.length < 10 || estate.campo.length>100){
-            validar.push("el objetivo debe contener un minimo de 10 caracteres y un maximo de 100 caracteres");
+            validar.push("el objetivo debe contener entre 10 y 100 caracteres");
         }
         if(!regex.test(estate.campo) && estate.campo.length>4){
             validar.push("hay caracteres invalidos en el campo");
@@ -107,7 +107,7 @@ const RegistroGE = () => {
             validar.push('Debes llenar este campo');
         }
         if(estate.campo.length>30 || estate.campo.length<3){
-            validar.push('Solo se permite un minimo de 3 caracteres y un maximo de 30 caracteres');
+            validar.push('el campo debe contener entre 3 y 30 caracteres');
         }
         if((!regex.test(estate.campo)) && (estate.campo.length>2 && estate.campo.length < 31) ){
             validar.push('El nombre solo puede contener caracteres alfabeticos y espacios');
@@ -125,7 +125,7 @@ const RegistroGE = () => {
             validar.push('Debes llenar este campo');
         }
         if(estate.campo.length>30 || estate.campo.length<3){
-            validar.push('Solo se permite un minimo de 2 caracteres y un maximo de 20 caracteres');
+            validar.push('el campo debe contener entre 2 y 20 caracteres');
         }
         if(!regex.test(estate.campo) && (estate.campo.length>1 && estate.campo.length < 21) ){
             validar.push('El nombre abreviado solo puede contener caracteres alfabeticos y espacios');
