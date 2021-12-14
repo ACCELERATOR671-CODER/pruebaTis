@@ -26,8 +26,8 @@ const VentanaAdmin = () => {
     }
 
     return (
-        <main>
-            <Card>
+        <>
+           
                 <PanelAdmin>
                     <div className='d-flex justify-content-center'>
                     <h1>Administracion</h1>
@@ -53,7 +53,7 @@ const VentanaAdmin = () => {
                                     
                                     return (index%2==0) ? 
                                             (<><RowSecundary>
-                                                <td width='25' height='10'>{index+1}</td>
+                                                <td width='60' height='10'>{index+1}</td>
                                                 <td height='10'><a href={`Socio-${ data.idUsuario }`} >{data.nombreC}</a></td>
                                                 <td height='10'>{data.email}</td>
                                                 <td width='25' height='10'>{data.idGrupo}</td>
@@ -63,7 +63,7 @@ const VentanaAdmin = () => {
                                             </RowSecundary></>)
                                             :
                                             (<><RowPrimary>
-                                                <td width='25' height='10'>{index+1}</td>
+                                                <td width='60' height='10'>{index+1}</td>
                                                 <td height='10'><a href={`Socio-${ data.idUsuario }`} >{data.nombreC}</a></td>
                                                 <td height='10'>{data.email}</td>
                                                 <td width='25' height='10'>{data.idGrupo}</td>
@@ -77,8 +77,8 @@ const VentanaAdmin = () => {
                         </GrupoTabla>
                     </div>
                 </PanelAdmin>
-            </Card>
-        </main>
+
+        </>
     )
 }
 

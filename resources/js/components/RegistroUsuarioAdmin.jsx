@@ -99,8 +99,7 @@ const RegistroUsuarioAdmin = () => {
     }
 
     return (
-        <main>
-            <Card className='p-5'>
+        <>
                 <Grid onSubmit={ registrar }>
                     <h1>Registrar Usuario</h1>
                     <Input estado={nombre} 
@@ -130,8 +129,8 @@ const RegistroUsuarioAdmin = () => {
                     </Cuadro>
                     <Boton type='submit'>Registrar</Boton>
                 </Grid>
-            </Card>
-        </main>
+            
+        </>
     )
 }
 

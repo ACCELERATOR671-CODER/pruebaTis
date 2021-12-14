@@ -6,7 +6,8 @@ faPowerOff,
 faClipboard,
 faUsersCog,
 faEdit,
-faFileImport} from '@fortawesome/free-solid-svg-icons'
+faFileImport,
+faUserPlus} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -97,6 +98,12 @@ const opcionesUsuarioA = [{
     name:'',
     contenido:'Importar Datos',
     img:faFileImport,
+    onClick: null
+},{
+    link : "RegitroUsuarioAdmin",
+    name:'',
+    contenido:'Registrar Usuario',
+    img:faUserPlus,
     onClick: null
 },{
     link : "#",

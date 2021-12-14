@@ -70516,7 +70516,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_EspacioDeAsesoramiento__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/EspacioDeAsesoramiento */ "./resources/js/components/EspacioDeAsesoramiento.jsx");
 /* harmony import */ var _components_VentanaAdmin__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/VentanaAdmin */ "./resources/js/components/VentanaAdmin.jsx");
 /* harmony import */ var _components_ImpExp__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/ImpExp */ "./resources/js/components/ImpExp.jsx");
-/* harmony import */ var _components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/RegistroUsuarioAdmin */ "./resources/js/components/RegistroUsuarioAdmin.jsx");
+/* harmony import */ var _components_ImpExp_AdminVal__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/ImpExp/AdminVal */ "./resources/js/components/ImpExp/AdminVal.jsx");
+/* harmony import */ var _components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/RegistroUsuarioAdmin */ "./resources/js/components/RegistroUsuarioAdmin.jsx");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
@@ -70530,6 +70531,7 @@ __webpack_require__.r(__webpack_exports__);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 //require('./components/Example');
+
 
 
 
@@ -70674,15 +70676,21 @@ if (document.getElementById('espAse')) {
 }
 
 if (document.getElementById('VenAd')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_VentanaAdmin__WEBPACK_IMPORTED_MODULE_28__["default"], null), document.getElementById('VenAd'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImpExp__WEBPACK_IMPORTED_MODULE_29__["default"], {
+    VentanaAdmin: _components_VentanaAdmin__WEBPACK_IMPORTED_MODULE_28__["default"]
+  }), document.getElementById('VenAd'));
 }
 
 if (document.getElementById('impexp')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImpExp__WEBPACK_IMPORTED_MODULE_29__["default"], null), document.getElementById('impexp'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImpExp__WEBPACK_IMPORTED_MODULE_29__["default"], {
+    VentanaAdmin: _components_ImpExp_AdminVal__WEBPACK_IMPORTED_MODULE_30__["default"]
+  }), document.getElementById('impexp'));
 }
 
 if (document.getElementById('rua')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_30__["default"], null), document.getElementById('rua'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImpExp__WEBPACK_IMPORTED_MODULE_29__["default"], {
+    VentanaAdmin: _components_RegistroUsuarioAdmin__WEBPACK_IMPORTED_MODULE_31__["default"]
+  }), document.getElementById('rua'));
 }
 
 /***/ }),
@@ -71071,13 +71079,15 @@ var CalendarioGE = function CalendarioGE() {
         method: 'POST',
         body: datos
       }).then(function (res) {
-        if (res.ok) {
+        if (res.status === 200) {
           alert('Evento agregado al calendario');
           setAgEvento(false);
           setNombreEvt('');
           setFechaIniEvt(null);
           setFechaFinEvt(null);
           setCmpValido(false);
+        } else if (res.status === 201) {
+          alert('La fecha limite debe ser mayor o igual a la fecha de inicio');
         } else {
           alert('Ocurrio un error al agregar evento');
         }
@@ -71153,17 +71163,11 @@ var CalendarioGE = function CalendarioGE() {
     }
   };
 
-  var cmpRegex = new RegExp('^[a-zA-Z0-9_ ]+$');
-
   var validarEvento = function validarEvento() {
     var cmpDesc = document.getElementById('evt-desc');
 
     if (cmpDesc.value.length === 0) {
       cmpDesc.setCustomValidity("Debe llenar este campo");
-      cmpDesc.reportValidity();
-      setCmpValido(false);
-    } else if (!cmpRegex.test(cmpDesc.value)) {
-      cmpDesc.setCustomValidity("Solo se admite caracteres alfanumericos.");
       cmpDesc.reportValidity();
       setCmpValido(false);
     } else {
@@ -75696,7 +75700,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var ImpExp = function ImpExp() {
+var ImpExp = function ImpExp(_ref) {
+  var VentanaAdmin = _ref.VentanaAdmin;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       usuario = _useState2[0],
@@ -75724,7 +75730,7 @@ var ImpExp = function ImpExp() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_card__WEBPACK_IMPORTED_MODULE_1__["Card"], {
     className: " p-4"
-  }, !usuario ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cargando...") : usuario.mensaje == 'valido' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ImpExp_AdminVal__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No tienes Permisos Para esta P\xE1gina")));
+  }, !usuario ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cargando...") : usuario.mensaje == 'valido' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VentanaAdmin, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No tienes Permisos Para esta P\xE1gina")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ImpExp);
@@ -75892,9 +75898,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _elementos_registro__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elementos/registro */ "./resources/js/elementos/registro.js");
-/* harmony import */ var _parametros_menus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../parametros/menus */ "./resources/js/parametros/menus.js");
-/* harmony import */ var _parametros_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../parametros/session */ "./resources/js/parametros/session.js");
+/* harmony import */ var _elementos_card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../elementos/card */ "./resources/js/elementos/card.js");
+/* harmony import */ var _elementos_registro__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../elementos/registro */ "./resources/js/elementos/registro.js");
+/* harmony import */ var _parametros_menus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../parametros/menus */ "./resources/js/parametros/menus.js");
+/* harmony import */ var _parametros_session__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../parametros/session */ "./resources/js/parametros/session.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -75906,6 +75913,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -75981,10 +75989,11 @@ var Login = function Login() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("main", {
     id: "main-login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "contenedor-login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "tarjeta-datos"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_card__WEBPACK_IMPORTED_MODULE_3__["Card"], {
+    style: {
+      margin: '5% auto',
+      padding: '10px 50px 50px 50px'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("form", {
     onSubmit: iniciarSession
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
@@ -75998,30 +76007,22 @@ var Login = function Login() {
     width: "100%"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     id: "cont-datos-login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_3__["InputStyle"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_4__["InputStyle"], {
     ref: refUser,
     className: "input-login",
     name: "user",
     type: "text",
     placeholder: "Nombre de Usuario"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_3__["InputStyle"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_4__["InputStyle"], {
     ref: refPass,
     className: "input-login",
     name: "password",
     type: "password",
     placeholder: "Contrase\xF1a"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_3__["Boton"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_4__["Boton"], {
     id: "boton-login",
     type: "submit"
-  }, "Iniciar Sesi\xF3n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "cont-label-login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
-    id: "label-login"
-  }, "\xBFA\xDAN NO TIENES CUENTA?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "link-login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
-    href: "/RegistroDeUsuario"
-  }, "Registrarse")))))));
+  }, "Iniciar Sesi\xF3n")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);
@@ -77944,9 +77945,7 @@ var RegistroUsuarioAdmin = function RegistroUsuarioAdmin() {
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_card__WEBPACK_IMPORTED_MODULE_1__["Card"], {
-    className: "p-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_rua__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_rua__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
     onSubmit: registrar
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Registrar Usuario"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rua_Input__WEBPACK_IMPORTED_MODULE_4__["default"], {
     estado: nombre,
@@ -77980,7 +77979,7 @@ var RegistroUsuarioAdmin = function RegistroUsuarioAdmin() {
     defaultValue: "---seleccione una carrera---"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_3__["Boton"], {
     type: "submit"
-  }, "Registrar"))));
+  }, "Registrar")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RegistroUsuarioAdmin);
@@ -78460,7 +78459,7 @@ var VentanaAdmin = function VentanaAdmin() {
     setContenido(us);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_card__WEBPACK_IMPORTED_MODULE_5__["Card"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_admin__WEBPACK_IMPORTED_MODULE_1__["PanelAdmin"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_admin__WEBPACK_IMPORTED_MODULE_1__["PanelAdmin"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Administracion")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: " d-flex justify-content-center align-items-center"
@@ -78479,7 +78478,7 @@ var VentanaAdmin = function VentanaAdmin() {
     cellPadding: "10"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_GE__WEBPACK_IMPORTED_MODULE_3__["THead"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nombre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Correo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Grupo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Rol"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_GE__WEBPACK_IMPORTED_MODULE_3__["Tbody"], null, contenido ? contenido.length > 0 ? contenido.map(function (data, index) {
     return index % 2 == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_GE__WEBPACK_IMPORTED_MODULE_3__["RowSecundary"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      width: "25",
+      width: "60",
       height: "10"
     }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       height: "10"
@@ -78496,7 +78495,7 @@ var VentanaAdmin = function VentanaAdmin() {
       rol: data.nombreRol,
       idUsuario: data.idUsuario
     })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_GE__WEBPACK_IMPORTED_MODULE_3__["RowPrimary"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      width: "25",
+      width: "60",
       height: "10"
     }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       height: "10"
@@ -78517,7 +78516,7 @@ var VentanaAdmin = function VentanaAdmin() {
     colSpan: "5"
   }, "No hay Usuarios")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "5"
-  }, "Cargando...")))))))));
+  }, "Cargando..."))))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VentanaAdmin);
@@ -79107,7 +79106,7 @@ var _templateObject;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-var PanelAdmin = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100%;\n    padding: 20px;\n    display: grid;\n    justify-content: center;\n    gap : 20px;\n"])));
+var PanelAdmin = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100%;\n    display: grid;\n    justify-content: center;\n    gap : 20px;\n"])));
 
 
 /***/ }),
@@ -79875,6 +79874,12 @@ var opcionesUsuarioA = [{
   name: '',
   contenido: 'Importar Datos',
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faFileImport"],
+  onClick: null
+}, {
+  link: "RegitroUsuarioAdmin",
+  name: '',
+  contenido: 'Registrar Usuario',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserPlus"],
   onClick: null
 }, {
   link: "#",

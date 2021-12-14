@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Card } from '../elementos/card'
 import AdminVal from './ImpExp/AdminVal';
 
-const ImpExp = () => {
+const ImpExp = ({VentanaAdmin}) => {
     
     const [usuario, setUsuario] = useState(null);
 
@@ -27,7 +27,7 @@ const ImpExp = () => {
         <main>
             <Card className=' p-4'>
                 {(!usuario) ? (<h1>Cargando...</h1>)
-                :((usuario.mensaje == 'valido') ? (<AdminVal />)
+                :((usuario.mensaje == 'valido') ? (<VentanaAdmin />)
                     :(<h1>No tienes Permisos Para esta Página</h1>))}
             </Card>
         </main>
