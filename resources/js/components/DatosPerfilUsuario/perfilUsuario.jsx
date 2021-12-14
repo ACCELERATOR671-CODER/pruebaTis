@@ -1,5 +1,4 @@
 import React,{ useRef, useState, useEffect } from "react";
-import MensajeAlerta from "../RegistroGE/MensajeAlerta";
 import IconoAtras from "../Svg/IconoAtras";
 import IconoEditar from "../Svg/IconoEditar";
 import IconoGuardar from "../Svg/IconoGuardar";
@@ -19,6 +18,7 @@ const PerfilUsuario = () => {
     const codSis = useRef(null);
     const imagen = useRef(null);
     const [logo, setLogo] = useState("../resources/socios/");
+    const logoDef = '../resources/perfilDefecto.png';
 
     useEffect(() => {
         const datoID = new FormData();
@@ -37,7 +37,11 @@ const PerfilUsuario = () => {
             codSis.current.value = datoUsuario[0].codSis;
             carrera.current.value = datoUsuario[1].nomCarrera;
             grupo.current.value = datoUsuario[2].nomGrupo;
-            imagen.current.src = logo+datoUsuario[0].foto_perfil;
+            if (datoUsuario[0].foto_perfil != null) {
+                imagen.current.src = logo+datoUsuario[0].foto_perfil;
+            } else {
+                imagen.current.src = logoDef;
+            }
         })
     }, []);
 
