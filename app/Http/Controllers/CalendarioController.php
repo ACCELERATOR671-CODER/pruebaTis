@@ -9,19 +9,23 @@ use Illuminate\Support\Facades\DB;
 class CalendarioController extends Controller
 {
     public function agregarEvento(Request $request){
-        $calendario = DB::table('Calendario')
-                        ->where('idGE','=',$request->idGE)
-                        ->first();
-        $evento = new Evento();
-        $evento->idCalendario = $calendario->idCalendario;
-        $evento->nombre = $request->nombre;
-        $evento->fecha_creacion = date("Y-m-d");
-        $evento->fecha_inicio = $request->fecha_inicio;
-        $evento->fecha_final = $request->fecha_final;
-
-        $evento->save();
-
-        return response(200);
+        if ($request->fecha_inicio <= $request->fecha_final) {
+            $calendario = DB::table('Calendario')
+                            ->where('idGE','=',$request->idGE)
+                            ->first();
+            $evento = new Evento();
+            $evento->idCalendario = $calendario->idCalendario;
+            $evento->nombre = $request->nombre;
+            $evento->fecha_creacion = date("Y-m-d");
+            $evento->fecha_inicio = $request->fecha_inicio;
+            $evento->fecha_final = $request->fecha_final;
+    
+            $evento->save();
+    
+            return response(200);
+        } else {
+            return response('',201); 
+        }
     }
 
     public function obtenerEventos(Request $request){

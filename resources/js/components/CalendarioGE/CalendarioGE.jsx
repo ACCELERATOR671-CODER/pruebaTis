@@ -90,14 +90,17 @@ const CalendarioGE = () => {
                 body: datos
             })
             .then((res) => {
-                if (res.ok) {
+                if (res.status === 200) {
                     alert('Evento agregado al calendario');
                     setAgEvento(false);
                     setNombreEvt('');
                     setFechaIniEvt(null);
                     setFechaFinEvt(null);
                     setCmpValido(false);
-                } else {
+                } else if (res.status === 201) {
+                    alert('La fecha limite debe ser mayor o igual a la fecha de inicio');
+                }
+                 else {
                     alert('Ocurrio un error al agregar evento');
                 }
             })
@@ -177,16 +180,10 @@ const CalendarioGE = () => {
         }
     };
 
-    const cmpRegex = new RegExp('^[a-zA-Z0-9_ ]+$');
-
     const validarEvento = () => {
         const cmpDesc = document.getElementById('evt-desc')
         if (cmpDesc.value.length === 0) {
             cmpDesc.setCustomValidity("Debe llenar este campo");
-            cmpDesc.reportValidity();
-            setCmpValido(false);
-        } else if (!cmpRegex.test(cmpDesc.value)) {
-            cmpDesc.setCustomValidity("Solo se admite caracteres alfanumericos.");
             cmpDesc.reportValidity();
             setCmpValido(false);
         } else {
