@@ -9,7 +9,7 @@ const TabPerfil = () => {
     
     return(
         <ContenedorTab>
-            <nav style={{ marginLeft:'9%', marginRight: '9%' }}>
+            <nav className='w-100 d-flex justify-content-center' style={{marginTop: '10%'}}>
             <div className="nav nav-tabs" id="nav-tab" role="tablist">
               <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Perfil</a>
               {
