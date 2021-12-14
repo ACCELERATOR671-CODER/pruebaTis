@@ -1,6 +1,7 @@
 import { data } from 'jquery';
 import { create, toInteger } from 'lodash';
 import React, { useRef, useEffect, useState } from 'react';
+import { Card } from '../elementos/card';
 import { Boton, InputStyle } from '../elementos/registro';
 import { iniciarSession } from '../parametros/menus';
 import { createSession } from '../parametros/session';
@@ -54,35 +55,25 @@ const Login = () => {
     };
     return(
         <main id="main-login">
-            <div id="contenedor-login">
-                <div id='tarjeta-datos'>
-                    <form onSubmit={iniciarSession}>
-                        <div id="cont-label-logo">
-                            <label id="label-login-logo">BIENVENIDO</label>
-                        </div>
+            <Card style={{margin: '5% auto', padding: '10px 50px 50px 50px'}}>
+                <form onSubmit={iniciarSession}>
+                    <div id="cont-label-logo">
+                        <label id="label-login-logo">BIENVENIDO</label>
+                    </div>
+                    
+                    <div id="cont-logo">
+                        <img src={ logo } width='100%'/>
+                    </div>
+
+                    <div id="cont-datos-login">
+                        <InputStyle ref = {refUser} className="input-login" name='user' type="text" placeholder="Nombre de Usuario" />
+
+                        <InputStyle ref = {refPass} className="input-login" name='password' type="password" placeholder="Contraseña" />
                         
-                        <div id="cont-logo">
-                            <img src={ logo } width='100%'/>
-                        </div>
-
-                        <div id="cont-datos-login">
-                            <InputStyle ref = {refUser} className="input-login" name='user' type="text" placeholder="Nombre de Usuario" />
-
-                            <InputStyle ref = {refPass} className="input-login" name='password' type="password" placeholder="Contraseña" />
-                            
-                            <Boton id="boton-login" type="submit">Iniciar Sesión</Boton>
-
-                            <div id="cont-label-login">
-                            <label id="label-login">¿AÚN NO TIENES CUENTA?</label> 
-                            </div>
-
-                            <div className="link-login">
-                                <a href="/RegistroDeUsuario">Registrarse</a>
-                            </div>
-                        </div>     
-                    </form>  
-                </div>  
-            </div>  
+                        <Boton id="boton-login" type="submit">Iniciar Sesión</Boton>
+                    </div>     
+                </form>  
+            </Card>  
         </main>
     );
 
