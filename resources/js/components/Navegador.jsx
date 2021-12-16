@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import { Nav, IconNav } from '../elementos/navegador'
 import ItemNavegador from './Navegador/ItemNavegador'
 import Logo from './Navegador/Logo'
