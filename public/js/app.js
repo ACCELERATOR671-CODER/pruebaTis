@@ -70799,7 +70799,20 @@ var SelectRol = function SelectRol(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, rol ? idUsuario != sessionStorage.getItem('id') ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+  var resetearUsuario = function resetearUsuario() {
+    var id = new FormData();
+    id.append('idUsuario', idUsuario);
+    fetch('api/resetear', {
+      method: 'POST',
+      body: id
+    }).then(function (response) {
+      if (!response.ok) {
+        alert("Usuario no se pudo reestablecer");
+      }
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, rol ? idUsuario != sessionStorage.getItem('id') ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
     ref: select,
     defaultValue: rol,
     onChange: actualizarRol
@@ -70809,7 +70822,9 @@ var SelectRol = function SelectRol(_ref) {
     value: "Estudiante"
   }, "Estudiante"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "Consultor"
-  }, "Consultor")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, rol) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No Registrado"));
+  }, "Consultor")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: resetearUsuario
+  }, "Reset")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, rol) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No Registrado"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SelectRol);
@@ -72860,9 +72875,9 @@ var usuario = sessionStorage.getItem('id');
 
 var TabPerfil = function TabPerfil() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_TabGE__WEBPACK_IMPORTED_MODULE_1__["ContenedorTab"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    className: "w-100 d-flex justify-content-center",
     style: {
-      marginLeft: '9%',
-      marginRight: '9%'
+      marginTop: '10%'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav nav-tabs",
@@ -72948,10 +72963,9 @@ var CajaBotones = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _RegistroGE_MensajeAlerta__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RegistroGE/MensajeAlerta */ "./resources/js/components/RegistroGE/MensajeAlerta.jsx");
-/* harmony import */ var _Svg_IconoAtras__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Svg/IconoAtras */ "./resources/js/components/Svg/IconoAtras.jsx");
-/* harmony import */ var _Svg_IconoEditar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Svg/IconoEditar */ "./resources/js/components/Svg/IconoEditar.jsx");
-/* harmony import */ var _Svg_IconoGuardar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Svg/IconoGuardar */ "./resources/js/components/Svg/IconoGuardar.jsx");
+/* harmony import */ var _Svg_IconoAtras__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Svg/IconoAtras */ "./resources/js/components/Svg/IconoAtras.jsx");
+/* harmony import */ var _Svg_IconoEditar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Svg/IconoEditar */ "./resources/js/components/Svg/IconoEditar.jsx");
+/* harmony import */ var _Svg_IconoGuardar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Svg/IconoGuardar */ "./resources/js/components/Svg/IconoGuardar.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -72969,7 +72983,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -72994,6 +73007,7 @@ var PerfilUsuario = function PerfilUsuario() {
       logo = _useState2[0],
       setLogo = _useState2[1];
 
+  var logoDef = '../resources/perfilDefecto.png';
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var datoID = new FormData();
     datoID.append('id', datos.id);
@@ -73010,7 +73024,12 @@ var PerfilUsuario = function PerfilUsuario() {
       codSis.current.value = datoUsuario[0].codSis;
       carrera.current.value = datoUsuario[1].nomCarrera;
       grupo.current.value = datoUsuario[2].nomGrupo;
-      imagen.current.src = logo + datoUsuario[0].foto_perfil;
+
+      if (datoUsuario[0].foto_perfil != null) {
+        imagen.current.src = logo + datoUsuario[0].foto_perfil;
+      } else {
+        imagen.current.src = logoDef;
+      }
     });
   }, []);
 
@@ -73226,7 +73245,7 @@ var PerfilUsuario = function PerfilUsuario() {
   })), edita && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cont-icono-editar",
     onClick: editarCampos
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoEditar__WEBPACK_IMPORTED_MODULE_3__["default"], null)), editando && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoEditar__WEBPACK_IMPORTED_MODULE_2__["default"], null)), editando && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cont-input-imagen"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "input-file",
@@ -73316,10 +73335,10 @@ var PerfilUsuario = function PerfilUsuario() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cont-icono-atras",
     onClick: bloquearCampos
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoAtras__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoAtras__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "cont-icono-guardar",
     onClick: actualizarDatos
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoGuardar__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Svg_IconoGuardar__WEBPACK_IMPORTED_MODULE_3__["default"], null)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PerfilUsuario);
@@ -75469,8 +75488,6 @@ var GEPorValidar = function GEPorValidar(props) {
     className: "row border border-dark bg-light table-responsive mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-bordered table-striped align-middle"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     scope: "col"
   }, "Nombre Grupo-Empresa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -75497,12 +75514,10 @@ var GEPorValidar = function GEPorValidar(props) {
     colSpan: "5"
   }, "No hay grupo Empresas Registradas")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "5"
-  }, "Cargando...")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 d-flex justify-content-center p-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_1__["Boton"], {
+  }, "Cargando..."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_1__["Boton"], {
     type: "button",
     onClick: onClick
-  }, "Validar GrupoEmpresas")))));
+  }, "Validar GrupoEmpresas"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GEPorValidar);
@@ -75536,14 +75551,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var GEvalida = function GEvalida(props) {
-  var Datos = [{
-    nombre: "Mythical",
-    nombre_largo: "Mythical Soft SRL",
-    usuarios: "4",
-    estado: "valido",
-    espacio: "con espacio"
-  }];
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       grupo_empresa = _useState2[0],
@@ -80120,8 +80127,8 @@ var getNombre = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Proyectos\php7.3\empresaTis\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Proyectos\php7.3\empresaTis\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\lena\vs\Proyecto_TIS\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\lena\vs\Proyecto_TIS\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

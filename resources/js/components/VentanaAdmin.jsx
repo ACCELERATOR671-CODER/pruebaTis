@@ -25,9 +25,10 @@ const VentanaAdmin = () => {
         setContenido(us);
     }
 
+
     return (
         <>
-           
+
                 <PanelAdmin>
                     <div className='d-flex justify-content-center'>
                     <h1>Administracion</h1>
@@ -50,8 +51,8 @@ const VentanaAdmin = () => {
                                 </THead>
                                 <Tbody>
                                 {(contenido) ? ((contenido.length>0) ? (contenido.map((data, index) => {
-                                    
-                                    return (index%2==0) ? 
+
+                                    return (index%2==0) ?
                                             (<><RowSecundary>
                                                 <td width='60' height='10'>{index+1}</td>
                                                 <td height='10'><a href={`Socio-${ data.idUsuario }`} >{data.nombreC}</a></td>

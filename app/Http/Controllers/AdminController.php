@@ -16,10 +16,10 @@ class AdminController extends Controller
                         ->where('Usuario.idUsuario', '=', $id)
                         ->first();
         if(isset($usuario->idUsuario) && $usuario->nombreRol == 'Administrador'){
-            return view('ventanaAdmin')->with(compact('id'));  
+            return view('ventanaAdmin')->with(compact('id'));
         } else {
             return view('login');
-        }  
+        }
     }
 
     public function getUsuarios(){
@@ -40,6 +40,18 @@ class AdminController extends Controller
                     ->first();
 
         $usuario->idRol = $rol->idRol;
+        $usuario->save();
+        return response(200);
+    }
+
+    /**
+     * idUsuario = el usuario que tendra un nuevo rol
+     * nombreRol = el rol que se le otorgara
+     */
+    public function resetear(Request $req){
+        $usuario = Usuario::find($req->idUsuario);
+        $usuario->nombreUsuario = $usuario->codSis;
+        $usuario->contrasenia = $usuario->codSis;
         $usuario->save();
         return response(200);
     }
