@@ -50,8 +50,8 @@ class AdminController extends Controller
      */
     public function resetear(Request $req){
         $usuario = Usuario::find($req->idUsuario);
-        $usuario->nombreUsuario = $usuario->codSis;
-        $usuario->contrasenia = $usuario->codSis;
+        $usuario->nombreUsuario = null;
+        $usuario->contrasenia = null;
         $usuario->save();
         return response(200);
     }

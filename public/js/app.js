@@ -70820,9 +70820,7 @@ var SelectRol = function SelectRol(_ref) {
     value: "Administrador"
   }, "Administrador"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "Estudiante"
-  }, "Estudiante"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-    value: "Consultor"
-  }, "Consultor")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "Estudiante")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: resetearUsuario
   }, "Reset")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, rol) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No Registrado"));
 };
@@ -79814,6 +79812,12 @@ var opcionesUsuarioSGE = [{
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faAddressCard"],
   onClick: null
 }, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
+  onClick: null
+}, {
   link: "#",
   name: 'cerrarSession',
   contenido: 'Cerrar Session',
@@ -79831,6 +79835,12 @@ var opcionesUsuarioCGE = [{
   name: 'grupoEmpresa',
   contenido: 'Mi Grupo Empresa',
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUsers"],
+  onClick: null
+}, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
   onClick: null
 }, {
   link: "#",
@@ -79856,6 +79866,12 @@ var opcionesUsuarioCGEV = [{
   name: 'espacioTrabajo',
   contenido: 'Mi Espacio de trabajo',
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faBriefcase"],
+  onClick: null
+}, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
   onClick: null
 }, {
   link: "#",
@@ -79931,9 +79947,6 @@ var iniciarSession = {
 var datosNavegador = [{
   nombre: 'Grupo Empresas',
   link: "/GrupoEmpresas"
-}, {
-  nombre: 'Inscritos en la materia',
-  link: "Inscritos"
 }, {
   nombre: 'FundaEmpresa',
   link: "FundaEmpresa"
