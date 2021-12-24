@@ -107,8 +107,13 @@ Route::post('importarExelEmpresas', [ImpExpController::class, 'importarExelEmpre
 Route::get('getGroups', [AdminController::class, 'getGroups']);
 Route::get('getCarrera', [AdminController::class, 'getCarrera']);
 Route::post('createUser', [UserController::class, 'createUser']);
+Route::post('createAdviser', [UserController::class, 'createAdviser']);
 
 Route::post('verificarCodSis', [UserController::class, 'verificarCodSis']);
 Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
 
+Route::get('ObtenerOpocionesG', [CalendarioController::class, 'ObtenerOpocionesG']);
+Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCalendarioGeneral']);
 
+Route::post('crearFechaG', [CalendarioController::class, 'crearFechaG']);
+Route::post('dropDate', [CalendarioController::class, 'dropDate']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,5 +56,81 @@ class CalendarioController extends Controller
         $evento->delete();
 
         return response(200);
+    }
+
+    public function ObtenerOpocionesG(){
+        $actividad = DB::table('Opcion')
+                            ->where('tipoOpcion', '=', 'Actividad')
+                            ->get();
+        $recurso = DB::table('Opcion')
+                            ->where('tipoOpcion', '=', 'Recurso')
+                            ->get();
+        $evaluacion = DB::table('Opcion')
+                            ->where('tipoOpcion', '=', 'Evaluacion')
+                            ->get();
+        return response()->json([$actividad, $recurso, $evaluacion]);
+    }
+
+    public function obtenerCalendarioGeneral(){
+        $calendario = DB::table('Calendario')
+                            ->join('Evento', 'Evento.idCalendario' , '=' ,'Calendario.idCalendario')
+                            ->where('Calendario.general', '=', true)
+                            ->orderBy('fecha_final')
+                            ->get();
+        $calendarioG = $this->obtenerEventosG($calendario);
+        return response()->json($calendarioG);
+    }
+
+    private function obtenerEventosG($fechas){
+        $eventos = [];
+        foreach($fechas as $fecha){
+            $evento = DB::table('Opcion')
+                            ->where('idEvento', '=', $fecha->idEvento)
+                            ->get();
+            $arrayFecha = (array) $fecha;
+            $arrayFecha['eventos'] = $evento;
+            array_push($eventos, (object) $arrayFecha);
+        }
+
+        return $eventos;
+    }
+
+    public function crearFechaG(Request $req){
+        if(sizeof((array)$req->checkbox) < 1){
+            return response()->json(['mensaje' => 'debes seleccionar al menos una opción de la lista']);
+        } else {
+            $evento = new Evento;
+
+            $id = (Evento::max('idEvento'))+1;
+            $evento->idEvento = $id;
+            $evento->idCalendario = '999';
+            $evento->fecha_creacion = date("Y-m-d");
+            $evento->fecha_final = $req->fecha;
+
+            $evento->save();
+            foreach($req->checkbox as $checked){
+                $option = Option::findOrFail($checked);
+                $option->idEvento = $id;
+                $option->save();
+            }
+    
+            return response()->json(sizeof($req->checkbox));
+        }
+    }
+
+    /*
+        recibir todos los ids
+    */
+    public function dropDate(Request $req){
+        $evento = Evento::findOrFail($req->idEvento);
+        $opciones = json_decode($req->idOpcion);
+        foreach($opciones as $opcion){
+            $option = Option::findOrFail($opcion->idOption);
+            $option->idEvento = null;
+            $option->save();
+        }
+        $evento->delete();
+
+        return response()->json($opciones);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FundaEmpresa;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
 use App\Models\session;
 use Illuminate\Support\Facades\DB;
@@ -114,16 +115,11 @@ class UserController extends Controller
                                     ->where('idUsuario','<>',$usuario->idUsuario)
                                     ->get();
                 if(sizeof($otrosUsuarios)<=0){
-
-                    $rol = DB::table('Rol')
-                                    ->where('nombreRol', '=', 'Estudiante')
-                                    ->first();
                     
                     $usuario->nombreUsuario = $req->nombreU;
                     $usuario->telefono = $req->telefono;
                     $usuario->contrasenia = $req->contrasenia;
                     $usuario->registrado = true;
-                    $usuario->idRol = $rol->idRol;
 
                     if($req->file('foto_perfil') != null){
                         $file = $req->file('foto_perfil');
@@ -207,10 +203,52 @@ class UserController extends Controller
         $usuario->idCarrera = $req->carrera;
         $usuario->idGrupo = $req->grupo;
 
+        $rol = DB::table('Rol')
+                    ->where('nombreRol', '=', 'Estudiante')
+                    ->first();
+        $usuario->idRol = $rol->idRol;
+
         $usuario->save();
 
         return response()->json($usuario);
     }
+
+    public function createAdviser(Request $req){
+
+        $usuario = new Usuario;
+        $usuario->idUsuario = $req->codsis;
+        $usuario->nombreC = $req->nombreUsuario;
+        $usuario->email = $req->email;
+        $usuario->codSis = $req->codsis;
+        $usuario->idCarrera = null;
+
+        //crear nuevo grupo a partir de aca
+
+        $gm = DB::table('Grupo')->max('idGrupo');
+        $id = (!empty($gm)) ? $gm+1: 1; 
+
+        $grupo = new Grupo;
+        $grupo->idGrupo = $id;
+        $grupo->nomGrupo = $usuario->nombreC;
+        $grupo->save();
+
+        $gp = DB::table('Grupo')
+                    ->where('nomGrupo', '=', $usuario->nombreC)
+                    ->first();
+
+
+        $usuario->idGrupo = $gp->idGrupo;//recuperamoe el nuevo grupo de la licenciad@ y le asignamos
+        $rol = DB::table('Rol')
+                        ->where('nombreRol', '=', 'Consultor')
+                    ->first();
+        $usuario->idRol = $rol->idRol;
+
+        $usuario->save();
+
+        return response()->json($usuario);
+    }
+
+
 
     public function verificarCodSis(Request $req){
         $usuario = DB::table('Usuario')

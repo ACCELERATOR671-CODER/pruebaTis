@@ -17,7 +17,7 @@ class Calendario extends Migration
             $table->id('idCalendario')->autoIncrement();
             $table->Integer('idGE')->nullable();
             $table->foreign('idGE')->references('idGE')->on('Grupo_Empresa');
-            $table->Integer('idTablon')->nullable();
+            $table->boolean('general')->default(false);
             //$table->foreign('idTablon')->references('idEspAse')->on('Tablon');
         });
     }

@@ -25,7 +25,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "134111",
                 "idGrupo" => "1",
                 "administrador" => "false",
-                "idRol" => null,
+                "idRol" => 3,
                 "registrado" => "false"
             ],[
                 "idUsuario" => "2",
@@ -39,7 +39,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "134111",
                 "idGrupo" => "1",
                 "administrador" => "false",
-                "idRol" => null,
+                "idRol" => 3,
                 "registrado" => "false"
             ],[
                 "idUsuario" => "3",
@@ -53,7 +53,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "134111",
                 "idGrupo" => "1",
                 "administrador" => "false",
-                "idRol" => null,
+                "idRol" => 3,
                 "registrado" => "false"
             ],[
                 "idUsuario" => "4",
@@ -81,7 +81,7 @@ class UsuarioTableSeeder extends Seeder
                 "idCarrera" => "134111",
                 "idGrupo" => "1",
                 "administrador" => "false",
-                "idRol" => null,
+                "idRol" => 3,
                 "registrado" => "false"
             ],
         ]);

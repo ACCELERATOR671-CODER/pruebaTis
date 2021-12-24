@@ -16,12 +16,10 @@ class Evento extends Migration
         Schema::create('Evento', function(Blueprint $table){
             $table->id('idEvento')->autoIncrement();
             $table->date('fecha_creacion'); 
-            $table->string('nombre'); //lo usaremos como actividad
+            $table->string('nombre')->nullable(); //lo usaremos como actividad
             $table->integer('idCalendario');
             $table->foreign('idCalendario')->references('idCalendario')->on('Calendario');
             $table->date('fecha_inicio')->nullable();
-            $table->string('recursos')->nullable();
-            $table->string('evaluacion')->nullable();
             $table->date('fecha_final');
         });
     }
