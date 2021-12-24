@@ -70805,7 +70805,20 @@ var SelectRol = function SelectRol(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, rol ? idUsuario != sessionStorage.getItem('id') ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+  var resetearUsuario = function resetearUsuario() {
+    var id = new FormData();
+    id.append('idUsuario', idUsuario);
+    fetch('api/resetear', {
+      method: 'POST',
+      body: id
+    }).then(function (response) {
+      if (!response.ok) {
+        alert("Usuario no se pudo reestablecer");
+      }
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, rol ? idUsuario != sessionStorage.getItem('id') ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
     ref: select,
     defaultValue: rol,
     onChange: actualizarRol
@@ -70813,9 +70826,9 @@ var SelectRol = function SelectRol(_ref) {
     value: "Administrador"
   }, "Administrador"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "Estudiante"
-  }, "Estudiante"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-    value: "Consultor"
-  }, "Consultor")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, rol) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No Registrado"));
+  }, "Estudiante")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: resetearUsuario
+  }, "Reset")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, rol) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No Registrado"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SelectRol);
@@ -75710,8 +75723,6 @@ var GEPorValidar = function GEPorValidar(props) {
     className: "row border border-dark bg-light table-responsive mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
     className: "table table-bordered table-striped align-middle"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     scope: "col"
   }, "Nombre Grupo-Empresa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -75738,12 +75749,10 @@ var GEPorValidar = function GEPorValidar(props) {
     colSpan: "5"
   }, "No hay grupo Empresas Registradas")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "5"
-  }, "Cargando...")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 d-flex justify-content-center p-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_1__["Boton"], {
+  }, "Cargando..."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_registro__WEBPACK_IMPORTED_MODULE_1__["Boton"], {
     type: "button",
     onClick: onClick
-  }, "Validar GrupoEmpresas")))));
+  }, "Validar GrupoEmpresas"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (GEPorValidar);
@@ -75777,14 +75786,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var GEvalida = function GEvalida(props) {
-  var Datos = [{
-    nombre: "Mythical",
-    nombre_largo: "Mythical Soft SRL",
-    usuarios: "4",
-    estado: "valido",
-    espacio: "con espacio"
-  }];
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
       grupo_empresa = _useState2[0],
@@ -80592,6 +80593,12 @@ var opcionesUsuarioSGE = [{
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faAddressCard"],
   onClick: null
 }, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
+  onClick: null
+}, {
   link: "#",
   name: 'cerrarSession',
   contenido: 'Cerrar Session',
@@ -80615,6 +80622,12 @@ var opcionesUsuarioCGE = [{
   name: 'grupoEmpresa',
   contenido: 'Mi Grupo Empresa',
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUsers"],
+  onClick: null
+}, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
   onClick: null
 }, {
   link: "#",
@@ -80646,6 +80659,12 @@ var opcionesUsuarioCGEV = [{
   name: 'espacioTrabajo',
   contenido: 'Mi Espacio de trabajo',
   img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faBriefcase"],
+  onClick: null
+}, {
+  link: "Inscritos",
+  name: 'inscritosMateria',
+  contenido: 'Inscritos en la Materia',
+  img: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUserFriends"],
   onClick: null
 }, {
   link: "#",
@@ -80727,9 +80746,6 @@ var iniciarSession = {
 var datosNavegador = [{
   nombre: 'Grupo Empresas',
   link: "/GrupoEmpresas"
-}, {
-  nombre: 'Inscritos en la materia',
-  link: "Inscritos"
 }, {
   nombre: 'FundaEmpresa',
   link: "FundaEmpresa"
@@ -80923,8 +80939,8 @@ var getNombre = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Proyectos\php7.3\empresaTis\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Proyectos\php7.3\empresaTis\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\lena\vs\Proyecto_TIS\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\lena\vs\Proyecto_TIS\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

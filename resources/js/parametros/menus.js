@@ -8,7 +8,8 @@ faUsersCog,
 faEdit,
 faFileImport,
 faUserPlus,
-faRocket} from '@fortawesome/free-solid-svg-icons'
+faRocket,
+faUserFriends} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -35,6 +36,12 @@ const opcionesUsuarioSGE = [{
     img:faAddressCard,
     onClick: null
 },{
+    link : "Inscritos",
+    name:'inscritosMateria',
+    contenido:'Inscritos en la Materia',
+    img:faUserFriends,
+    onClick: null
+},{
     link : "#",
     name:'cerrarSession',
     contenido:'Cerrar Session',
@@ -59,6 +66,12 @@ const opcionesUsuarioCGE = [{
     name:'grupoEmpresa',
     contenido:'Mi Grupo Empresa',
     img:faUsers,
+    onClick: null
+},{
+    link : "Inscritos",
+    name:'inscritosMateria',
+    contenido:'Inscritos en la Materia',
+    img:faUserFriends,
     onClick: null
 },{
     link : "#",
@@ -91,6 +104,12 @@ const opcionesUsuarioCGEV = [{
     name:'espacioTrabajo',
     contenido:'Mi Espacio de trabajo',
     img:faBriefcase,
+    onClick: null
+},{
+    link : "Inscritos",
+    name:'inscritosMateria',
+    contenido:'Inscritos en la Materia',
+    img:faUserFriends,
     onClick: null
 },{
     link : "#",
@@ -178,9 +197,6 @@ const datosNavegador = [
     {
         nombre:'Grupo Empresas',
         link : "/GrupoEmpresas"
-    },{
-        nombre:'Inscritos en la materia',
-        link : "Inscritos"
     },{
         nombre:'FundaEmpresa',
         link : "FundaEmpresa"

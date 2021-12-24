@@ -4,16 +4,6 @@ import { useState, useEffect } from 'react';
 
 const GEvalida = (props) => {
 
-    var Datos = [
-        {
-            nombre: "Mythical",
-            nombre_largo: "Mythical Soft SRL",
-            usuarios: "4",
-            estado: "valido",
-            espacio: "con espacio"
-        }
-    ];
-
     const [grupo_empresa, setGrupoEmpresa] = useState(null)
 
     useEffect(() => {

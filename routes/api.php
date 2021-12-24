@@ -42,6 +42,7 @@ Route::post('registrarGrupoEmpresa', [RegistroGEController::class, 'RegistrarGru
 Route::post('crearSession', [UserController::class, 'createSession']);
 Route::post('eliminarSession', [UserController::class, 'dropSession']);
 Route::post('verificarSession', [UserController::class, 'verifySession']);
+Route::post('verificarSessionConsultor', [UserController::class, 'verifySessionConsultor']);
 Route::post('getNombre', [UserController::class, 'getNombre']);
 
 Route::post('registrarCambiosGE', [EditarGEController::class, 'registrarCambiosGE']);
@@ -97,6 +98,7 @@ Route::post('obtenerDatosGrupoEmpresa', [RegistroGEController::class, 'obtenerDa
 Route::post('elegirNavegador', [NavegadorController::class, 'elegirNavegador']);
 
 Route::post('actualizarRol', [AdminController::class, 'actualizarRol']);
+Route::post('resetear', [AdminController::class, 'resetear']);
 Route::get('getUsuarios', [AdminController::class, 'getUsuarios']);
 Route::post('registrarDescrip', [EspacioGeneralController::class, 'RegistroDescripcion']);
 Route::post('getFullUser', [AdminController::class, 'getFullUser']);

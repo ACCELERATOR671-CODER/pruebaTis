@@ -10,7 +10,7 @@
     if(token){
         const data = new FormData();
         data.append('token', token);
-        fetch("api/verificarSession", {
+        fetch("api/verificarSessionConsultor", {
             method: 'POST',
             body:data
         }).then((response) => {
