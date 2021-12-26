@@ -52,6 +52,9 @@ class AdminController extends Controller
         $usuario = Usuario::find($req->idUsuario);
         $usuario->nombreUsuario = null;
         $usuario->contrasenia = null;
+        $usuario->telefono = null;
+        $usuario->foto_perfil = null;
+        $usuario->registrado = false;
         $usuario->save();
         return response(200);
     }
