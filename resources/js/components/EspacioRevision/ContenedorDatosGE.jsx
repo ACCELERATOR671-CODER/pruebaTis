@@ -22,16 +22,39 @@ const ContenedorDatosGE = ({gE}) => {
         })
     },[])
 
-    const revisarArchivos = () => {
-        if (elementos != null && elementos.length > 0) {
-            if (!elementos[0].revisado) {
-                setEstaRevisado(false);
+    const revisarArchivos = (elemento) => {
+        if (elemento != null) {
+            if (elemento.tipo != 'carpeta') {
+                if (!elemento.revisado) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (elemento.hijos.length > 0) {
+                    let revisados = [];
+                    elemento.hijos.forEach(hijo => {
+                        revisados.push(revisarArchivos(hijo))
+                    });
+    
+                    if (revisados.includes(false)) {
+                        elemento.revisado = false;
+                    } else {
+                        elemento.revisado = true;
+                    }
+                }
+
+                return elemento.revisado;
             }
+        } else {
+            return true;
         }
     };
 
     useEffect(() => {
-        revisarArchivos();
+        if (elementos && elementos.length > 0) {
+            setEstaRevisado(revisarArchivos(elementos[0]));
+        }
     },[elementos]);
 
     return (
@@ -63,6 +86,11 @@ const ContenedorDatosGE = ({gE}) => {
                                 contenido={datos} 
                                 nombreGEAlt={gE.nombre} 
                                 revConsultor={true}
+                                revisar={revisarArchivos}
+                                padre={datos}
+                                setPadre={setEstaRevisado}
+                                principal={datos}
+                                setPrincipal={setEstaRevisado}
                             />
                         )))
                         :

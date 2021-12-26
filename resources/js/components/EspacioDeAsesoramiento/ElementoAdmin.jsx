@@ -8,7 +8,9 @@ import { faFolder,
          faExternalLinkAlt,
          faTimes as faCross } from '@fortawesome/free-solid-svg-icons';
 
-const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsultor = false}) => {
+const ElementoAdmin = ({contenido, hijos, setHijos, 
+    nombreGEAlt = null,revConsultor = false, revisar = null, 
+    padre = null, setPadre = null, principal = null, setPrincipal = null}) => {
 
     const [contenidoInt, setContenidoInt] = useState(contenido);
     const [hijosInt, setHijosInt] = useState(contenido.hijos);
@@ -21,6 +23,8 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
 
     const [valorSelect, setValorSelect] = useState("carpeta");
 
+    const [elemRevisado, setElemRevisado] = useState(contenidoInt.revisado);
+
     const onChangeSelect  = () => {
         setValorSelect(refSelect.current.value);
     }
@@ -29,6 +33,10 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
         setDesplegado(!desplegado);
         const desp = document.getElementById('id'+contenido.idElemento);
         desp.classList.toggle("nuevoDebate--ocultar");
+
+        if (revConsultor && contenidoInt.hijos.length == 0 && !contenidoInt.revisado) {
+            cambiarRevisado();
+        }
     }
 
     const desplegarNE = () => {
@@ -77,6 +85,11 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
                                                setHijos={ setHijosInt }
                                                nombreGEAlt={nombreGEAlt != null? nombreGEAlt :null} 
                                                revConsultor={revConsultor}
+                                               revisar={revisar != null? revisar:null}
+                                               padre={contenidoInt}
+                                               setPadre={setElemRevisado}
+                                               principal={principal}
+                                               setPrincipal={setPrincipal}
                                                />); 
 
     const eliminarElemento = () => {
@@ -105,16 +118,56 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
     }
 
     const cambiarRevisado = () => {
-        if (contenidoInt.tipo != 'carpeta') {
-            const data = new FormData();
-            data.append('idElemento',contenidoInt.idElemento);
-            fetch('api/cambiarRevisado',{
-                method: 'POST',
-                body: data
-            })
-            contenidoInt.revisado = true;
+        if (revConsultor) {
+            if (contenidoInt.tipo != 'carpeta' || contenidoInt.hijos.length == 0) {
+                const data = new FormData();
+                data.append('idElemento',contenidoInt.idElemento);
+                fetch('api/cambiarRevisado',{
+                    method: 'POST',
+                    body: data
+                })
+                contenidoInt.revisado = true;
+                setElemRevisado(true);
+                cambiarEstadoPadre();
+            }
         }
     };
+
+    const cambiarEstadoPadre = () => {
+        if (revisar != null && setPadre != null) {
+            if (padre.tipo == 'carpeta') {
+                const todoRevisado = revisar(padre);
+                if (todoRevisado) {
+                    const data = new FormData();
+                    data.append('idElemento',padre.idElemento);
+                    fetch('api/cambiarRevisado',{
+                        method: 'POST',
+                        body: data
+                    })
+                    padre.revisado = true;
+                    setPadre(true);
+                }
+
+                const revisarPrincipal = revisar(principal);
+
+                if (revisarPrincipal) {
+                    const data = new FormData();
+                    data.append('idElemento',principal.idElemento);
+                    fetch('api/cambiarRevisado',{
+                        method: 'POST',
+                        body: data
+                    })
+                    principal.revisado = true;
+                    setPrincipal(true);
+                    revisar(principal);
+                }
+            }
+        }
+    };
+
+    useEffect(() => {
+        cambiarEstadoPadre();
+    },[elemRevisado])
 
     return (<>
         <div className='d-block ml-2 border-left border-dark pl-2'>
@@ -123,7 +176,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
                     <ContenedorElemento onClick={ desplegar }>
                         <MarcoIcono icon={ (!desplegado) ? faFolder:faFolderOpen }/>
                         {
-                            ((revConsultor) && (!contenidoInt.revisado))?(
+                            ((revConsultor) && (!elemRevisado))?(
                             <div style={{color: 'red'}}>{ contenidoInt.nombre }</div>
                             )
                             :
@@ -165,7 +218,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
                 <ContenedorElemento>
                     <MarcoIcono icon={ faExternalLinkAlt }/>
                     {
-                        ((revConsultor) && (!contenidoInt.revisado))?(
+                        ((revConsultor) && (!elemRevisado))?(
                             <a onClick={cambiarRevisado} style={{color: 'red'}} href={ contenidoInt.link } target='blank'>{ contenidoInt.nombre }</a>
                         )
                         :
@@ -181,7 +234,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsul
                 <ContenedorElemento>
                     <MarcoIcono icon={ faFilePdf } />
                     {
-                        ((revConsultor) && (!contenidoInt.revisado))?(
+                        ((revConsultor) && (!elemRevisado))?(
                             <a onClick={cambiarRevisado} style={{color: 'red'}} href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
                         )
                         :
