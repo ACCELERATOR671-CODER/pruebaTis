@@ -52,7 +52,6 @@ const Elemento = ({contenido, hijos, setHijos}) => {
             <ContenedorElemento>
                 <MarcoIcono icon={ faFilePdf } />
                 <div>{ contenidoInt.nombre }</div>
-                <MarcoIcono icon={ faPlus }/>
             </ContenedorElemento>)}
         </div>
     )

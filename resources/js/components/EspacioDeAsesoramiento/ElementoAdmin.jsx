@@ -8,7 +8,7 @@ import { faFolder,
          faExternalLinkAlt,
          faTimes as faCross } from '@fortawesome/free-solid-svg-icons';
 
-const ElementoAdmin = ({contenido, hijos, setHijos}) => {
+const ElementoAdmin = ({contenido, hijos, setHijos, nombreGEAlt = null,revConsultor = false}) => {
 
     const [contenidoInt, setContenidoInt] = useState(contenido);
     const [hijosInt, setHijosInt] = useState(contenido.hijos);
@@ -42,9 +42,18 @@ const ElementoAdmin = ({contenido, hijos, setHijos}) => {
         e.preventDefault();
         const post = new FormData(document.getElementById(`formulario${contenidoInt.idElemento}`));
         post.append('idPadre', contenidoInt.idElemento);
-        post.append('nombreGE', nombreGE);
+        if (nombreGEAlt != null) {
+            post.append('nombreGE', nombreGEAlt);
+        } else {
+            post.append('nombreGE', nombreGE);
+        } 
         if(refSelect.current.value == 'carpeta'){
             post.append('link', null);
+        }
+        if (revConsultor) {
+            post.append('revisado',true);
+        } else {
+            post.append('revisado',false);
         }
         fetch('api/crearElemento',{
             method:'POST',
@@ -65,7 +74,10 @@ const ElementoAdmin = ({contenido, hijos, setHijos}) => {
 
     const construirHijo = (dato) => (<ElementoAdmin contenido={dato} 
                                                hijos={ hijosInt } 
-                                               setHijos={ setHijosInt }/>); 
+                                               setHijos={ setHijosInt }
+                                               nombreGEAlt={nombreGEAlt != null? nombreGEAlt :null} 
+                                               revConsultor={revConsultor}
+                                               />); 
 
     const eliminarElemento = () => {
         if(hijosInt.length <= 0){
@@ -92,13 +104,31 @@ const ElementoAdmin = ({contenido, hijos, setHijos}) => {
         }
     }
 
+    const cambiarRevisado = () => {
+        if (contenidoInt.tipo != 'carpeta') {
+            const data = new FormData();
+            data.append('idElemento',contenidoInt.idElemento);
+            fetch('api/cambiarRevisado',{
+                method: 'POST',
+                body: data
+            })
+            contenidoInt.revisado = true;
+        }
+    };
+
     return (<>
         <div className='d-block ml-2 border-left border-dark pl-2'>
             {(contenidoInt.tipo == 'carpeta') && (<>
                 <ContenedorElemento>
                     <ContenedorElemento onClick={ desplegar }>
                         <MarcoIcono icon={ (!desplegado) ? faFolder:faFolderOpen }/>
-                        <div>{ contenidoInt.nombre }</div>
+                        {
+                            ((revConsultor) && (!contenidoInt.revisado))?(
+                            <div style={{color: 'red'}}>{ contenidoInt.nombre }</div>
+                            )
+                            :
+                            (<div>{ contenidoInt.nombre }</div>)
+                        }
                         <MarcoIcono icon={ (!desplegado) ? faPlus:faMinus }/>
                     </ContenedorElemento>
                 {(contenidoInt.idPadre) && (<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
@@ -134,7 +164,15 @@ const ElementoAdmin = ({contenido, hijos, setHijos}) => {
             <ContenedorElemento>
                 <ContenedorElemento>
                     <MarcoIcono icon={ faExternalLinkAlt }/>
-                    <a href={ contenidoInt.link } target='blank'>{ contenidoInt.nombre }</a>
+                    {
+                        ((revConsultor) && (!contenidoInt.revisado))?(
+                            <a onClick={cambiarRevisado} style={{color: 'red'}} href={ contenidoInt.link } target='blank'>{ contenidoInt.nombre }</a>
+                        )
+                        :
+                        (
+                            <a href={ contenidoInt.link } target='blank'>{ contenidoInt.nombre }</a>
+                        )
+                    }
                 </ContenedorElemento>
                 {(<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
             </ContenedorElemento>)}
@@ -142,8 +180,15 @@ const ElementoAdmin = ({contenido, hijos, setHijos}) => {
             <ContenedorElemento>
                 <ContenedorElemento>
                     <MarcoIcono icon={ faFilePdf } />
-                    <a href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
-                    <MarcoIcono icon={ faPlus }/>
+                    {
+                        ((revConsultor) && (!contenidoInt.revisado))?(
+                            <a onClick={cambiarRevisado} style={{color: 'red'}} href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
+                        )
+                        :
+                        (
+                            <a href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
+                        )
+                    }
                 </ContenedorElemento>
                 {(<MarcoEliminar icon={ faCross } onClick={ eliminarElemento }/>)}
             </ContenedorElemento>)}
