@@ -5,7 +5,7 @@ import Logo from './Navegador/Logo'
 import { faBars, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Session from './Navegador/Session'
 import { datosNavegador } from '../parametros/menus';
-
+import Notificacion from './Notificacion';
 const Navegador = () => {
 
     const session = sessionStorage.getItem('id');
@@ -25,7 +25,10 @@ const Navegador = () => {
                     <ul className="navbar-nav">      
                         {datosNavegador.map((dato) => (<li className="nav-item"><ItemNavegador className='nav-item active' link={dato.link} nombre = {dato.nombre}/></li>))}
                     </ul>
-                </div></>)}
+                </div>
+                <Notificacion /> 
+                </>)}
+
                 <Session className=' text-lg-right'></Session>   
             </Nav>
         </>
