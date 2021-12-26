@@ -45,6 +45,7 @@ import EspacioDeAsesoramiento from './components/EspacioDeAsesoramiento';
 import VentanaAdmin from './components/VentanaAdmin';
 import ImpExp from './components/ImpExp';
 import AdminVal from './components/ImpExp/AdminVal';
+import HomeContenido from './components/HomeContenido';
 
 import RegistroUsuarioAdmin from './components/RegistroUsuarioAdmin';
 import EspacioRevision from './components/EspacioRevision/EspacioRevision';
@@ -202,7 +203,6 @@ if(document.getElementById('espAse')){
 if(document.getElementById('VenAd')){
     ReactDOM.render(<ImpExp VentanaAdmin={ VentanaAdmin }/>,document.getElementById('VenAd'));
 }
-
 if(document.getElementById('impexp')){
     ReactDOM.render(<ImpExp VentanaAdmin={ AdminVal }/>,document.getElementById('impexp'));
 }
@@ -213,4 +213,7 @@ if(document.getElementById('rua')){
 
 if(document.getElementById('espRev')){
     ReactDOM.render(<EspacioRevision />,document.getElementById('espRev'));
+}
+if(document.getElementById('home')){
+    ReactDOM.render(<HomeContenido />,document.getElementById('home'));
 }

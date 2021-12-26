@@ -2,18 +2,18 @@ import React from 'react'
 import Fila from './Fila'
 import { Tabla, THead, GrupoTabla, Tbody } from '../../elementos/GE'
 import { PanelInputs } from '../../elementos/calendarioEG'
+import ModalC from './ModalC'
 
+const CalendarioEG = ({user, ges, cambio, setCambio}) => {
 
-const CalendarioEG = ({ges}) => {
-    
     return (
         <>
             <GrupoTabla className='w-100'>
                 <Tabla  className='w-100' cellPadding='10'>
                     <THead>
                         <tr>
-                            <th>Actividad</th>
                             <th>Fecha</th>
+                            <th>Actividad</th> 
                             <th>Recursos</th>
                             <th>Evaluacion</th>
                         </tr>
@@ -22,7 +22,9 @@ const CalendarioEG = ({ges}) => {
                     {(ges) ? 
                             ((ges.length>0) ? 
                                             (ges.map((data, index) => <Fila data = {data} 
-                                                                            index = {index}/>)) 
+                                                                            index = {index}
+                                                                            cambio={cambio}
+                                                                            setCambio={setCambio}/>)) 
                                 : 
                                 (<tr><td colSpan="5">No hay debates</td></tr>))
                         :
@@ -30,20 +32,7 @@ const CalendarioEG = ({ges}) => {
                     </Tbody>
                 </Tabla>
             </GrupoTabla>
-            <PanelInputs>
-                <div>
-                    <label htmlFor="">Actividad</label><input type = 'text'/>
-                </div>
-                <div>
-                    <label htmlFor="">Fecha</label><input type = 'date'/>
-                </div>
-                <div>
-                    <label htmlFor="">Recursos</label><input type = 'text'/>
-                </div>
-                <div>
-                    <label htmlFor="">Evaluacion</label><input type = 'text'/>
-                </div>
-            </PanelInputs>
+            { (user) && ((user.nombreRol == 'Consultor') && <ModalC cambio = { cambio } setCambio = { setCambio }/>)}
         </>
     )
 }

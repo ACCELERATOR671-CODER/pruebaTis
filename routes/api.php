@@ -43,6 +43,7 @@ Route::post('registrarGrupoEmpresa', [RegistroGEController::class, 'RegistrarGru
 Route::post('crearSession', [UserController::class, 'createSession']);
 Route::post('eliminarSession', [UserController::class, 'dropSession']);
 Route::post('verificarSession', [UserController::class, 'verifySession']);
+Route::post('verificarSessionConsultor', [UserController::class, 'verifySessionConsultor']);
 Route::post('getNombre', [UserController::class, 'getNombre']);
 
 Route::post('registrarCambiosGE', [EditarGEController::class, 'registrarCambiosGE']);
@@ -98,6 +99,7 @@ Route::post('obtenerDatosGrupoEmpresa', [RegistroGEController::class, 'obtenerDa
 Route::post('elegirNavegador', [NavegadorController::class, 'elegirNavegador']);
 
 Route::post('actualizarRol', [AdminController::class, 'actualizarRol']);
+Route::post('resetear', [AdminController::class, 'resetear']);
 Route::get('getUsuarios', [AdminController::class, 'getUsuarios']);
 Route::post('registrarDescrip', [EspacioGeneralController::class, 'RegistroDescripcion']);
 Route::post('getFullUser', [AdminController::class, 'getFullUser']);
@@ -108,6 +110,7 @@ Route::post('importarExelEmpresas', [ImpExpController::class, 'importarExelEmpre
 Route::get('getGroups', [AdminController::class, 'getGroups']);
 Route::get('getCarrera', [AdminController::class, 'getCarrera']);
 Route::post('createUser', [UserController::class, 'createUser']);
+Route::post('createAdviser', [UserController::class, 'createAdviser']);
 
 Route::post('verificarCodSis', [UserController::class, 'verificarCodSis']);
 Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
@@ -115,4 +118,8 @@ Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
 Route::post('verificarConsultor', [EspacioRevisionController::class, 'verificarConsultor']);
 Route::post('obtenerCarpetaEspecifica',[EspacioDeAsesoramientoController::class,'obtenerCarpetaEspecifica']);
 Route::post('cambiarRevisado',[EspacioRevisionController::class, 'cambiarRevisado']);
+Route::get('ObtenerOpocionesG', [CalendarioController::class, 'ObtenerOpocionesG']);
+Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCalendarioGeneral']);
 
+Route::post('crearFechaG', [CalendarioController::class, 'crearFechaG']);
+Route::post('dropDate', [CalendarioController::class, 'dropDate']);

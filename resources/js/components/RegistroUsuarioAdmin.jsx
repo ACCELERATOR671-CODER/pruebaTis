@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 import { Card } from '../elementos/card'
-import { Cuadro, Grid } from '../elementos/rua'
+import { Cuadro, Grid, TipUserCont } from '../elementos/rua'
 import { Boton } from '../elementos/registro'
 import Input from './rua/Input'
 import SelectRua from './rua/SelectRua'
@@ -10,7 +10,8 @@ const RegistroUsuarioAdmin = () => {
     //datos creados junto a su expReg y añadir en verificar inputs
     const [nombre, setNombre] = useState({campo:'', valido: null});
     const [codsis, setCodsis] = useState({campo:'', valido: null, existe:'false'});
-    const [email, setEmail] = useState({campo:'', valido: null, existe:'false'})
+    const [email, setEmail] = useState({campo:'', valido: null, existe:'false'});
+    const [user, setUser] = useState('1');
     
     const validarCorreo = (estate, regex) => {
         const validar = [];
@@ -86,15 +87,30 @@ const RegistroUsuarioAdmin = () => {
         if(nombre.valido == 'true' && 
             codsis.valido == 'true' && 
             email.valido == 'true'){
+            const direccion = (user == '1') ? 'createUser': 'createAdviser';
             const form = new FormData(e.currentTarget);
-            fetch('api/createUser',{
+            fetch('api/'+direccion,{
                 method:'POST',
                 body:form
             })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
+            .then((response) => {
+                if(response.ok){
+                    alert("Registro Exitoso");
+                    location.replace('/');
+                } else {
+                    alert("Hubo un error con el servidor, intentelo de nuevo mas tarde");
+                }
             })
+        }
+    }
+
+    const cambiarUser = () => {
+        const dat = document.getElementsByName('tipUser');
+        if(dat[0].checked){
+            setUser(dat[0].value);
+        } 
+        if(dat[1].checked) {
+            setUser(dat[1].value);
         }
     }
 
@@ -102,6 +118,17 @@ const RegistroUsuarioAdmin = () => {
         <>
                 <Grid onSubmit={ registrar }>
                     <h1>Registrar Usuario</h1>
+                    <TipUserCont>
+                        <label>Tipo de usuario : </label>
+                        <TipUserCont>
+                            <label onClick={ cambiarUser }>
+                                <input name='tipUser'  type="radio" value='1' defaultChecked/> Estudiante
+                            </label>
+                            <label onClick={ cambiarUser }>
+                                <input name='tipUser' type="radio" value='2'/> Consultor
+                            </label>
+                        </TipUserCont>
+                    </TipUserCont>
                     <Input estado={nombre} 
                            cambiarEstado={setNombre} 
                             regex = {expresiones.nombre} 
@@ -124,8 +151,11 @@ const RegistroUsuarioAdmin = () => {
                                 placeholder='Correo Electronico' 
                                 tipo='email'
                                 funcValidar={validarCorreo}/>
-                        <SelectRua name = 'grupo' defaultValue='---seleccione una grupo---'/>
-                        <SelectRua name = 'carrera' defaultValue='---seleccione una carrera---'/>
+                        {(user == '1') && (
+                        <>
+                            <SelectRua name = 'grupo' defaultValue='---seleccione una grupo---'/>
+                            <SelectRua name = 'carrera' defaultValue='---seleccione una carrera---'/>
+                        </>)}
                     </Cuadro>
                     <Boton type='submit'>Registrar</Boton>
                 </Grid>

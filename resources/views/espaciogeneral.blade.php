@@ -1,7 +1,7 @@
 @extends('templates.plantillaprincipal')
 
 @section('titulo') 
-    Login
+    Espacio General
 @endsection
 
 @section('script')

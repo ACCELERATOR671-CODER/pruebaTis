@@ -29,11 +29,13 @@ const THead = styled.thead`
 `; 
 
 const RowPrimary= styled.tr`
+    text-align: left;
     height: 44px;
     background-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
 `;
 
 const RowSecundary = styled.tr`
+    text-align: left;
     height: 44px;
     background-color: rgb(${colorSecundary.r}, ${colorSecundary.g}, ${colorSecundary.b});
 `

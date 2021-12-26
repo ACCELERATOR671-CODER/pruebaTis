@@ -18,26 +18,8 @@ import CalendarioEG from './CalendarioEG/CalendarioEG';
 
 const EspacioGeneral = () => {
 
-    const [datosC, setDatosC] = useState([{
-        idEvento:1,
-        actividad: "publicacion de invitacion",
-        fecha: "10-10-2021",
-        recursos: "invitacion publica",
-        evaluacion:"grupo Empresa conformadas"
-    },{
-        idEvento:2,
-        actividad: "Entrega Propuestas",
-        fecha: "22-10-2021",
-        recursos: "presentacion de equipos",
-        evaluacion:"Revision de portafolios"
-    },{
-        idEvento:3,
-        actividad: "creacion de espacios de trabajo",
-        fecha: "15-10-2021",
-        recursos: null,
-        evaluacion:"Participacion del equipo en el espacio de asesoramiento"
-    }]);
-    
+    const [datosC, setDatosC] = useState(null);
+    const [cambio, setCambio] = useState(false);
     const [usuario,setUsuario] = useState (null)
     const formulario = useRef(null);
     useEffect(()=>{
@@ -51,7 +33,13 @@ const EspacioGeneral = () => {
             .then((json) => {
                 setUsuario(json);
             })
-        },[]) 
+
+            fetch('api/obtenerCalendarioGeneral')
+            .then((response) => response.json())
+            .then((json) => {
+                setDatosC(json);
+            })
+        },[cambio]) 
     const contenidoAnuncio=() => {
         return (<>
             {
@@ -130,8 +118,8 @@ const EspacioGeneral = () => {
                         <Accordion atomic = {true}>
                             <ItemAcord titulo='Descripcion' contenido={ contenidoDescripcion } />
                             <ItemAcord titulo='Anuncios' contenido={ contenidoAnuncio }/>
-                            <ItemAcord titulo='Documentacion' contenido={ contenidoDocumentacion }/>
-                            <ItemAcord titulo='Calendario' contenido={ () => {}/*() => <CalendarioEG ges={ datosC }/>*/ }/>
+                            <ItemAcord titulo='Documentacion' contenido={ contenidoDocumentacion }/> 
+                            <ItemAcord titulo='Calendario' contenido={ () => <CalendarioEG user = { usuario } cambio = { cambio } setCambio = { setCambio } ges={ datosC }/> }/>
                             
                         </Accordion>
                     </div>
