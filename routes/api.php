@@ -6,6 +6,7 @@ use App\Http\Controllers\EditarGEController;
 use App\Http\Controllers\EditarPerfilController;
 use App\Http\Controllers\EspacioDeAsesoramientoController;
 use App\Http\Controllers\EspacioGeneralController;
+use App\Http\Controllers\EspacioRevisionController;
 use App\Http\Controllers\ForoDudasController;
 use App\Http\Controllers\NavegadorController;
 use App\Http\Controllers\RegistroGEController;
@@ -114,6 +115,9 @@ Route::post('createAdviser', [UserController::class, 'createAdviser']);
 Route::post('verificarCodSis', [UserController::class, 'verificarCodSis']);
 Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
 
+Route::post('verificarConsultor', [EspacioRevisionController::class, 'verificarConsultor']);
+Route::post('obtenerCarpetaEspecifica',[EspacioDeAsesoramientoController::class,'obtenerCarpetaEspecifica']);
+Route::post('cambiarRevisado',[EspacioRevisionController::class, 'cambiarRevisado']);
 Route::get('ObtenerOpocionesG', [CalendarioController::class, 'ObtenerOpocionesG']);
 Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCalendarioGeneral']);
 
