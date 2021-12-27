@@ -48,6 +48,7 @@ import AdminVal from './components/ImpExp/AdminVal';
 import HomeContenido from './components/HomeContenido';
 
 import RegistroUsuarioAdmin from './components/RegistroUsuarioAdmin';
+import EspacioRevision from './components/EspacioRevision/EspacioRevision';
 //import Login from "./components/Login/Login"
 
 /*
@@ -210,6 +211,9 @@ if(document.getElementById('rua')){
     ReactDOM.render(<ImpExp VentanaAdmin={ RegistroUsuarioAdmin }/>,document.getElementById('rua'));
 }
 
+if(document.getElementById('espRev')){
+    ReactDOM.render(<EspacioRevision />,document.getElementById('espRev'));
+}
 if(document.getElementById('home')){
     ReactDOM.render(<HomeContenido />,document.getElementById('home'));
 }

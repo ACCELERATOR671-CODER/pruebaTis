@@ -9,6 +9,6 @@ class Elemento extends Model
 {
     protected $table = 'Elemento';
     protected $primaryKey = 'idElemento';
-    protected $fillable = ['nombre','tipo','link','idPadre','idGE'];
+    protected $fillable = ['nombre','tipo','link','idPadre','idGE','revisado'];
     public $timestamps = false;
 }
