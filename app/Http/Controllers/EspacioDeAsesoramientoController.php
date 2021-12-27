@@ -92,9 +92,7 @@ class EspacioDeAsesoramientoController extends Controller
                 $elemento->idPadre = $req->idPadre;
                 $elemento->idGE = $ge->idGE;
                 $elemento->revisado = $req->revisado;
-                error_log("modifIni");
                 if ($elemento->revisado=='false') {
-                    error_log("modifPadre");
                     $tienePadre = true;
                     $padre = $req->idPadre;
                     while ($tienePadre) {

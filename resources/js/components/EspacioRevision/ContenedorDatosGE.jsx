@@ -7,6 +7,7 @@ const ContenedorDatosGE = ({gE}) => {
     
     const [elementos, setElementos] = useState(null);
     const [estaRevisado, setEstaRevisado] = useState(true);
+    const [lista, setLista] = useState([]);
 
     useEffect(()=>{
         const data = new FormData();
@@ -22,17 +23,49 @@ const ContenedorDatosGE = ({gE}) => {
         })
     },[])
 
-    const revisarArchivos = () => {
-        if (elementos != null && elementos.length > 0) {
-            if (!elementos[0].revisado) {
-                setEstaRevisado(false);
+    const revisarArchivos = (elemento) => {
+        if (elemento != null) {
+            if (elemento.tipo != 'carpeta') {
+                if (!elemento.revisado) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (elemento.hijos.length > 0) {
+                    let revisados = [];
+                    elemento.hijos.forEach(hijo => {
+                        revisados.push(revisarArchivos(hijo))
+                    });
+    
+                    if (revisados.includes(false)) {
+                        elemento.revisado = false;
+                    } else {
+                        elemento.revisado = true;
+                    }
+                }
+
+                return elemento.revisado;
             }
+        } else {
+            return true;
         }
     };
 
     useEffect(() => {
-        revisarArchivos();
+        if (elementos && elementos.length > 0) {
+            setEstaRevisado(revisarArchivos(elementos[0]));
+        }
     },[elementos]);
+
+    const cambiarEstadoArchivos = () => {
+        const data = new FormData();
+        data.append('listaElementos',lista);
+        fetch('api/cambiarRevisados',{
+            method: 'POST',
+            body: data
+        });
+    };
 
     return (
         <ContenedorGE 
@@ -63,6 +96,11 @@ const ContenedorDatosGE = ({gE}) => {
                                 contenido={datos} 
                                 nombreGEAlt={gE.nombre} 
                                 revConsultor={true}
+                                revisar={revisarArchivos}
+                                padre={datos}
+                                setPadre={setEstaRevisado}
+                                principal={datos}
+                                setPrincipal={setEstaRevisado}
                             />
                         )))
                         :

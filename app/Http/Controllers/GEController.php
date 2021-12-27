@@ -116,6 +116,7 @@ class GEController extends Controller
                 $elemento->tipo = "carpeta";
                 $elemento->link = "#";
                 $elemento->idGE = $ge->idGE;
+                $elemento->revisado = true;
                 $elemento->save();
 
                 $elemento2 = new Elemento;
@@ -123,6 +124,7 @@ class GEController extends Controller
                 $elemento2->tipo = "carpeta";
                 $elemento2->link = "#";
                 $elemento2->idGE = $ge->idGE;
+                $elemento2->revisado = true;
                 $elemento2->save();
 
                 $elemento3 = new Elemento;
@@ -130,6 +132,7 @@ class GEController extends Controller
                 $elemento3->tipo = "carpeta";
                 $elemento3->link = "#";
                 $elemento3->idGE = $ge->idGE;
+                $elemento3->revisado = true;
                 $elemento3->save();
             } else {
                 $Users = DB::table('Usuario')
