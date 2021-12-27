@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VistaInscritosController;
 use App\Http\Controllers\GEController;
 use App\Http\Controllers\ImpExpController;
+use App\Http\Controllers\NotificacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,3 +124,7 @@ Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCal
 
 Route::post('crearFechaG', [CalendarioController::class, 'crearFechaG']);
 Route::post('dropDate', [CalendarioController::class, 'dropDate']);
+
+Route::post('crearNotificacion',[NotificacionController::class, 'crearNotificacion']);
+Route::post('actualizarNotificacion',[NotificacionController::class, 'actualizarNotificacion']);
+Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNotificacion']);
