@@ -15,7 +15,8 @@ class CreateNotificacionTable extends Migration
     {
         Schema::create('notificacion', function (Blueprint $table) {
             $table->id('idNotificacion')->autoIncrement();
-            $table->integer('idUsuario')->references('idUsuario')->on('Usuario');
+            $table->integer('idUsuario');
+            $table->foreign('idUsuario')->references('idUsuario')->on('Usuario');
             $table->string('descNotificacion')->nullable();
             $table->string('link')->nullable();
             $table->string('tipoNotificacion')->nullable();

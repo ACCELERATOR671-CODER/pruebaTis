@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Notificacion;
 use Illuminate\Http\Request;
 
@@ -44,5 +45,16 @@ class NotificacionController extends Controller
         $notificacion->delete();
 
         return response(200);
+    }
+
+    /*
+        idUsuario - id del usuario
+    */
+    public function obtenerNotificaciones(Request $req){
+        $notificaciones = DB::table('notificacion')
+                                ->where('idUsuario', '=', $req->idUsuario)
+                                ->take(5)
+                                ->get();
+        return response()->json($notificaciones);
     }
 }
