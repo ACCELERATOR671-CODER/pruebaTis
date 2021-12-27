@@ -15,7 +15,7 @@ class EspacioRevisionController extends Controller
     }
 
     public function verificarConsultor(Request $request){
-        $rolCons = DB::table('Rol')->where('nombreRol','=','Estudiante')->first();
+        $rolCons = DB::table('Rol')->where('nombreRol','=','Consultor')->first();
         $usuario = DB::table('Usuario')
             ->select('*')
             ->where('idUsuario','=',$request->idUsuario)->first();
@@ -31,5 +31,15 @@ class EspacioRevisionController extends Controller
         $elemento->revisado = true;
         $elemento->save();
         return response(200);
+    }
+
+    public function cambiarRevisados(Request $request) {
+        $elementos = $request->listaElementos;
+        foreach ($elementos as $elemento) {
+            $elem = Elemento::find($elemento->idElemento);
+            $elem->revisado = true;
+            $elem->save();
+        }
+        return response(200); 
     }
 }

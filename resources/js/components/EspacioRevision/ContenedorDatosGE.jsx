@@ -7,6 +7,7 @@ const ContenedorDatosGE = ({gE}) => {
     
     const [elementos, setElementos] = useState(null);
     const [estaRevisado, setEstaRevisado] = useState(true);
+    const [lista, setLista] = useState([]);
 
     useEffect(()=>{
         const data = new FormData();
@@ -56,6 +57,15 @@ const ContenedorDatosGE = ({gE}) => {
             setEstaRevisado(revisarArchivos(elementos[0]));
         }
     },[elementos]);
+
+    const cambiarEstadoArchivos = () => {
+        const data = new FormData();
+        data.append('listaElementos',lista);
+        fetch('api/cambiarRevisados',{
+            method: 'POST',
+            body: data
+        });
+    };
 
     return (
         <ContenedorGE 

@@ -10,7 +10,7 @@ import { faFolder,
 
 const ElementoAdmin = ({contenido, hijos, setHijos, 
     nombreGEAlt = null,revConsultor = false, revisar = null, 
-    padre = null, setPadre = null, principal = null, setPrincipal = null}) => {
+    padre = null, setPadre = null, principal = null, setPrincipal = null, setAuxRev = null}) => {
 
     const [contenidoInt, setContenidoInt] = useState(contenido);
     const [hijosInt, setHijosInt] = useState(contenido.hijos);
@@ -24,6 +24,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos,
     const [valorSelect, setValorSelect] = useState("carpeta");
 
     const [elemRevisado, setElemRevisado] = useState(contenidoInt.revisado);
+    const [auxRevisado, setAuxRevisado] = useState(false);
 
     const onChangeSelect  = () => {
         setValorSelect(refSelect.current.value);
@@ -88,8 +89,7 @@ const ElementoAdmin = ({contenido, hijos, setHijos,
                                                revisar={revisar != null? revisar:null}
                                                padre={contenidoInt}
                                                setPadre={setElemRevisado}
-                                               principal={principal}
-                                               setPrincipal={setPrincipal}
+                                               setAuxRev={setAuxRevisado}
                                                />); 
 
     const eliminarElemento = () => {
@@ -103,10 +103,19 @@ const ElementoAdmin = ({contenido, hijos, setHijos,
                 })
                 .then((response) => {
                     if(response.ok){
-
-                        const nuevosHijos = hijos.filter((dato) => dato.idElemento != contenido.idElemento);
+                        if (revConsultor && !contenidoInt.revisado) {
+                            contenidoInt.revisado = true;
+                            setElemRevisado(true);
+                            setAuxRevisado(true);
+                            cambiarEstadoPadre(padre)
+                        }
+                        
+                        const nuevosHijos = hijos.filter((dato) => {
+                            return dato.idElemento != contenido.idElemento;
+                        });
                         setHijos(nuevosHijos);
                         alert("Eliminado con exito");
+
                     } else {
                         alert("Ha ocurrido un error, vuelva a intentarlo mas tarde");
                     }
@@ -128,12 +137,12 @@ const ElementoAdmin = ({contenido, hijos, setHijos,
                 })
                 contenidoInt.revisado = true;
                 setElemRevisado(true);
-                cambiarEstadoPadre();
+                setAuxRevisado(true);
             }
         }
     };
 
-    const cambiarEstadoPadre = () => {
+    const cambiarEstadoPadre = (padre) => {
         if (revisar != null && setPadre != null) {
             if (padre.tipo == 'carpeta') {
                 const todoRevisado = revisar(padre);
@@ -147,26 +156,42 @@ const ElementoAdmin = ({contenido, hijos, setHijos,
                     padre.revisado = true;
                     setPadre(true);
                 }
-
-                const revisarPrincipal = revisar(principal);
-
-                if (revisarPrincipal) {
-                    const data = new FormData();
-                    data.append('idElemento',principal.idElemento);
-                    fetch('api/cambiarRevisado',{
-                        method: 'POST',
-                        body: data
-                    })
-                    principal.revisado = true;
-                    setPrincipal(true);
-                    revisar(principal);
-                }
             }
         }
     };
 
     useEffect(() => {
-        cambiarEstadoPadre();
+        if (revConsultor) {
+            if (auxRevisado && contenidoInt.nombre != 'Propuestas') {
+                setAuxRev(true);
+                setElemRevisado(revisar(contenidoInt));
+            } else {
+                if (auxRevisado && contenidoInt.nombre == 'Propuestas') {
+                    setElemRevisado(revisar(contenidoInt));
+                }
+            }
+        }
+    },[auxRevisado])
+
+    useEffect(() => {
+        if (revConsultor) {
+            if (auxRevisado) {
+                if (contenidoInt.nombre != 'Propuestas') {
+                    cambiarEstadoPadre(padre);
+                    setAuxRevisado(false);
+                } else {
+                    if (revisar(contenidoInt)) {
+                        const data = new FormData();
+                        data.append('idElemento',contenidoInt.idElemento);
+                        fetch('api/cambiarRevisado',{
+                            method: 'POST',
+                            body: data
+                        })
+                        setPrincipal(true);
+                    }
+                }
+            }
+        }
     },[elemRevisado])
 
     return (<>
