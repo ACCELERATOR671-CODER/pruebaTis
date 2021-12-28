@@ -128,3 +128,5 @@ Route::post('dropDate', [CalendarioController::class, 'dropDate']);
 Route::post('crearNotificacion',[NotificacionController::class, 'crearNotificacion']);
 Route::post('actualizarNotificacion',[NotificacionController::class, 'actualizarNotificacion']);
 Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNotificacion']);
+
+Route::post('obtenerEventoGeneral',[CalendarioController::class, 'obtenerEventoGeneral']);

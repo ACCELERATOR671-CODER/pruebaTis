@@ -133,4 +133,14 @@ class CalendarioController extends Controller
 
         return response()->json($opciones);
     }
+
+    public function obtenerEventoGeneral(Request $request) {
+        $eventoG = DB::table('Opcion')
+            ->join('Evento','Evento.idEvento','=','Opcion.idEvento')
+            ->where('tipoOpcion','=',$request->tipoOpcion)
+            ->where('nombreOpcion','=',$request->nombreOpcion)
+            ->first();
+
+        return response()->json($eventoG);
+    }
 }
