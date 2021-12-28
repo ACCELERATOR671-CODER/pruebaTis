@@ -1,15 +1,15 @@
 import styled, { css } from "styled-components";
 import { colorPrimary, colorSecundary } from "../parametros/colores";
 
-const Titulo = styled.p`
+const Titulo = styled.h1`
     color: black;
-    text-aling: center;
-    font-size: 12px;
+    text-align: center;
+    
 
 `
 const Subtitulo = styled.p`
     color: black;
-    text-aling: center;
+    text-align: center;
     font-size: 12px;
 `
 const NombreConsultora = styled.p`
@@ -26,7 +26,7 @@ const NombreLider = styled.p`
 `
 const PieDePagina = styled.p`
     color: black;
-    text-aling: center;
+    text-align: center;
     font-size: 12px;
 `
 ;
@@ -55,7 +55,7 @@ const Letra = styled.p`
 ;
 const FondoContrato  = styled.div`
     
-    max-heigth: 700px;
+    /*max-heigth: 700px;*/
     width: 700px;
     margin-top: 5%;
     text-align: center;
@@ -70,7 +70,27 @@ const FondoContrato  = styled.div`
         margin: auto;
     }
 `;
+const FondoGeneral = styled.div`
+    min-width: 700px;
+    margin-top: 5%;
+    text-align: center;
+    display: grid;
+    
+    gap: 10px;
+    
+    justify-content: center;
+    transition: .5s ease all;
+    background-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b}, 0.7);
+    border-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b}, 0.4);
+    border-radius: 30px;
+    box-shadow: 10px 10px 10px;
+    @media (max-width:700px){
+        min-width: 0;
+        width: 100%;
+        margin: auto;
+    }
+`;
 
 export{
-    Titulo, ContenidoImput, Subtitulo, Letra, NombreConsultora, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE, FondoContrato
+    Titulo, ContenidoImput, FondoGeneral,Subtitulo, Letra, NombreConsultora, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE, FondoContrato
 };

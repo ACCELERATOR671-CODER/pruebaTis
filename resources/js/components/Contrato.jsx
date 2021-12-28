@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { CardEG, DescArea } from '../elementos/espacioGeneral';
 import {InputStyle } from '../elementos/registro';
 import Chevron from './Acordeon/chevron.svg'
-import { Titulo,Letra, ContenidoImput, Subtitulo, NombreConsultora,FondoContrato, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE } from '../elementos/contratoFuentes';
+import { Titulo,Letra,FondoGeneral, ContenidoImput, Subtitulo, NombreConsultora,FondoContrato, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE } from '../elementos/contratoFuentes';
 import { Boton } from '../elementos/registro';
 import InputImg from './RegistroGE/InputImg'
 import jsPDF from 'jspdf';
@@ -20,6 +20,7 @@ const GenContrato = () => {
     const [sistema, setsistema] = useState("")
     const [pliego, setpliego] = useState("")
     const [convocatoria, setconvocatoria] = useState("")
+    const [lider, setlider] = useState("")
     
     const imprimir = (e) => {
     document.addEventListener("DOMContentLoaded", () => {
@@ -58,7 +59,7 @@ const GenContrato = () => {
         doc.html(document.querySelector("#Contrato"),{
             callback: function(pdf){
                 
-                pdf.save("mypdf.pdf");
+                pdf.save(select+".pdf");
                 
             }
 
@@ -76,9 +77,29 @@ const GenContrato = () => {
                     setGrupoempresas(json);
                     console.log(json);
                 });
+        fetch('api/obtenerConsultores')
+        .then( (response)=> response.json())
+        .then((consultores)=> {
+            setconsultores(consultores);
+        });
+        
     }, [])
+    const [consultores, setconsultores] = useState([]);
+
+
+
     const onchangeselect = (e) => {
-        setselect(e.currentTarget.value);
+        const [value, id]= e.currentTarget.value.split('.'); 
+        setselect(value);
+        const form = new FormData();
+        console.log(id)
+        form.append('idUsuario', id );
+        fetch('api/getFullUser', {
+            method: 'POST',
+            body: form
+        })
+        .then((response)=> response.json())
+        .then((obtenerL)=>{setlider(obtenerL)})
     };
     const onchangesistema = (e) => {
         setsistema(e.currentTarget.value);
@@ -93,7 +114,7 @@ const GenContrato = () => {
 
     return(<>
             
-            <CardEG className='p-4'>
+            <FondoGeneral className='p-4  ' style={{margin:"0 auto"}}>
                 <div id="cont-label-logo">
                     <label id="label-login-logo">CONTRATO</label>
                 </div>
@@ -102,7 +123,7 @@ const GenContrato = () => {
                     <label > Seleccione una GE Valida:
                         <select  defaultValue= "---Selecciona una Opcion---" id="GE" onChange={onchangeselect}>
                             <option value="">---Selecciona una Opcion---</option>
-                            {grupoempresas.map(data => <option value= { data.nombre}>{data.nombre}</option> )}
+                            {grupoempresas.map(data => <option value= { data.nombre + "." + data.duenio }>{data.nombre}</option> )}
                         </select>
                     </label>
                     
@@ -111,7 +132,7 @@ const GenContrato = () => {
                     <label > Nombre del pliego: <input type="text" onChange={onchangepliego} /></label>
                 </ContenidoImput>    
                 <FondoContrato className='p-4' id='Contrato'>
-                    <Titulo>CONTRATO DE PRESENTACION DE<br /> SERVICIOS    -    CONSULTORIA</Titulo><br />
+                    <h4>CONTRATO DE PRESENTACION DE<br /> SERVICIOS    -    CONSULTORIA</h4><br />
                     <Subtitulo>AQUI FECHA DE PRESENTACION DE CONTRATOS</Subtitulo>
                     <div className='text-left'>
                     <Letra>
@@ -123,51 +144,43 @@ const GenContrato = () => {
                         <strong>{select}</strong>, por otra parte, de conformidad a las clausulas que se 
                         detallan a continuacion.
                         <br />
-                        PRIMERA.- TIS contratara los servicios del Contratista para la provision
+                        <b> PRIMERA.-</b> TIS contratara los servicios del Contratista para la provision
                         de un <strong>{sistema}</strong> que se realizara, conforme a la modalidad y 
                         presupuesto entregado por la Consultora, en su documento de propuesta
                         tecnica, y normas estipuladas por TIS.
                         <br />
                     
-                        SEGUNDO.- El objeto de este contrato es la provision de un producto software.
+                        <b> SEGUNDO.-</b> El objeto de este contrato es la provision de un producto software.
                         <br />
-                        TERCERO.- La consultora <strong>{select}</strong>, se hace responsable por la buena ejecucion de las distintas fases, que involucren
+                        <b> TERCERO.-</b> La consultora <strong>{select}</strong>, se hace responsable por la buena ejecucion de las distintas fases, que involucren
                         su ingenieria del proyecto, especificadas en la propuesta tecnica corregida
                         de acuerdo al pliego de especificaciones.
                         <br />
-                        CUARTO.- Para cualquier otro punto no estipulado en el presente contrato, 
+                        <b> CUARTO.-</b> Para cualquier otro punto no estipulado en el presente contrato, 
                         debe hacerse referencia a la Convocatoria Pública <strong>{convocatoria}</strong>  
                         al Pliego de Especificaciones <strong>{pliego}</strong>  
                         y/o al PG-TIS (Plan Global - TIS)
                         <br />
-                        QUINTO.- Se pone en evidencia que cualquier incumplimiento de las cláusulas 
+                        <b> QUINTO.-</b> Se pone en evidencia que cualquier incumplimiento de las cláusulas 
                         estipuladas en el presente contrato, es pasible a la disolución del mismo.
                         <br />
-                        SEXTO.- La consultora <strong>{select}</strong>, declara su absoluta conformidad con los términos del presente contrato. 
+                        <b> SEXTO.-</b> La consultora <strong>{select}</strong>, declara su absoluta conformidad con los términos del presente contrato. 
                         Se deja constancia de que los datos y antecedentes personales jurídicos 
                         proporcionados por el adjudicatario son verídicos.
                         <br />
-                        SEPTIMO.- El presente contrato se disuelve también, por cualquier motivo 
+                        <b> SEPTIMO.-</b> El presente contrato se disuelve también, por cualquier motivo 
                         de incumplimiento a normas establecidas en PG-TIS (Plan Global - TIS)
                         <br />
-                        OCTAVO.- Por la disolución del contrato, TIS tiene todo el derecho de 
+                        <b> OCTAVO.-</b> Por la disolución del contrato, TIS tiene todo el derecho de 
                         ejecutar la boleta de garantía, que es entregada por el contratado 
                         como documento de seriedad de la empresa.
                         <br />
-                        NOVENO.- La información que TIS brinde al contratado debe ser de rigurosa 
+                        <b> NOVENO.-</b> La información que TIS brinde al contratado debe ser de rigurosa 
                         onfidencialidad, y no utilizarse para otros fines que no sea el desarrollo 
                         del proyecto.
                         <br />
-                        DECIMO.- TIS representada por su directorio 
-                        <NombreAsesores>
-                            AQUI LISTADO DE LOS ASESORES
-                        </NombreAsesores>
-                        y por otra; la consultora <strong>{select}</strong>, representada por su representante legal 
-                        <NombreLider>
-                            AQUI NOMBRE DEL LIDER GE 
-                        </NombreLider>
-                        , dan su plena 
-                        conformidad a los términos y condiciones establecidos en el presente Contrato de Prestación de 
+                        <strong> DECIMO.-</strong> TIS representada por su directorio {consultores.map(data =><NombreAsesores> {data.nombreC}, </NombreAsesores>  )} y por otra; la consultora <strong>{select}</strong>, representada por su representante legal  
+                        <NombreLider>{lider.nombreC}</NombreLider>, dan su plena conformidad a los términos y condiciones establecidos en el presente Contrato de Prestación de 
                         Servicios y Consultoría, firmando en constancia al pie de presente documento.
                     </Letra>
                     </div>
@@ -189,10 +202,11 @@ const GenContrato = () => {
                             </div> 
                             
                         </div> 
-                </FondoContrato>    
-            <Boton onClick={generatePDF} type="primary">GUARDAR CONTRATO</Boton>
-                
-            </CardEG>
+                </FondoContrato>  
+                <div className='d-flex justify-content-center'> 
+                    <Boton onClick={generatePDF} style={{width: "200px"}}>GUARDAR CONTRATO</Boton>
+                </div> 
+            </FondoGeneral>
     </>);
 };
 export default GenContrato;

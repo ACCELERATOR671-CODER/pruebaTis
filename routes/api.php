@@ -130,3 +130,4 @@ Route::post('actualizarNotificacion',[NotificacionController::class, 'actualizar
 Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNotificacion']);
 
 Route::post('obtenerEventoGeneral',[CalendarioController::class, 'obtenerEventoGeneral']);
+Route::get('obtenerConsultores',[UserController::class, 'obtenerConsultores']);
