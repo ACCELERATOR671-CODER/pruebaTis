@@ -28,6 +28,8 @@ const CalendarioGE = () => {
 
     const [fechaAct, setFechaAct] = useState('');
 
+    const [fechaLimite, setFechaLimite] = useState(null);
+
     useEffect(() => {
         const datos = new FormData();
         datos.append('nombreGE', nombreGE);
@@ -41,6 +43,22 @@ const CalendarioGE = () => {
             setDatosGE(data);
         });
     },[])
+
+    useEffect(() => {
+        const data = new FormData();
+        data.append('nombreOpcion','Entrega de propuestas');
+        data.append('tipoOpcion','Actividad');
+        fetch('api/obtenerEventoGeneral',{
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.json())
+        .then((datos) => {
+            if (datos.idEvento) {
+                setFechaLimite(datos.fecha_final);
+            }
+        });
+    },[]);
 
     const convertirDig = (n) => {
         return (n < 10) ? '0'+n : n;
@@ -265,7 +283,7 @@ const CalendarioGE = () => {
                     <h2>Calendario</h2>
                     {
                         (datosGE && datosGE.duenio == sessionStorage.getItem('id') 
-                        && !agEvento && !edEvento) && (
+                        && !agEvento && !edEvento && fechaLimite && fechaAct <= fechaLimite) && (
                            <div>
                                 <IconPlus 
                                     onClick={agregarEvt} 
@@ -288,7 +306,7 @@ const CalendarioGE = () => {
                     </THead>
                     <TBody>
                     {
-                        ((eventos != null) && (eventos != []))? eventos.map((evento) => (
+                        ((eventos != null) && (eventos.length > 0))? eventos.map((evento) => (
                             <TItem 
                                 style={(fechaIgual(evento.fecha_final)?
                                      ({
@@ -304,7 +322,8 @@ const CalendarioGE = () => {
                                 <td style={{maxWidth: '120px'}}>{evento.nombre}</td>
                                 <td>
                                     {
-                                        (datosGE && datosGE.duenio == sessionStorage.getItem('id'))? (
+                                        (datosGE && datosGE.duenio == sessionStorage.getItem('id')
+                                        && fechaLimite && fechaAct <= fechaLimite)? (
                                             <Icon
                                                 style={{fontSize: '30px',
                                                         cursor: 'pointer',
@@ -322,7 +341,8 @@ const CalendarioGE = () => {
                                 </td>
                                 <td>
                                     {
-                                    (datosGE && datosGE.duenio == sessionStorage.getItem('id'))? (
+                                    (datosGE && datosGE.duenio == sessionStorage.getItem('id')
+                                    && fechaLimite && fechaAct <= fechaLimite)? (
                                         <Icon 
                                             style={{fontSize: '30px',
                                                     cursor: 'pointer'}} 
@@ -339,12 +359,16 @@ const CalendarioGE = () => {
                                 </td>
                             </TItem>
                         ))
-                        :(<>
-                            <h2>SIN EVENTOS</h2>
-                        </>)
+                        :
+                        (<></>)
                     } 
                     </TBody>
                 </Tabla>
+
+                {
+                    ((eventos) && (eventos.length <= 0)) && (<h2 style={{margin:'20% auto'}}>SIN EVENTOS</h2>)
+                }
+
                 </div>
                 
             </ContCalendar>
