@@ -52,7 +52,7 @@ class UserController extends Controller
             ->join('Usuario', 'Usuario.idUsuario','=','Session.idUser')
             ->select('idUser')
             ->where('token','=', $request->token)
-            ->where('idGrupo', '=','2')
+            ->where('Usuario.idGrupo', '=','2')
             ->first();
         return response()->json($id);
     }
