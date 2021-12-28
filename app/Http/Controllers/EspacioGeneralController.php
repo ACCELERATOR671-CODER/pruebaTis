@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EspaciGeneral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EspacioGeneralController extends Controller
 {
@@ -13,8 +14,14 @@ class EspacioGeneralController extends Controller
     }
     function RegistroDescripcion(Request $req){
         $Descripcion = new EspaciGeneral;
-        $Descripcion -> descripcion = $req -> descripcion;
+        $Descripcion -> idEspAse = $req -> id;
+        $Descripcion -> descripcion = $req -> desc;
         $Descripcion ->save();
 
+        $descip = DB::table ('espaci_generals')
+                    ->where ('espaci_generals.idEspAse', '=' , $Descripcion->id)
+                    ->where ('espaci_generals.descripcion','=',$Descripcion->desc)
+                    ->first();
+        return response ()->json($descip);
     }
 }

@@ -8,7 +8,8 @@ faUsersCog,
 faEdit,
 faFileImport,
 faUserPlus,
-faUserFriends} from '@fortawesome/free-solid-svg-icons'
+faUserFriends,
+faFileContract} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -137,6 +138,12 @@ const opcionesUsuarioC = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
+    onClick: null
+},{
+    link : 'Contrato',
+    name:'contrato',
+    contenido:'Contrato',
+    img:faFileContract,
     onClick: null
 },{
     link : 'ValidarGE',

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { CardEG } from '../elementos/espacioGeneral';
+import { CardEG, DescArea } from '../elementos/espacioGeneral';
 import {InputStyle } from '../elementos/registro';
 import Chevron from './Acordeon/chevron.svg'
 import {Accordion, AccordionItem} from 'react-light-accordion'
@@ -37,7 +37,7 @@ const EspacioGeneral = () => {
         recursos: null,
         evaluacion:"Participacion del equipo en el espacio de asesoramiento"
     }]);
-    
+    const descArea = useRef(null);
     const [usuario,setUsuario] = useState (null)
     const formulario = useRef(null);
     useEffect(()=>{
@@ -69,13 +69,15 @@ const EspacioGeneral = () => {
 
     const contenidoDescripcion = () => {
         const Submit = () =>{
-            const data = new FormData (document.getElementById('anuncioId1'));
+            const data = new FormData ();
+            data.append('id', sessionStorage.getItem('id'));
+            data.append('desc',descArea.current.value );
             fetch ('api/registrarDescrip',{
                 method: 'POST',
                 body:data
             })
-            .then (()=>{ 
-            });        
+            .then ((response) => response.json()
+            .then ((json) => {alert("DESCRIPCION REGISTRADA")}));        
         }
         
         const enviarDescripcion = () => {
@@ -94,16 +96,17 @@ const EspacioGeneral = () => {
         return (<>
         
             { (usuario) && ((usuario.nombreRol == 'Consultor') ? 
-                (<form   
+                (
+                <form   
                     ref={formulario}
                     id='formulario'
                     onSubmit={Submit}
                     method='POST'
                     >
-                <TextArea id='anuncioId1'></TextArea>
+                <TextArea ref = {descArea} id='anuncioId1'></TextArea>
 
                 <div>
-                    <Boton id='botonSub' type = 'submit'onClick= { enviarDescripcion } >Enviar</Boton>
+                    <Boton id='botonSub' type = 'submit'onClick= { Submit } >Enviar</Boton>
                 </div>
             </form>):(<p>DESCRIPCION</p>))}    
         </>)
