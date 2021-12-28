@@ -2,18 +2,24 @@ import React, {useState, useEffect, useRef} from 'react';
 import { CardEG, DescArea } from '../elementos/espacioGeneral';
 import {InputStyle } from '../elementos/registro';
 import Chevron from './Acordeon/chevron.svg'
-import { Titulo,Letra, Subtitulo, NombreConsultora,FondoContrato, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE } from '../elementos/contratoFuentes';
+import { Titulo,Letra, ContenidoImput, Subtitulo, NombreConsultora,FondoContrato, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE } from '../elementos/contratoFuentes';
 import { Boton } from '../elementos/registro';
 import InputImg from './RegistroGE/InputImg'
 import jsPDF from 'jspdf';
+import { map } from 'jquery';
 
 
 
 const GenContrato = () => {
+    const [grupoempresas, setGrupoempresas] = useState([])
     const [imagen, setImagen] = useState({valido : null});
     const validarImagen = () => {
         return [];
     };
+    const [select, setselect] = useState("---Selecciona una Opcion---")
+    const [sistema, setsistema] = useState("")
+    const [pliego, setpliego] = useState("")
+    const [convocatoria, setconvocatoria] = useState("")
     
     const imprimir = (e) => {
     document.addEventListener("DOMContentLoaded", () => {
@@ -48,10 +54,10 @@ const GenContrato = () => {
         var doc =  new jsPDF({
                 orientation :"p",
                 unit:"pt",
-                format: [700,1000]});
+                format: [700,1100]});
         doc.html(document.querySelector("#Contrato"),{
             callback: function(pdf){
-                pdf.save
+                
                 pdf.save("mypdf.pdf");
                 
             }
@@ -67,11 +73,24 @@ const GenContrato = () => {
             })
                 .then((response) => response.json())
                 .then((json) => {
-                    setGrupoEmpresa(json);
+                    setGrupoempresas(json);
                     console.log(json);
                 });
     }, [])
-    
+    const onchangeselect = (e) => {
+        setselect(e.currentTarget.value);
+    };
+    const onchangesistema = (e) => {
+        setsistema(e.currentTarget.value);
+    };
+    const onchangepliego = (e) => {
+        setpliego(e.currentTarget.value);
+    };
+    const onchangeconvocatoria = (e) => {
+        setconvocatoria(e.currentTarget.value);
+    };
+
+
     return(<>
             
             <CardEG className='p-4'>
@@ -79,51 +98,52 @@ const GenContrato = () => {
                     <label id="label-login-logo">CONTRATO</label>
                 </div>
                 <h4 >Seleccione una Grupo Empresa</h4>
-                <select name="" id="GE">
-                    <option value="empresa1">empresa1</option>
-                    <option value="empresa2">empresa2</option>
-                </select>
+                <ContenidoImput>
+                    <label > Seleccione una GE Valida:
+                        <select  defaultValue= "---Selecciona una Opcion---" id="GE" onChange={onchangeselect}>
+                            <option value="">---Selecciona una Opcion---</option>
+                            {grupoempresas.map(data => <option value= { data.nombre}>{data.nombre}</option> )}
+                        </select>
+                    </label>
+                    
+                    <label > Nombre del Sistema: <input type="text"  onChange={onchangesistema} /></label>
+                    <label > Nombre de la convocatoria: <input type="text" onChange={onchangeconvocatoria} /></label>
+                    <label > Nombre del pliego: <input type="text" onChange={onchangepliego} /></label>
+                </ContenidoImput>    
                 <FondoContrato className='p-4' id='Contrato'>
-                    <Titulo>CONTRATO    DE    PRESENTACION DE<br /> SERVICIOS    -    CONSULTORIA</Titulo><br />
+                    <Titulo>CONTRATO DE PRESENTACION DE<br /> SERVICIOS    -    CONSULTORIA</Titulo><br />
                     <Subtitulo>AQUI FECHA DE PRESENTACION DE CONTRATOS</Subtitulo>
                     <div className='text-left'>
                     <Letra>
                         Que suscriben la empresa Taller de Ingenieria de Software - TIS,
                         que en lo sucesivo se denominara TIS, por una parte, 
-                        y la consultora 
-                        <NombreConsultora value = "GrupoEmpresa"> AQUI NOMBRE GE</NombreConsultora> 
-                        registrada debidamente en el 
+                        y la consultora <strong>{select}</strong> registrada debidamente en el 
                         Departamento de Procesamiento de Datos y Registro e Inscripciones,
-                        domiciliada en la ciudad de Conchabamba, que en lo sucesivo se denominara  
-                        <NombreConsultora> AQUI NOMBRE GE</NombreConsultora>, 
-                        por otra parte, de conformidad a las clausulas que se 
+                        domiciliada en la ciudad de Conchabamba, que en lo sucesivo se denominara   
+                        <strong>{select}</strong>, por otra parte, de conformidad a las clausulas que se 
                         detallan a continuacion.
                         <br />
                         PRIMERA.- TIS contratara los servicios del Contratista para la provision
-                        de un <input type="text" /> que se realizara, conforme a la modalidad y 
+                        de un <strong>{sistema}</strong> que se realizara, conforme a la modalidad y 
                         presupuesto entregado por la Consultora, en su documento de propuesta
                         tecnica, y normas estipuladas por TIS.
                         <br />
                     
                         SEGUNDO.- El objeto de este contrato es la provision de un producto software.
                         <br />
-                        TERCERO.- La consultora <NombreConsultora>AQUI NOMBRE GE</NombreConsultora>,
-                        se hace responsable por la buena ejecucion de las distintas fases, que involucren
+                        TERCERO.- La consultora <strong>{select}</strong>, se hace responsable por la buena ejecucion de las distintas fases, que involucren
                         su ingenieria del proyecto, especificadas en la propuesta tecnica corregida
                         de acuerdo al pliego de especificaciones.
                         <br />
                         CUARTO.- Para cualquier otro punto no estipulado en el presente contrato, 
-                        debe hacerse referencia a la Convocatoria Pública   
-                        <input type="text" />  
-                        al Pliego de Especificaciones   
-                        <input type="text" />  
+                        debe hacerse referencia a la Convocatoria Pública <strong>{convocatoria}</strong>  
+                        al Pliego de Especificaciones <strong>{pliego}</strong>  
                         y/o al PG-TIS (Plan Global - TIS)
                         <br />
                         QUINTO.- Se pone en evidencia que cualquier incumplimiento de las cláusulas 
                         estipuladas en el presente contrato, es pasible a la disolución del mismo.
                         <br />
-                        SEXTO.- La consultora <NombreConsultora>AQUI NOMBRE GE</NombreConsultora>, 
-                        declara su absoluta conformidad con los términos del presente contrato. 
+                        SEXTO.- La consultora <strong>{select}</strong>, declara su absoluta conformidad con los términos del presente contrato. 
                         Se deja constancia de que los datos y antecedentes personales jurídicos 
                         proporcionados por el adjudicatario son verídicos.
                         <br />
@@ -142,8 +162,7 @@ const GenContrato = () => {
                         <NombreAsesores>
                             AQUI LISTADO DE LOS ASESORES
                         </NombreAsesores>
-                        y por otra; la consultora <NombreConsultora>AQUI NOMBRE GE</NombreConsultora>, 
-                        representada por su representante legal 
+                        y por otra; la consultora <strong>{select}</strong>, representada por su representante legal 
                         <NombreLider>
                             AQUI NOMBRE DEL LIDER GE 
                         </NombreLider>

@@ -32,6 +32,9 @@ class ImpExpController extends Controller
         $lines = file('doc/'.$loadedSheetName.'.csv');
         $array = array_map('str_getcsv', $lines);
         //0 = codigo, 1= codigosis, 2 = nombre, 3 = correo, 4= carrera 5=grupo, 
+        $rol = DB::table('Rol')
+                    ->where('nombreRol', '=', 'Estudiante')
+                    ->first();
         for ($i=0; $i < sizeof($array); $i++) { 
             if(is_numeric($array[$i][0])){
                 $estudiante = DB::table('Usuario')
@@ -45,6 +48,7 @@ class ImpExpController extends Controller
                     $user->codSis = intval($array[$i][1]);
                     $user->idGrupo = intval($array[$i][5]);
                     $user->idCarrera = intval($array[$i][4]);
+                    $user->idRol = $rol->idRol;
 
                     $user->save();
                 }

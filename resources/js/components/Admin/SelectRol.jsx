@@ -40,7 +40,6 @@ const SelectRol = ({ rol, idUsuario }) => {
                     onChange={actualizarRol}>
                     <option value='Administrador'>Administrador</option>
                     <option value='Estudiante'>Estudiante</option>
-                    <option value='Consultor'>Consultor</option>
                 </select>
                 <button onClick={resetearUsuario}>
                     Reset

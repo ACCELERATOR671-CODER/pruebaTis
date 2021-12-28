@@ -27,6 +27,16 @@ class EspacioDeAsesoramientoController extends Controller
         return response()->json($arbolDatos);
     }
 
+    public function obtenerCarpetaEspecifica(Request $req){
+        $carpetas = DB::table('Elemento')
+                            ->where('idGE', '=', $req->idGE)
+                            ->where('nombre','=', $req->nombre)
+                            ->whereNull('idPadre')
+                            ->get();
+        $arbolDatos = $this->buscarHijos($carpetas);
+        return response()->json($arbolDatos);
+    }
+
     private function buscarHijos($datos){
         $response = [];
         foreach ($datos as $key) {
@@ -81,6 +91,21 @@ class EspacioDeAsesoramientoController extends Controller
                 $elemento->tipo = $req->tipo;
                 $elemento->idPadre = $req->idPadre;
                 $elemento->idGE = $ge->idGE;
+                $elemento->revisado = $req->revisado;
+                if ($elemento->revisado=='false') {
+                    $tienePadre = true;
+                    $padre = $req->idPadre;
+                    while ($tienePadre) {
+                        $carpetaPadre = Elemento::find($padre);
+                        $carpetaPadre->revisado = false;
+                        $carpetaPadre->save();
+                        if ($carpetaPadre->idPadre != null) {
+                            $padre = $carpetaPadre->idPadre;
+                        } else {
+                            $tienePadre = false;
+                        }
+                    }
+                }
 
                 if($elemento->tipo == 'pdf'){
                     $file = $req->file('link');

@@ -29,5 +29,5 @@
 @endsection
 
 @section('contenido')
-    <div id='espaciogeneral'></div>
+    <div id='home'></div>
 @endsection

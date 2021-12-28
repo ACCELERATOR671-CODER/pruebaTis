@@ -22,6 +22,7 @@ class Elemento extends Migration
             $table->foreign('idPadre')->references('idElemento')->on('Elemento');
             $table->integer('idGE');
             $table->foreign('idGE')->references('idGE')->on('Grupo_Empresa');
+            $table->boolean('revisado')->nullable();
         });
     }
 

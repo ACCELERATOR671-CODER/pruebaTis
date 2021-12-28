@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PanelInputs= styled.div`
     display: grid;
@@ -11,4 +12,13 @@ const PanelInputs= styled.div`
     }
 `;
 
-export {PanelInputs}
+const Trash = styled(FontAwesomeIcon)`
+    font-size: 15px;
+    color:red;
+`;
+
+const TD = styled.td`
+    max-width: 200px;
+`;
+
+export {PanelInputs, TD, Trash}

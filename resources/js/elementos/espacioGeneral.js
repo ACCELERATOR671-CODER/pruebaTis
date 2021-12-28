@@ -54,4 +54,38 @@ const DescArea = styled.div`
     padding: 10px;
 `;
 
-export {Acordeon, MarcoIcono, Panel, TextArea, CardEG, DescArea};
+const GrupoCheckBox = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap : 10px;
+`;
+
+const ContenedorCheckBox = styled.div`
+    display: grid;
+    border-style: solid;
+    text-align: left;
+    padding-left: 3px;
+    padding-right: 3px;
+`;
+
+const GrupoBotones = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+const BotonCancel = styled.button`
+    transition: .3s ease all;
+    border-radius: 5px;
+    color: white;
+    border-style: solid;
+    background-color: red;
+    border-color: red;
+    :hover{
+        color: black;
+        border-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
+        background-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
+    }
+`;
+
+export {Acordeon, MarcoIcono, Panel, TextArea, CardEG, GrupoCheckBox, ContenedorCheckBox,
+        GrupoBotones, BotonCancel};

@@ -6,6 +6,7 @@ use App\Http\Controllers\EditarGEController;
 use App\Http\Controllers\EditarPerfilController;
 use App\Http\Controllers\EspacioDeAsesoramientoController;
 use App\Http\Controllers\EspacioGeneralController;
+use App\Http\Controllers\EspacioRevisionController;
 use App\Http\Controllers\ForoDudasController;
 use App\Http\Controllers\NavegadorController;
 use App\Http\Controllers\RegistroGEController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VistaInscritosController;
 use App\Http\Controllers\GEController;
 use App\Http\Controllers\ImpExpController;
+use App\Http\Controllers\NotificacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Route::post('registrarGrupoEmpresa', [RegistroGEController::class, 'RegistrarGru
 Route::post('crearSession', [UserController::class, 'createSession']);
 Route::post('eliminarSession', [UserController::class, 'dropSession']);
 Route::post('verificarSession', [UserController::class, 'verifySession']);
+Route::post('verificarSessionConsultor', [UserController::class, 'verifySessionConsultor']);
 Route::post('getNombre', [UserController::class, 'getNombre']);
 
 Route::post('registrarCambiosGE', [EditarGEController::class, 'registrarCambiosGE']);
@@ -108,8 +111,22 @@ Route::post('importarExelEmpresas', [ImpExpController::class, 'importarExelEmpre
 Route::get('getGroups', [AdminController::class, 'getGroups']);
 Route::get('getCarrera', [AdminController::class, 'getCarrera']);
 Route::post('createUser', [UserController::class, 'createUser']);
+Route::post('createAdviser', [UserController::class, 'createAdviser']);
 
 Route::post('verificarCodSis', [UserController::class, 'verificarCodSis']);
 Route::post('verificarEmail', [UserController::class, 'verificarEmail']);
 
+Route::post('verificarConsultor', [EspacioRevisionController::class, 'verificarConsultor']);
+Route::post('obtenerCarpetaEspecifica',[EspacioDeAsesoramientoController::class,'obtenerCarpetaEspecifica']);
+Route::post('cambiarRevisado',[EspacioRevisionController::class, 'cambiarRevisado']);
+Route::get('ObtenerOpocionesG', [CalendarioController::class, 'ObtenerOpocionesG']);
+Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCalendarioGeneral']);
 
+Route::post('crearFechaG', [CalendarioController::class, 'crearFechaG']);
+Route::post('dropDate', [CalendarioController::class, 'dropDate']);
+
+Route::post('crearNotificacion',[NotificacionController::class, 'crearNotificacion']);
+Route::post('actualizarNotificacion',[NotificacionController::class, 'actualizarNotificacion']);
+Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNotificacion']);
+
+Route::post('obtenerEventoGeneral',[CalendarioController::class, 'obtenerEventoGeneral']);

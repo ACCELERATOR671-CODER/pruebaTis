@@ -38,10 +38,17 @@ const FirmaGE = styled.div`
 `
 const SubirFirmaAsesor = styled.input`
 
+`;
+const ContenidoImput = styled.div`
+    display: flex;
+    flex-direction : column;
+    justify-content: start;
+    gap: 10px;
 `
 ;
 const Letra = styled.p`
     font-size: 10px;
+    
 
 `
 
@@ -65,5 +72,5 @@ const FondoContrato  = styled.div`
 `;
 
 export{
-    Titulo, Subtitulo, Letra, NombreConsultora, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE, FondoContrato
+    Titulo, ContenidoImput, Subtitulo, Letra, NombreConsultora, NombreAsesores, NombreLider, PieDePagina, SubirFirmaAsesor, FirmaGE, FondoContrato
 };

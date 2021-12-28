@@ -11,6 +11,7 @@ use App\Http\Controllers\EditarGEController;
 use App\Http\Controllers\SubirPDFController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\EspacioDeAsesoramientoController;
+use App\Http\Controllers\EspacioRevisionController;
 use App\Http\Controllers\ForoDudasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VistaInscritosController;
@@ -73,3 +74,5 @@ Route::get('/ImportarDatos', [ImpExpController::class, 'getView']);
 
 Route::get('/RegitroUsuarioAdmin', [AdminController::class, 'getViewRegister']);
 Route::get('/Contrato', [ContratosController::class, 'vistaContrato']);
+
+Route::get('/EspacioRevision', [EspacioRevisionController::class, 'index_view']);

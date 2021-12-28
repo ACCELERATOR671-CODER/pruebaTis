@@ -14,4 +14,11 @@ const Grid = styled.form`
     gap : 20px;
 `;
 
-export {Cuadro, Grid};
+const TipUserCont = styled.div`
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    flex-wrap: wrap;
+`;
+
+export {Cuadro, Grid, TipUserCont};

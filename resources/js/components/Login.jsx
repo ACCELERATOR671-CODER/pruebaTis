@@ -6,7 +6,7 @@ import { Boton, InputStyle } from '../elementos/registro';
 import { iniciarSession } from '../parametros/menus';
 import { createSession } from '../parametros/session';
 
-const Login = () => {       
+const Login = () => {
     const refUser = useRef(null);
     const refPass = useRef(null);
     const [datos, setDatos] = useState(null);
@@ -19,7 +19,7 @@ const Login = () => {
         .then((response) => response.json())
         .then(data => setDatos(data));
     }, []);
-    
+
     const obtenerID = () => {
         let idUsuario = "-1";
         for (let i = 0; i < datos.length; i++) {
@@ -60,7 +60,7 @@ const Login = () => {
                     <div id="cont-label-logo">
                         <label id="label-login-logo">BIENVENIDO</label>
                     </div>
-                    
+
                     <div id="cont-logo">
                         <img src={ logo } width='100%'/>
                     </div>
@@ -69,11 +69,11 @@ const Login = () => {
                         <InputStyle ref = {refUser} className="input-login" name='user' type="text" placeholder="Nombre de Usuario" />
 
                         <InputStyle ref = {refPass} className="input-login" name='password' type="password" placeholder="Contraseña" />
-                        
+
                         <Boton id="boton-login" type="submit">Iniciar Sesión</Boton>
-                    </div>     
-                </form>  
-            </Card>  
+                    </div>
+                </form>
+            </Card>
         </main>
     );
 
