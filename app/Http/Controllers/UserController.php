@@ -296,4 +296,13 @@ class UserController extends Controller
             return response()->json(['mensaje' => 'false']);
         }
     }
+
+    public function obtenerConsultores() {
+        $rolConsultor = DB::table('Rol')->where('nombreRol','=','Consultor')->first();
+        $consultores = 
+            DB::table('Usuario')
+            ->where('idRol','=',$rolConsultor->idRol)
+            ->get();
+        return response()->json($consultores);
+    }
 }
