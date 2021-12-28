@@ -51,8 +51,8 @@ class UserController extends Controller
         $id = DB::table('Session')
             ->join('Usuario', 'Usuario.idUsuario','=','Session.idUser')
             ->select('idUser')
-            ->where('token', $request->token)
-            ->where('Usuario.grupo', '=','2')
+            ->where('token','=', $request->token)
+            ->where('idGrupo', '=','2')
             ->first();
         return response()->json($id);
     }
@@ -135,7 +135,7 @@ class UserController extends Controller
                                     ->where('idUsuario','<>',$usuario->idUsuario)
                                     ->get();
                 if(sizeof($otrosUsuarios)<=0){
-                    
+
                     $usuario->nombreUsuario = $req->nombreU;
                     $usuario->telefono = $req->telefono;
                     $usuario->contrasenia = $req->contrasenia;
@@ -249,7 +249,7 @@ class UserController extends Controller
         //crear nuevo grupo a partir de aca
 
         $gm = DB::table('Grupo')->max('idGrupo');
-        $id = (!empty($gm)) ? $gm+1: 1; 
+        $id = (!empty($gm)) ? $gm+1: 1;
 
         $grupo = new Grupo;
         $grupo->idGrupo = $id;

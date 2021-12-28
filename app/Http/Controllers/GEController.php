@@ -95,7 +95,6 @@ class GEController extends Controller
             ->first();
         $dat = DB::table('Grupo_Empresa')
             ->join('Usuario', 'Usuario.idUsuario', '=', 'Grupo_Empresa.duenio')
-            ->select('Grupo_Empresa.idGE')
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
             ->where('Grupo_Empresa.valido', '=', 'false')
             ->get();
@@ -105,7 +104,13 @@ class GEController extends Controller
                 ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
                 ->where('Usuario.idGE', '=', $value->idGE)
                 ->count();
-            if ($integrantes > 2) {
+
+            $fecha = DB::table('Opcion')
+                ->join('Evento', 'Opcion.idEvento', '=', 'Evento.idEvento')
+                ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
+                ->first();
+
+            if ($integrantes > 2 && $fecha->fecha_final >= $value->fecha_registro) {
 
                 $ge = GrupoEmpresa::find($value->idGE);
                 $ge->valido = true;

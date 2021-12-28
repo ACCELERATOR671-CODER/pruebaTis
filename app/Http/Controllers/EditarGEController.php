@@ -12,7 +12,7 @@ class EditarGEController extends Controller
     function registrarCambiosGE(Request $req)
     {
         $grupoEmpresa = GrupoEmpresa::find($req->idGE);
-        
+
         $grupoEmpresa->nombre = $req->nombre;
         $grupoEmpresa->nombreAb = $req->nombreAb;
         $grupoEmpresa->direccion = $req->direccion;
@@ -20,22 +20,15 @@ class EditarGEController extends Controller
         $grupoEmpresa->telefono = $req->telefono;
         $grupoEmpresa->orgJur = $req->orgJur;
         $grupoEmpresa->descripcion = $req->descripcion;
-        
+
         $file = $req->file('logo');
         if ($file != null) {
             $nombre =  time()."_".$file->getClientOriginalName();
             File::delete('resources/'.$grupoEmpresa->logo);
             $file->move('resources', $nombre);
             $grupoEmpresa->logo = $nombre;
-        }        
-       /* 
-        $file = $req->file('pdf');
-        $nombre =  time() . "_" . $file->getClientOriginalName();
-        $file->move('resources', $nombre);
-        error_log("error 3");
-        */
+        }
         $grupoEmpresa->save();
-
         return response(200);
     }
 
@@ -44,12 +37,6 @@ class EditarGEController extends Controller
         $response = DB::table('Grupo_Empresa')->get();
         return response()->json($response);
     }
-
-
-    /* function index()
-    {
-        return view('editarGE');
-    } */
 
     function index_view($nombre)
     {
