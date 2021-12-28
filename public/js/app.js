@@ -75139,7 +75139,19 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       _ref$nombreGEAlt = _ref.nombreGEAlt,
       nombreGEAlt = _ref$nombreGEAlt === void 0 ? null : _ref$nombreGEAlt,
       _ref$revConsultor = _ref.revConsultor,
-      revConsultor = _ref$revConsultor === void 0 ? false : _ref$revConsultor;
+      revConsultor = _ref$revConsultor === void 0 ? false : _ref$revConsultor,
+      _ref$revisar = _ref.revisar,
+      revisar = _ref$revisar === void 0 ? null : _ref$revisar,
+      _ref$padre = _ref.padre,
+      padre = _ref$padre === void 0 ? null : _ref$padre,
+      _ref$setPadre = _ref.setPadre,
+      setPadre = _ref$setPadre === void 0 ? null : _ref$setPadre,
+      _ref$principal = _ref.principal,
+      principal = _ref$principal === void 0 ? null : _ref$principal,
+      _ref$setPrincipal = _ref.setPrincipal,
+      setPrincipal = _ref$setPrincipal === void 0 ? null : _ref$setPrincipal,
+      _ref$setAuxRev = _ref.setAuxRev,
+      setAuxRev = _ref$setAuxRev === void 0 ? null : _ref$setAuxRev;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(contenido),
       _useState2 = _slicedToArray(_useState, 2),
@@ -75169,6 +75181,16 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       valorSelect = _useState10[0],
       setValorSelect = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(contenidoInt.revisado),
+      _useState12 = _slicedToArray(_useState11, 2),
+      elemRevisado = _useState12[0],
+      setElemRevisado = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      auxRevisado = _useState14[0],
+      setAuxRevisado = _useState14[1];
+
   var onChangeSelect = function onChangeSelect() {
     setValorSelect(refSelect.current.value);
   };
@@ -75177,6 +75199,10 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     setDesplegado(!desplegado);
     var desp = document.getElementById('id' + contenido.idElemento);
     desp.classList.toggle("nuevoDebate--ocultar");
+
+    if (revConsultor && contenidoInt.hijos.length == 0 && !contenidoInt.revisado) {
+      cambiarRevisado();
+    }
   };
 
   var desplegarNE = function desplegarNE() {
@@ -75233,7 +75259,11 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       hijos: hijosInt,
       setHijos: setHijosInt,
       nombreGEAlt: nombreGEAlt != null ? nombreGEAlt : null,
-      revConsultor: revConsultor
+      revConsultor: revConsultor,
+      revisar: revisar != null ? revisar : null,
+      padre: contenidoInt,
+      setPadre: setElemRevisado,
+      setAuxRev: setAuxRevisado
     });
   };
 
@@ -75247,6 +75277,13 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
           body: drop
         }).then(function (response) {
           if (response.ok) {
+            if (revConsultor && !contenidoInt.revisado) {
+              contenidoInt.revisado = true;
+              setElemRevisado(true);
+              setAuxRevisado(true);
+              cambiarEstadoPadre(padre);
+            }
+
             var nuevosHijos = hijos.filter(function (dato) {
               return dato.idElemento != contenido.idElemento;
             });
@@ -75263,24 +75300,79 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
   };
 
   var cambiarRevisado = function cambiarRevisado() {
-    if (contenidoInt.tipo != 'carpeta') {
-      var data = new FormData();
-      data.append('idElemento', contenidoInt.idElemento);
-      fetch('api/cambiarRevisado', {
-        method: 'POST',
-        body: data
-      });
-      contenidoInt.revisado = true;
+    if (revConsultor) {
+      if (contenidoInt.tipo != 'carpeta' || contenidoInt.hijos.length == 0) {
+        var data = new FormData();
+        data.append('idElemento', contenidoInt.idElemento);
+        fetch('api/cambiarRevisado', {
+          method: 'POST',
+          body: data
+        });
+        contenidoInt.revisado = true;
+        setElemRevisado(true);
+        setAuxRevisado(true);
+      }
     }
   };
 
+  var cambiarEstadoPadre = function cambiarEstadoPadre(padre) {
+    if (revisar != null && setPadre != null) {
+      if (padre.tipo == 'carpeta') {
+        var todoRevisado = revisar(padre);
+
+        if (todoRevisado) {
+          var data = new FormData();
+          data.append('idElemento', padre.idElemento);
+          fetch('api/cambiarRevisado', {
+            method: 'POST',
+            body: data
+          });
+          padre.revisado = true;
+          setPadre(true);
+        }
+      }
+    }
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (revConsultor) {
+      if (auxRevisado && contenidoInt.nombre != 'Propuestas') {
+        setAuxRev(true);
+        setElemRevisado(revisar(contenidoInt));
+      } else {
+        if (auxRevisado && contenidoInt.nombre == 'Propuestas') {
+          setElemRevisado(revisar(contenidoInt));
+        }
+      }
+    }
+  }, [auxRevisado]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (revConsultor) {
+      if (auxRevisado) {
+        if (contenidoInt.nombre != 'Propuestas') {
+          cambiarEstadoPadre(padre);
+          setAuxRevisado(false);
+        } else {
+          if (revisar(contenidoInt)) {
+            var data = new FormData();
+            data.append('idElemento', contenidoInt.idElemento);
+            fetch('api/cambiarRevisado', {
+              method: 'POST',
+              body: data
+            });
+            setPrincipal(true);
+          }
+        }
+      }
+    }
+  }, [elemRevisado]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-block ml-2 border-left border-dark pl-2"
   }, contenidoInt.tipo == 'carpeta' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], {
     onClick: desplegar
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: !desplegado ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolder"] : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       color: 'red'
     }
@@ -75337,7 +75429,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     type: "submit"
   }, "Crear")))))), contenidoInt.tipo == 'link' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExternalLinkAlt"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: cambiarRevisado,
     style: {
       color: 'red'
@@ -75352,7 +75444,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     onClick: eliminarElemento
   })), contenidoInt.tipo == 'pdf' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFilePdf"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: cambiarRevisado,
     style: {
       color: 'red'
@@ -75721,6 +75813,11 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
       estaRevisado = _useState4[0],
       setEstaRevisado = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      lista = _useState6[0],
+      setLista = _useState6[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var data = new FormData();
     data.append('idGE', gE.idGE);
@@ -75735,17 +75832,50 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
     });
   }, []);
 
-  var revisarArchivos = function revisarArchivos() {
-    if (elementos != null && elementos.length > 0) {
-      if (!elementos[0].revisado) {
-        setEstaRevisado(false);
+  var revisarArchivos = function revisarArchivos(elemento) {
+    if (elemento != null) {
+      if (elemento.tipo != 'carpeta') {
+        if (!elemento.revisado) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        if (elemento.hijos.length > 0) {
+          var revisados = [];
+          elemento.hijos.forEach(function (hijo) {
+            revisados.push(revisarArchivos(hijo));
+          });
+
+          if (revisados.includes(false)) {
+            elemento.revisado = false;
+          } else {
+            elemento.revisado = true;
+          }
+        }
+
+        return elemento.revisado;
       }
+    } else {
+      return true;
     }
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    revisarArchivos();
+    if (elementos && elementos.length > 0) {
+      setEstaRevisado(revisarArchivos(elementos[0]));
+    }
   }, [elementos]);
+
+  var cambiarEstadoArchivos = function cambiarEstadoArchivos() {
+    var data = new FormData();
+    data.append('listaElementos', lista);
+    fetch('api/cambiarRevisados', {
+      method: 'POST',
+      body: data
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_estilosEspacioRevision_estilosEspacioRev__WEBPACK_IMPORTED_MODULE_3__["ContenedorGE"], {
     style: !estaRevisado ? {
       borderColor: 'red'
@@ -75767,7 +75897,12 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EspacioDeAsesoramiento_ElementoAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
       contenido: datos,
       nombreGEAlt: gE.nombre,
-      revConsultor: true
+      revConsultor: true,
+      revisar: revisarArchivos,
+      padre: datos,
+      setPadre: setEstaRevisado,
+      principal: datos,
+      setPrincipal: setEstaRevisado
     });
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sin Carpetas") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Cargando...")));
 };
