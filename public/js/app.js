@@ -75139,7 +75139,19 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       _ref$nombreGEAlt = _ref.nombreGEAlt,
       nombreGEAlt = _ref$nombreGEAlt === void 0 ? null : _ref$nombreGEAlt,
       _ref$revConsultor = _ref.revConsultor,
-      revConsultor = _ref$revConsultor === void 0 ? false : _ref$revConsultor;
+      revConsultor = _ref$revConsultor === void 0 ? false : _ref$revConsultor,
+      _ref$revisar = _ref.revisar,
+      revisar = _ref$revisar === void 0 ? null : _ref$revisar,
+      _ref$padre = _ref.padre,
+      padre = _ref$padre === void 0 ? null : _ref$padre,
+      _ref$setPadre = _ref.setPadre,
+      setPadre = _ref$setPadre === void 0 ? null : _ref$setPadre,
+      _ref$principal = _ref.principal,
+      principal = _ref$principal === void 0 ? null : _ref$principal,
+      _ref$setPrincipal = _ref.setPrincipal,
+      setPrincipal = _ref$setPrincipal === void 0 ? null : _ref$setPrincipal,
+      _ref$setAuxRev = _ref.setAuxRev,
+      setAuxRev = _ref$setAuxRev === void 0 ? null : _ref$setAuxRev;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(contenido),
       _useState2 = _slicedToArray(_useState, 2),
@@ -75169,6 +75181,16 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       valorSelect = _useState10[0],
       setValorSelect = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(contenidoInt.revisado),
+      _useState12 = _slicedToArray(_useState11, 2),
+      elemRevisado = _useState12[0],
+      setElemRevisado = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      auxRevisado = _useState14[0],
+      setAuxRevisado = _useState14[1];
+
   var onChangeSelect = function onChangeSelect() {
     setValorSelect(refSelect.current.value);
   };
@@ -75177,6 +75199,10 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     setDesplegado(!desplegado);
     var desp = document.getElementById('id' + contenido.idElemento);
     desp.classList.toggle("nuevoDebate--ocultar");
+
+    if (revConsultor && contenidoInt.hijos.length == 0 && !contenidoInt.revisado) {
+      cambiarRevisado();
+    }
   };
 
   var desplegarNE = function desplegarNE() {
@@ -75233,7 +75259,11 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
       hijos: hijosInt,
       setHijos: setHijosInt,
       nombreGEAlt: nombreGEAlt != null ? nombreGEAlt : null,
-      revConsultor: revConsultor
+      revConsultor: revConsultor,
+      revisar: revisar != null ? revisar : null,
+      padre: contenidoInt,
+      setPadre: setElemRevisado,
+      setAuxRev: setAuxRevisado
     });
   };
 
@@ -75247,8 +75277,15 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
           body: drop
         }).then(function (response) {
           if (response.ok) {
+            if (revConsultor && !contenidoInt.revisado) {
+              contenidoInt.revisado = true;
+              setElemRevisado(true);
+              setAuxRevisado(true);
+              cambiarEstadoPadre(padre);
+            }
+
             var nuevosHijos = hijos.filter(function (dato) {
-              dato.idElemento != contenidoInt.idElemento;
+              return dato.idElemento != contenido.idElemento;
             });
             setHijos(nuevosHijos);
             alert("Eliminado con exito");
@@ -75263,24 +75300,79 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
   };
 
   var cambiarRevisado = function cambiarRevisado() {
-    if (contenidoInt.tipo != 'carpeta') {
-      var data = new FormData();
-      data.append('idElemento', contenidoInt.idElemento);
-      fetch('api/cambiarRevisado', {
-        method: 'POST',
-        body: data
-      });
-      contenidoInt.revisado = true;
+    if (revConsultor) {
+      if (contenidoInt.tipo != 'carpeta' || contenidoInt.hijos.length == 0) {
+        var data = new FormData();
+        data.append('idElemento', contenidoInt.idElemento);
+        fetch('api/cambiarRevisado', {
+          method: 'POST',
+          body: data
+        });
+        contenidoInt.revisado = true;
+        setElemRevisado(true);
+        setAuxRevisado(true);
+      }
     }
   };
 
+  var cambiarEstadoPadre = function cambiarEstadoPadre(padre) {
+    if (revisar != null && setPadre != null) {
+      if (padre.tipo == 'carpeta') {
+        var todoRevisado = revisar(padre);
+
+        if (todoRevisado) {
+          var data = new FormData();
+          data.append('idElemento', padre.idElemento);
+          fetch('api/cambiarRevisado', {
+            method: 'POST',
+            body: data
+          });
+          padre.revisado = true;
+          setPadre(true);
+        }
+      }
+    }
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (revConsultor) {
+      if (auxRevisado && contenidoInt.nombre != 'Propuestas') {
+        setAuxRev(true);
+        setElemRevisado(revisar(contenidoInt));
+      } else {
+        if (auxRevisado && contenidoInt.nombre == 'Propuestas') {
+          setElemRevisado(revisar(contenidoInt));
+        }
+      }
+    }
+  }, [auxRevisado]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (revConsultor) {
+      if (auxRevisado) {
+        if (contenidoInt.nombre != 'Propuestas') {
+          cambiarEstadoPadre(padre);
+          setAuxRevisado(false);
+        } else {
+          if (revisar(contenidoInt)) {
+            var data = new FormData();
+            data.append('idElemento', contenidoInt.idElemento);
+            fetch('api/cambiarRevisado', {
+              method: 'POST',
+              body: data
+            });
+            setPrincipal(true);
+          }
+        }
+      }
+    }
+  }, [elemRevisado]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-block ml-2 border-left border-dark pl-2"
   }, contenidoInt.tipo == 'carpeta' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], {
     onClick: desplegar
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: !desplegado ? _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolder"] : _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       color: 'red'
     }
@@ -75337,7 +75429,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     type: "submit"
   }, "Crear")))))), contenidoInt.tipo == 'link' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faExternalLinkAlt"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: cambiarRevisado,
     style: {
       color: 'red'
@@ -75352,7 +75444,7 @@ var ElementoAdmin = function ElementoAdmin(_ref) {
     onClick: eliminarElemento
   })), contenidoInt.tipo == 'pdf' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["ContenedorElemento"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_espacioAsesoramient__WEBPACK_IMPORTED_MODULE_1__["MarcoIcono"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFilePdf"]
-  }), revConsultor && !contenidoInt.revisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), revConsultor && !elemRevisado ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: cambiarRevisado,
     style: {
       color: 'red'
@@ -75721,6 +75813,11 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
       estaRevisado = _useState4[0],
       setEstaRevisado = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      lista = _useState6[0],
+      setLista = _useState6[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var data = new FormData();
     data.append('idGE', gE.idGE);
@@ -75735,17 +75832,50 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
     });
   }, []);
 
-  var revisarArchivos = function revisarArchivos() {
-    if (elementos != null && elementos.length > 0) {
-      if (!elementos[0].revisado) {
-        setEstaRevisado(false);
+  var revisarArchivos = function revisarArchivos(elemento) {
+    if (elemento != null) {
+      if (elemento.tipo != 'carpeta') {
+        if (!elemento.revisado) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        if (elemento.hijos.length > 0) {
+          var revisados = [];
+          elemento.hijos.forEach(function (hijo) {
+            revisados.push(revisarArchivos(hijo));
+          });
+
+          if (revisados.includes(false)) {
+            elemento.revisado = false;
+          } else {
+            elemento.revisado = true;
+          }
+        }
+
+        return elemento.revisado;
       }
+    } else {
+      return true;
     }
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    revisarArchivos();
+    if (elementos && elementos.length > 0) {
+      setEstaRevisado(revisarArchivos(elementos[0]));
+    }
   }, [elementos]);
+
+  var cambiarEstadoArchivos = function cambiarEstadoArchivos() {
+    var data = new FormData();
+    data.append('listaElementos', lista);
+    fetch('api/cambiarRevisados', {
+      method: 'POST',
+      body: data
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_estilosEspacioRevision_estilosEspacioRev__WEBPACK_IMPORTED_MODULE_3__["ContenedorGE"], {
     style: !estaRevisado ? {
       borderColor: 'red'
@@ -75767,7 +75897,12 @@ var ContenedorDatosGE = function ContenedorDatosGE(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EspacioDeAsesoramiento_ElementoAdmin__WEBPACK_IMPORTED_MODULE_2__["default"], {
       contenido: datos,
       nombreGEAlt: gE.nombre,
-      revConsultor: true
+      revConsultor: true,
+      revisar: revisarArchivos,
+      padre: datos,
+      setPadre: setEstaRevisado,
+      principal: datos,
+      setPrincipal: setEstaRevisado
     });
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Sin Carpetas") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Cargando...")));
 };
@@ -77035,6 +77170,16 @@ var Notificacion = function Notificacion() {
       notificaciones = _useState2[0],
       setNotificaciones = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cambio = _useState4[0],
+      setCambio = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      not = _useState6[0],
+      setNot = _useState6[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var dat = new FormData();
     dat.append('idUsuario', sessionStorage.getItem('id'));
@@ -77044,9 +77189,10 @@ var Notificacion = function Notificacion() {
     }).then(function (response) {
       return response.json();
     }).then(function (json) {
-      setNotificaciones(json);
+      setNotificaciones(json[0]);
+      setNot(json[1]);
     });
-  }, []);
+  }, [cambio]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, notificaciones && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "navbar-toggler",
     type: "button",
@@ -77056,7 +77202,7 @@ var Notificacion = function Notificacion() {
     "aria-expanded": "false",
     "aria-label": "Toggle navigation"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notificacion_Bell__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    cant: notificaciones.length
+    cant: not
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "navegadorNot",
     className: "collapse navbar-collapse"
@@ -77073,15 +77219,17 @@ var Notificacion = function Notificacion() {
     "aria-haspopup": "true",
     "aria-expanded": "false"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notificacion_Bell__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    cant: notificaciones.length
-  })), notificaciones.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_2__["ContenedorNavC"], {
+    cant: not
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_2__["ContenedorNavC"], {
     className: " dropdown-menu",
     "aria-labelledby": "navbarDropdownNot"
-  }, notificaciones.map(function (data) {
+  }, notificaciones.length > 0 ? notificaciones.map(function (data) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notificacion_BotonNot__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      cambio: cambio,
+      setCambio: setCambio,
       data: data
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "No tienes notificaciones"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-end p-2",
     style: {
       fontSize: '15px'
@@ -79780,12 +79928,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../elementos/notificacion */ "./resources/js/elementos/notificacion.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -79815,7 +79957,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 */
 
 var BotonNot = function BotonNot(_ref) {
-  var data = _ref.data;
+  var data = _ref.data,
+      cambio = _ref.cambio,
+      setCambio = _ref.setCambio;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -79840,6 +79984,8 @@ var BotonNot = function BotonNot(_ref) {
       tipo = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCalendarAlt"];
     } else if (data.tipoNotificacion == 'elemento') {
       tipo = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faFolderOpen"];
+    } else if (data.tipoNotificacion == 'invitacion') {
+      tipo = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCube"];
     } else {
       tipo = 'imagen';
     }
@@ -79847,10 +79993,36 @@ var BotonNot = function BotonNot(_ref) {
     setImagen(tipo);
   }, []);
 
+  var dropNotification = function dropNotification() {
+    var dat = new FormData();
+    dat.append('idNotificacion', data.idNotificacion);
+    fetch('api/eliminarNotificacion', {
+      method: 'POST',
+      body: dat
+    }).then(function (response) {
+      if (!response.ok) {
+        alert("hubo un error interno en el servidor, intentelo de nuevo mas tarde");
+        K;
+      } else {
+        setCambio(!cambio);
+      }
+    });
+  };
+
   var onClick = function onClick() {
-    setItem(_objectSpread(_objectSpread({}, item), {}, {
-      visto: true
-    }));
+    var dat = new FormData();
+    dat.append('idNotificacion', data.idNotificacion);
+    dat.append('visto', true);
+    fetch('api/actualizarNotificacion', {
+      method: 'POST',
+      body: dat
+    }).then(function (response) {
+      if (!response.ok) {
+        alert("Hubo un error interno con el servidor, intentelo de nuevo mas tarde");
+      } else {
+        window.location.href = data.link;
+      }
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["GrupoElement"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -79863,7 +80035,9 @@ var BotonNot = function BotonNot(_ref) {
     }
   }), item.descNotificacion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["ContTrash"], {
     className: " d-flex justify-content-center align-items-center p2 mr-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["ButtonTrash"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["IconTrash"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["ButtonTrash"], {
+    onClick: dropNotification
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementos_notificacion__WEBPACK_IMPORTED_MODULE_1__["IconTrash"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"]
   }))));
 };

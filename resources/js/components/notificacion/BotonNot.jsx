@@ -22,7 +22,7 @@ import { IconNav, Link, IconTrash, GrupoElement, ContTrash,
     cube = cuando una grupo empresa invita al usuario -> invitacion
     folder = cuando una grupo empresa registra un elemento -> elemento
 */
-const BotonNot = ({ data }) => {
+const BotonNot = ({ data, cambio, setCambio }) => {
 
     const [imagen, setImagen] = useState(null);
     const [item, setItem] = useState(data)
@@ -43,14 +43,50 @@ const BotonNot = ({ data }) => {
         }
         else if(data.tipoNotificacion == 'elemento'){
             tipo = faFolderOpen;
-        } else {
+        } 
+        else if(data.tipoNotificacion == 'invitacion'){
+            tipo = faCube;
+        }
+        else if(data.tipoNotificacion == 'ge'){
+            tipo = faCube;
+        }
+        else {
             tipo = 'imagen';
         }
         setImagen(tipo);
     }, [])
 
+    const dropNotification = () => {
+        const dat = new FormData();
+        dat.append('idNotificacion', data.idNotificacion);
+        fetch('api/eliminarNotificacion',{
+            method:'POST',
+            body:dat
+        })
+        .then((response) => {
+            if(!response.ok){
+                alert("hubo un error interno en el servidor, intentelo de nuevo mas tarde");K
+            } else {
+                setCambio(!cambio);
+            }
+        })
+    }
+
     const onClick = () => {
-        setItem({...item, visto:true});
+        const dat = new FormData();
+        dat.append('idNotificacion', data.idNotificacion);
+        dat.append('visto', true);
+        fetch('api/actualizarNotificacion', {
+            method:'POST',
+            body: dat
+        })
+        .then((response) => {
+            if(!response.ok){
+                alert("Hubo un error interno con el servidor, intentelo de nuevo mas tarde");
+            } else {
+                window.location.href = data.link;
+            }
+        })
     }
 
     return (
@@ -61,7 +97,7 @@ const BotonNot = ({ data }) => {
                     {item.descNotificacion}
                 </Link>
                 <ContTrash className=' d-flex justify-content-center align-items-center p2 mr-2'>
-                    <ButtonTrash>
+                    <ButtonTrash onClick={ dropNotification }>
                         <IconTrash icon={ faTrashAlt }/>
                     </ButtonTrash>
                 </ContTrash>

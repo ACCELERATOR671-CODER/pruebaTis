@@ -6,6 +6,7 @@ use App\Models\Elemento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use File;
+use App\Models\Usuario;
 
 class EspacioDeAsesoramientoController extends Controller
 {
@@ -92,9 +93,7 @@ class EspacioDeAsesoramientoController extends Controller
                 $elemento->idPadre = $req->idPadre;
                 $elemento->idGE = $ge->idGE;
                 $elemento->revisado = $req->revisado;
-                error_log("modifIni");
                 if ($elemento->revisado=='false') {
-                    error_log("modifPadre");
                     $tienePadre = true;
                     $padre = $req->idPadre;
                     while ($tienePadre) {
@@ -119,6 +118,24 @@ class EspacioDeAsesoramientoController extends Controller
                 }
 
                 $elemento->save();
+
+                if($elemento->tipo == 'pdf' || $elemento->tipo == 'link'){
+                    $user = Usuario::find($ge->duenio);
+                    $consultor = DB::table('Usuario')
+                                        ->join('Rol', 'Rol.idRol', '=', 'Usuario.idRol')
+                                        ->where('Usuario.idGrupo', '=' , $user->idGrupo)
+                                        ->where('Rol.nombreRol', '=', 'Consultor')
+                                        ->first();                    
+
+                    $not = new NotificacionController;
+                    $request = new Request();
+                    $request->idUsuario = $consultor->idUsuario;
+                    $request->descripcion = $ge->nombre.' ha publicado un '.$elemento->tipo.' en su espacio de asesoramiento';
+                    $request->link = 'Esp-de-Asesoramiento-'.$ge->nombre;
+                    $request->tipo = 'elemento';
+                    $not->crearNotificacion($request);
+                }
+
                 $req = DB::table('Elemento')
                         ->where('nombre', '=', $elemento->nombre)
                         ->where('idPadre' , '=', $elemento->idPadre)

@@ -14,6 +14,7 @@ class NotificacionController extends Controller
         $notificacion->idUsuario = $request->idUsuario;
         $notificacion->descNotificacion = $request->descripcion;
         $notificacion->link = $request->link;
+        $notificacion->fecha_creacion = date('Y-m-d H:i:s');
         $notificacion->tipoNotificacion = $request->tipo;
         $notificacion->save();
         return response(200);
@@ -33,6 +34,9 @@ class NotificacionController extends Controller
         }
         if(isset($request->tipo)){
             $notificacion->tipoNotificacion = $request->tipo;
+        }
+        if(isset($request->visto)){
+            $notificacion->visto = $request->visto;
         }
         $notificacion->save();
 
@@ -54,7 +58,12 @@ class NotificacionController extends Controller
         $notificaciones = DB::table('notificacion')
                                 ->where('idUsuario', '=', $req->idUsuario)
                                 ->take(5)
+                                ->orderBy('fecha_creacion', 'desc')
                                 ->get();
-        return response()->json($notificaciones);
+        $cantidadSinLeer = DB::table('notificacion')
+                                ->where('idUsuario', '=', $req->idUsuario)
+                                ->where('visto', '=', false)
+                                ->count('idNotificacion');
+        return response()->json([$notificaciones, $cantidadSinLeer]);
     }
 }

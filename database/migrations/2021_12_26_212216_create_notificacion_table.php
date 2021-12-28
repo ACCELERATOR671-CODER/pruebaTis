@@ -20,6 +20,7 @@ class CreateNotificacionTable extends Migration
             $table->string('descNotificacion')->nullable();
             $table->string('link')->nullable();
             $table->string('tipoNotificacion')->nullable();
+            $table->dateTime('fecha_creacion');
             $table->boolean('visto')->default(false);
         });
     }
