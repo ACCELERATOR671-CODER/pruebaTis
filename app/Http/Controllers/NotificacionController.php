@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Notificacion;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class NotificacionController extends Controller
         $notificacion->idUsuario = $request->idUsuario;
         $notificacion->descNotificacion = $request->descripcion;
         $notificacion->link = $request->link;
+        $notificacion->fecha_creacion = date('Y-m-d H:i:s');
         $notificacion->tipoNotificacion = $request->tipo;
         $notificacion->save();
         return response(200);
@@ -33,6 +35,9 @@ class NotificacionController extends Controller
         if(isset($request->tipo)){
             $notificacion->tipoNotificacion = $request->tipo;
         }
+        if(isset($request->visto)){
+            $notificacion->visto = $request->visto;
+        }
         $notificacion->save();
 
         return response(200);
@@ -44,5 +49,21 @@ class NotificacionController extends Controller
         $notificacion->delete();
 
         return response(200);
+    }
+
+    /*
+        idUsuario - id del usuario
+    */
+    public function obtenerNotificaciones(Request $req){
+        $notificaciones = DB::table('notificacion')
+                                ->where('idUsuario', '=', $req->idUsuario)
+                                ->take(5)
+                                ->orderBy('fecha_creacion', 'desc')
+                                ->get();
+        $cantidadSinLeer = DB::table('notificacion')
+                                ->where('idUsuario', '=', $req->idUsuario)
+                                ->where('visto', '=', false)
+                                ->count('idNotificacion');
+        return response()->json([$notificaciones, $cantidadSinLeer]);
     }
 }

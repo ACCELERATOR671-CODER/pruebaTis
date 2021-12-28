@@ -95,6 +95,24 @@ class UserController extends Controller
                             ->where('Invitacion.idGE', '=', $ge->idGE)
                             ->first();
 
+
+                        $not = new NotificacionController;
+                        $request = new Request(); 
+                        
+                        if($inv->invitacion == false){
+                            $request->idUsuario = $usuario->idUsuario;
+                            $request->descripcion = $ge->nombre.' Te ha invitado a formar parte de sus socios';
+                            $request->link = 'Socio-'.$usuario->idUsuario;
+                            $request->tipo = 'invitacion';
+                        } else {
+                            $request->idUsuario = $ge->duenio;
+                            $request->descripcion = $usuario->nombreC.' ha solicitado formar parte de tu Grupo-Empresa';
+                            $request->link = 'GE-'.$ge->nombre;
+                            $request->tipo = 'invitacion';
+                        }
+
+                        $not->crearNotificacion($request);
+
                         return response()->json($invi);
                     } else {
                         return response()->json(['mensaje' => 'Ya existe una invitacion o solicitud entre el usuario y la grupo empresa']);

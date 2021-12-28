@@ -7,6 +7,7 @@ use App\Models\Grupo;
 use App\Models\Carrera;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class AdminController extends Controller
 {
@@ -41,6 +42,15 @@ class AdminController extends Controller
 
         $usuario->idRol = $rol->idRol;
         $usuario->save();
+
+        $not = new NotificacionController;
+        $request = new Request();
+        $request->idUsuario = $req->idUsuario;
+        $request->descripcion = 'Se te ha otorgado el Rol de '.$req->nombreRol;
+        $request->link = 'Socio-'.$req->idUsuario;
+        $request->tipo = 'admin';
+        $not->crearNotificacion($request);
+
         return response(200);
     }
 

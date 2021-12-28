@@ -125,6 +125,7 @@ Route::get('obtenerCalendarioGeneral', [CalendarioController::class, 'obtenerCal
 Route::post('crearFechaG', [CalendarioController::class, 'crearFechaG']);
 Route::post('dropDate', [CalendarioController::class, 'dropDate']);
 
+Route::post('obtenerNotificaciones', [NotificacionController::class, 'obtenerNotificaciones']);
 Route::post('crearNotificacion',[NotificacionController::class, 'crearNotificacion']);
 Route::post('actualizarNotificacion',[NotificacionController::class, 'actualizarNotificacion']);
 Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNotificacion']);
