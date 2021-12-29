@@ -117,13 +117,13 @@ class GEController extends Controller
                 ->join('Evento', 'Opcion.idEvento', '=', 'Evento.idEvento')
                 ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
                 ->first();
-
-            if ($integrantes > 2 && $fecha->fecha_final >= $value->fecha_registro) {
-
+            
+            if ($integrantes >= 0 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
+               
                 $ge = GrupoEmpresa::find($value->idGE);
                 $ge->valido = true;
                 $ge->save();
-
+                
                 $elemento = new Elemento;
                 $elemento->nombre = "Propuestas";
                 $elemento->tipo = "carpeta";
@@ -147,7 +147,7 @@ class GEController extends Controller
                 $elemento3->idGE = $ge->idGE;
                 $elemento3->revisado = 'true';
                 $elemento3->save();
-
+                
                 $int = DB::table('Usuario')
                             ->where('idGE', '=', $ge->idGE)
                             ->get();
@@ -163,12 +163,13 @@ class GEController extends Controller
                     $request->tipo = 'ge';
                     $not->crearNotificacion($request);
                 }
-
+                
             } else {
                 $Users = DB::table('Usuario')
                     ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
                     ->where('Usuario.idGE', '=', $value->idGE)
                     ->get();
+                    error_log("holaasdasd");
                 foreach ($Users as $usuario) {
                     $usuario->idGE = null;
                     $usuario->save();
@@ -178,6 +179,6 @@ class GEController extends Controller
                 $ge->delete();
             }
         }
-        return response()->json($dat);//view('vistaGEValida');
+        return view('vistaGEValida');
     }
 }
