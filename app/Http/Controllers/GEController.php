@@ -69,7 +69,9 @@ class GEController extends Controller
                 'Grupo_Empresa.idGE',
                 'Grupo_Empresa.nombre',
                 'Grupo_Empresa.nombreAb',
-                'Grupo_Empresa.valido'
+                'Grupo_Empresa.valido',
+                'Grupo_Empresa.duenio',
+
             )
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
             ->where('Grupo_Empresa.valido', '=', 'true')
@@ -93,10 +95,16 @@ class GEController extends Controller
             ->select('Usuario.idGrupo')
             ->where('idUsuario', '=', $req->id)
             ->first();
+        
+        /*$db = DB::table('Usuario')
+                    ->
+                    ->where('idGrupo', '=', $grupo->idGrupo)
+                    ->whereNotNull('idGE')
+                    ->get();*/    
+
         $dat = DB::table('Grupo_Empresa')
             ->join('Usuario', 'Usuario.idUsuario', '=', 'Grupo_Empresa.duenio')
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
-            ->where('Grupo_Empresa.valido', '=', 'false')
             ->get();
 
         foreach ($dat as $value) {
@@ -109,19 +117,19 @@ class GEController extends Controller
                 ->join('Evento', 'Opcion.idEvento', '=', 'Evento.idEvento')
                 ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
                 ->first();
-
-            if ($integrantes > 2 && $fecha->fecha_final >= $value->fecha_registro) {
-
+            
+            if ($integrantes >= 0 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
+               
                 $ge = GrupoEmpresa::find($value->idGE);
                 $ge->valido = true;
                 $ge->save();
-
+                
                 $elemento = new Elemento;
                 $elemento->nombre = "Propuestas";
                 $elemento->tipo = "carpeta";
                 $elemento->link = "#";
                 $elemento->idGE = $ge->idGE;
-                $elemento->revisado = true;
+                $elemento->revisado = 'true';
                 $elemento->save();
 
                 $elemento2 = new Elemento;
@@ -129,7 +137,7 @@ class GEController extends Controller
                 $elemento2->tipo = "carpeta";
                 $elemento2->link = "#";
                 $elemento2->idGE = $ge->idGE;
-                $elemento2->revisado = true;
+                $elemento2->revisado = 'true';
                 $elemento2->save();
 
                 $elemento3 = new Elemento;
@@ -137,12 +145,31 @@ class GEController extends Controller
                 $elemento3->tipo = "carpeta";
                 $elemento3->link = "#";
                 $elemento3->idGE = $ge->idGE;
-                $elemento3->revisado = true;
+                $elemento3->revisado = 'true';
                 $elemento3->save();
+                
+                $int = DB::table('Usuario')
+                            ->where('idGE', '=', $ge->idGE)
+                            ->get();
+                
+
+                foreach($int as $integrante)
+                {
+                    $not = new NotificacionController;
+                    $request = new Request();
+                    $request->idUsuario = $integrante->idUsuario;
+                    $request->descripcion = 'Se ha marcado tu grupo empresa como Válida, ahora puedes acceder al espacio de asesoramiento';
+                    $request->link = 'Esp-de-Asesoramiento-'.$ge->nombre;
+                    $request->tipo = 'ge';
+                    $not->crearNotificacion($request);
+                }
+                
             } else {
                 $Users = DB::table('Usuario')
                     ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
-                    ->where('Usuario.idGE', '=', $value->idGE);
+                    ->where('Usuario.idGE', '=', $value->idGE)
+                    ->get();
+                    error_log("holaasdasd");
                 foreach ($Users as $usuario) {
                     $usuario->idGE = null;
                     $usuario->save();

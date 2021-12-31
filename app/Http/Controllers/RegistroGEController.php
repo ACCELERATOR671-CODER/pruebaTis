@@ -37,11 +37,28 @@ class RegistroGEController extends Controller
 
         $grupoEmpresa->save();
 
-        
         $idge = DB::table('Grupo_Empresa')->select('idGE')->where('nombre', '=', $grupoEmpresa->nombre)->first();
         $us = Usuario::find($id->idUser);
         $us->idGE = $idge->idGE;
         $us->save();
+
+        //notificacion
+
+        $consultor = DB::table('Usuario')
+                            ->join('Rol', 'Rol.idRol', '=', 'Usuario.idRol')
+                            ->where('idGrupo', '=', $us->idGrupo)
+                            ->where('nombreRol', '=' , 'Consultor')
+                            ->first();
+
+        $not = new NotificacionController;
+        $request = new Request();
+        $request->idUsuario = $consultor->idUsuario;
+        $request->descripcion = $us->nombreC.' ha creado la Grupo-Empresa '.$grupoEmpresa->nombre;
+        $request->link = 'GE-'.$grupoEmpresa->nombre;
+        $request->tipo = 'ge';
+        $not->crearNotificacion($request);
+
+        //fin Notificacion
 
         $calendario = new Calendario();
         $calendario->idGE = $idge->idGE;

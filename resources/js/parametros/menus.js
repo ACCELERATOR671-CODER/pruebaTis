@@ -8,8 +8,9 @@ faUsersCog,
 faEdit,
 faFileImport,
 faUserPlus,
-faRocket,
-faUserFriends} from '@fortawesome/free-solid-svg-icons'
+faUserFriends,
+faFileContract,
+faFileAlt} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -22,12 +23,6 @@ const opcionesUsuarioSGE = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
-    onClick: null
-},{
-    link :'EspacioGeneral',
-    name:'EspacioGeneral',
-    contenido:'Espacio General',
-    img:faRocket,
     onClick: null
 },{
     link : "RegistroGE",
@@ -56,12 +51,6 @@ const opcionesUsuarioCGE = [{
     img:faUser,
     onClick: null
 },{
-    link :'EspacioGeneral',
-    name:'EspacioGeneral',
-    contenido:'Espacio General',
-    img:faRocket,
-    onClick: null
-},{
     link : 'GE-'+sessionStorage.getItem('ge'),
     name:'grupoEmpresa',
     contenido:'Mi Grupo Empresa',
@@ -86,12 +75,6 @@ const opcionesUsuarioCGEV = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
-    onClick: null
-},{
-    link :'EspacioGeneral',
-    name:'EspacioGeneral',
-    contenido:'Espacio General',
-    img:faRocket,
     onClick: null
 },{
     link : 'GE-'+sessionStorage.getItem('ge'),
@@ -158,10 +141,16 @@ const opcionesUsuarioC = [{
     img:faUser,
     onClick: null
 },{
-    link :'EspacioGeneral',
-    name:'EspacioGeneral',
-    contenido:'Espacio General',
-    img:faRocket,
+    link : 'Contrato',
+    name:'contrato',
+    contenido:'Contrato',
+    img:faFileContract,
+    onClick: null
+},{
+    link : 'EspacioRevision',
+    name:'revision',
+    contenido:'DocumentacionGE',
+    img:faFileAlt,
     onClick: null
 },{
     link : 'ValidarGE',

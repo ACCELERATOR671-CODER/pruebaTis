@@ -48,6 +48,7 @@ import AdminVal from './components/ImpExp/AdminVal';
 import HomeContenido from './components/HomeContenido';
 
 import RegistroUsuarioAdmin from './components/RegistroUsuarioAdmin';
+import GenContrato from './components/Contrato';
 import EspacioRevision from './components/EspacioRevision/EspacioRevision';
 //import Login from "./components/Login/Login"
 
@@ -183,6 +184,13 @@ if(document.getElementById('espaciogeneral')){
         ,document.getElementById('espaciogeneral'));
 
 }
+if (document.getElementById('contrato')) {
+    ReactDOM.render(
+        <>
+            <GenContrato/>
+        </>, document.getElementById('contrato'));
+
+};
 
 if(document.getElementById('vistaInscritos')){
     ReactDOM.render(<VistaInscritos/>,document.getElementById('vistaInscritos'));

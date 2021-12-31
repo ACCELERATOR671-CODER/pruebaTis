@@ -37,6 +37,23 @@ class ForoDudasController extends Controller
                         ->where('Debate.titulo', '=', $deb->titulo)
                         ->where('Debate.descripcion', '=', $deb->descripcion)
                         ->first();
+
+        $consultores = DB::table('Usuario')
+                            ->join('Rol', 'Rol.idRol','=','Usuario.idRol')
+                            ->where('nombreRol', '<>' ,'Administrador')
+                            ->where('idUsuario', '<>', $deb->duenio)
+                            ->get();
+        foreach($consultores as $consultor)
+        {
+            $not = new NotificacionController;
+            $request = new Request();
+            $request->idUsuario = $consultor->idUsuario;
+            $request->descripcion = $debate->nombreC.' ha publicado un debate';
+            $request->link = 'Debate-'.$req->idDebate;
+            $request->tipo = 'debate';
+            $not->crearNotificacion($request);
+        }
+
         return response()->json($debate);
     }
 
@@ -96,6 +113,21 @@ class ForoDudasController extends Controller
         $mensaje->duenio = $req->ìdUsuario;
 
         $mensaje->save();
+
+        $notificacion = DB::table('Debate')
+                            ->where('idDebate', '=', $req->idDebate)
+                            ->first();
+        $user = DB::table('Usuario')
+                        ->where('idUsuario', '=', $mensaje->duenio)
+                        ->first();
+
+        $not = new NotificacionController;
+        $request = new Request();
+        $request->idUsuario = $notificacion->duenio;
+        $request->descripcion = $user->nombreC.' ha respondido a tu debate';
+        $request->link = 'Debate-'.$req->idDebate;
+        $request->tipo = 'debate';
+        $not->crearNotificacion($request);
 
         $resp = DB::table('Mensaje')
                         ->select('idMensaje', 

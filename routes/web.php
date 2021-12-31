@@ -18,6 +18,7 @@ use App\Http\Controllers\VistaInscritosController;
 use App\Http\Controllers\IngresoGEController;
 use App\Http\Controllers\GEController;
 use App\Http\Controllers\ImpExpController;
+use App\Http\Controllers\ContratosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,5 +73,6 @@ Route::get('/VentanaAdmin-{id}',[AdminController::class, 'getView']);
 Route::get('/ImportarDatos', [ImpExpController::class, 'getView']);
 
 Route::get('/RegitroUsuarioAdmin', [AdminController::class, 'getViewRegister']);
+Route::get('/Contrato', [ContratosController::class, 'vistaContrato']);
 
 Route::get('/EspacioRevision', [EspacioRevisionController::class, 'index_view']);

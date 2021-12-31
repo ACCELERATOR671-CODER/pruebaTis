@@ -47,6 +47,12 @@ const TextArea = styled.textarea`
     resize: none;
     height: 120px;
 `;
+const DescArea = styled.div`
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    padding: 10px;
+`;
 
 const GrupoCheckBox = styled.div`
     display: grid;

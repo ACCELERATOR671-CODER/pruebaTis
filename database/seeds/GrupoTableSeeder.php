@@ -23,6 +23,10 @@ class GrupoTableSeeder extends Seeder
             ],
             [
                 "idGrupo" => "3",
+                "nomGrupo" => "Escalera Fernandez David"
+            ],
+            [
+                "idGrupo" => "4",
                 "nomGrupo" => "Rodriguez Bilbao Erika Patricia"
             ]
         ]);

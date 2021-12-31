@@ -52,7 +52,7 @@ class UserController extends Controller
             ->join('Usuario', 'Usuario.idUsuario','=','Session.idUser')
             ->select('idUser')
             ->where('token','=', $request->token)
-            ->where('idRol', '=','1')
+            ->where('idRol', '=','2')
             ->first();
         return response()->json($id);
     }
@@ -94,6 +94,24 @@ class UserController extends Controller
                             ->where('Invitacion.idUsuario', '=', $usuario->idUsuario)
                             ->where('Invitacion.idGE', '=', $ge->idGE)
                             ->first();
+
+
+                        $not = new NotificacionController;
+                        $request = new Request();
+
+                        if($inv->invitacion == false){
+                            $request->idUsuario = $usuario->idUsuario;
+                            $request->descripcion = $ge->nombre.' Te ha invitado a formar parte de sus socios';
+                            $request->link = 'Socio-'.$usuario->idUsuario;
+                            $request->tipo = 'invitacion';
+                        } else {
+                            $request->idUsuario = $ge->duenio;
+                            $request->descripcion = $usuario->nombreC.' ha solicitado formar parte de tu Grupo-Empresa';
+                            $request->link = 'GE-'.$ge->nombre;
+                            $request->tipo = 'invitacion';
+                        }
+
+                        $not->crearNotificacion($request);
 
                         return response()->json($invi);
                     } else {
@@ -295,5 +313,14 @@ class UserController extends Controller
         } else {
             return response()->json(['mensaje' => 'false']);
         }
+    }
+
+    public function obtenerConsultores() {
+        $rolConsultor = DB::table('Rol')->where('nombreRol','=','Consultor')->first();
+        $consultores =
+            DB::table('Usuario')
+            ->where('idRol','=',$rolConsultor->idRol)
+            ->get();
+        return response()->json($consultores);
     }
 }
