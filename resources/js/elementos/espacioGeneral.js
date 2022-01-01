@@ -88,4 +88,4 @@ const BotonCancel = styled.button`
 `;
 
 export {Acordeon, MarcoIcono, Panel, TextArea, CardEG, GrupoCheckBox, ContenedorCheckBox,
-        GrupoBotones, BotonCancel};
+        GrupoBotones, BotonCancel, DescArea};
