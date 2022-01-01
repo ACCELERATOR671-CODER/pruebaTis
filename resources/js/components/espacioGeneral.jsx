@@ -59,7 +59,7 @@ const EspacioGeneral = () => {
         const Submit = () =>{
             const data = new FormData ();
             data.append('id', sessionStorage.getItem('id'));
-            data.append('desc',descArea.current.value );
+            data.append('desc',DescArea.current.value );
             fetch ('api/registrarDescrip',{
                 method: 'POST',
                 body:data

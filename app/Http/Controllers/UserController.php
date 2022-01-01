@@ -99,7 +99,7 @@ class UserController extends Controller
                         $not = new NotificacionController;
                         $request = new Request(); 
                         
-                        if($inv->invitacion == false){
+                        if($inv->invitacion == true){
                             $request->idUsuario = $usuario->idUsuario;
                             $request->descripcion = $ge->nombre.' Te ha invitado a formar parte de sus socios';
                             $request->link = 'Socio-'.$usuario->idUsuario;

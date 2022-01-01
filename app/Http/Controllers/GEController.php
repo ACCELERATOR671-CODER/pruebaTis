@@ -7,16 +7,18 @@ use App\Models\Elemento;
 use App\Models\GrupoEmpresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Usuario;
+use App\Models\Calendario;
 
 class GEController extends Controller
 {
     public function viewGEValida()
     {
-        return view('vistaGEValida');
+        return view('VistaGEValida');
     }
     public function viewValidarGE()
     {
-        return view('vistaValidarGE');
+        return view('VistaValidarGE');
     }
     public function obtenerGrupoEmpresa(Request $req)
     {
@@ -42,12 +44,13 @@ class GEController extends Controller
                 'Grupo_Empresa.nombreAb',
                 'Grupo_Empresa.valido'
             )
+            ->where('Grupo_Empresa.valido', '=', false)
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
             ->get();
         $res = [];
         foreach ($dat as $value) {
             $integrantes = DB::table('Usuario')
-                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
                 ->where('Usuario.idGE', '=', $value->idGE)
                 ->count();
             $val2 = (array)$value;
@@ -79,7 +82,7 @@ class GEController extends Controller
         $res = [];
         foreach ($dat as $value) {
             $integrantes = DB::table('Usuario')
-                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
                 ->where('Usuario.idGE', '=', $value->idGE)
                 ->count();
             $val2 = (array)$value;
@@ -104,12 +107,13 @@ class GEController extends Controller
 
         $dat = DB::table('Grupo_Empresa')
             ->join('Usuario', 'Usuario.idUsuario', '=', 'Grupo_Empresa.duenio')
+            ->where('Grupo_Empresa.valido', '=' , false)
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
             ->get();
 
         foreach ($dat as $value) {
             $integrantes = DB::table('Usuario')
-                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
                 ->where('Usuario.idGE', '=', $value->idGE)
                 ->count();
 
@@ -117,10 +121,9 @@ class GEController extends Controller
                 ->join('Evento', 'Opcion.idEvento', '=', 'Evento.idEvento')
                 ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
                 ->first();
-            
-            if ($integrantes >= 0 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
+            $ge = GrupoEmpresa::find($value->idGE); 
+            if ($integrantes >= 3 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
                
-                $ge = GrupoEmpresa::find($value->idGE);
                 $ge->valido = true;
                 $ge->save();
                 
@@ -166,17 +169,22 @@ class GEController extends Controller
                 
             } else {
                 $Users = DB::table('Usuario')
-                    ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                    ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
                     ->where('Usuario.idGE', '=', $value->idGE)
                     ->get();
-                    error_log("holaasdasd");
                 foreach ($Users as $usuario) {
-                    $usuario->idGE = null;
-                    $usuario->save();
+                    $us = Usuario::findOrFail($usuario->idUsuario);
+                    $us->idGE = null;
+                    $us->save();
                 }
-
-                $ge = GrupoEmpresa::find($value->idGE);
+                $cal = DB::table('Calendario')
+                            ->where('idGE', '=', $ge->idGE)
+                            ->first();
+            
+                $calend = Calendario::findOrFail($cal->idCalendario);
+                $calend->delete();
                 $ge->delete();
+
             }
         }
         return view('vistaGEValida');
