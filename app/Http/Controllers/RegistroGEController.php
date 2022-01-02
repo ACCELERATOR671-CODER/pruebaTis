@@ -120,6 +120,8 @@ class RegistroGEController extends Controller
         $user = Usuario::find($req->id);
         $usuarios = DB::table('Usuario')
                     ->select('nombreC','foto_perfil', 'idUsuario')
+                    ->where('registrado', '=', true)
+                    ->where('idRol', '=', 3)
                     ->where('idGrupo', '=',$user->idGrupo)
                     ->where('idUsuario', '<>', $req->id)
                     ->get();

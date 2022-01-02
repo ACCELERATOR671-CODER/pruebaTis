@@ -78,7 +78,7 @@ const ContenedorDatosGE = ({gE}) => {
             }>
             <ContenedorTituloGE>
                 <h3>{gE.nombre}</h3>
-                <Boton style={{margin: '10px auto', width: '80%'}}>Generar Contrato</Boton>
+                
             </ContenedorTituloGE>
             <ContenedorCarpetasGE
                 style={

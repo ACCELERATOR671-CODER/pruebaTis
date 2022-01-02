@@ -21,7 +21,7 @@ const Espacio = ({id}) => {
 
     return (<>
         <Backgroundesp>
-            {elementos.map((datos) => (id == sessionStorage.getItem('id')) ?
+            {elementos.map((datos) => (id == sessionStorage.getItem('id') ) ?
             (<ElementoAdmin contenido = {datos}/>)
             :
             (<Elemento contenido = {datos}/>))}
