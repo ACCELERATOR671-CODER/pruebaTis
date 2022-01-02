@@ -204,7 +204,6 @@ const PerfilUsuario = () => {
             formData.append('nombreUsuario',nomUsuario.current.value);
             formData.append('email',correo.current.value);
             formData.append('telefono',telefono.current.value);
-            
             formData.append('imagen',imagenCarg.current.files[0])
             fetch('/api/actualizarPerfil', {
                 method: 'POST',
@@ -213,11 +212,12 @@ const PerfilUsuario = () => {
             .then((response) => {
                 if (response.ok) {
                     alert("Actualizado");
+                    bloquearCampos();
                 } else {
                     alert("Algo paso")
                 }
             });
-            bloquearCampos();
+            
         } else {
             alert("Revise que los campos esten correctamente llenados!!");
         }
