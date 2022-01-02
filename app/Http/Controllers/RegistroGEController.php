@@ -120,6 +120,8 @@ class RegistroGEController extends Controller
         $user = Usuario::find($req->id);
         $usuarios = DB::table('Usuario')
                     ->select('nombreC','foto_perfil', 'idUsuario')
+                    ->where('registrado', '=', true)
+                    ->where('idRol', '=', 3)
                     ->where('idGrupo', '=',$user->idGrupo)
                     ->where('idUsuario', '<>', $req->id)
                     ->get();
@@ -174,7 +176,7 @@ class RegistroGEController extends Controller
         $res = [];
         foreach ($dat as $value){
             $integrantes = DB::table('Usuario')
-                                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.duenio')
+                                ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
                                 ->where('Usuario.idGE','=', $value->idGE)
                                 ->count();
             $val2 = (array)$value;
@@ -197,6 +199,7 @@ class RegistroGEController extends Controller
                             ->join('Grupo_Empresa', 'Grupo_Empresa.idGE', '=', 'Invitacion.idGE')
                             ->where('invitacion', '=', false)
                             ->where('estado', '=', 'Pendiente')
+                            ->where('Grupo_Empresa.idGE', '=', $GE->idGE)
                             ->get();
         return response()->json($pendientes);
     }

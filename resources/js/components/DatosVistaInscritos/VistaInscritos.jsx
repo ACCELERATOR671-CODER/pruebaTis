@@ -7,7 +7,7 @@ import { ContTabla, ContTabla2, TBody, TItem } from './estilosVistaInscritos/est
 
 const VistaInscritos = () => {
 
-    const [usuarios, setUsuarios] = useState(null);
+    const [usuarios, setUsuarios] = useState([]);
     const grupoEmp = sessionStorage.getItem('ge');
     const [duenioEmp, setDuenioEmp] = useState(false);
 
@@ -47,7 +47,7 @@ const VistaInscritos = () => {
                     </THead>
                     <TBody>
                         {
-                            (usuarios != null)? usuarios.map((usuario) => (
+                            (usuarios.length > 0) ? usuarios.map((usuario) => (
                                 <TItem>
                                     <td>{usuario.idUsuario}</td>
                                     <td>{usuario.nombreC}</td>
@@ -71,7 +71,10 @@ const VistaInscritos = () => {
                                     }
                                 </TItem>
                             ))
-                            :(<></>)
+                            :(
+                            <TItem>
+                                <td colSpan='4'>No hay usuario we</td>
+                            </TItem>)
                         } 
                     </TBody>
                 </Tabla>

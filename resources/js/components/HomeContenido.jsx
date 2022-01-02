@@ -13,7 +13,7 @@ const HomeContenido = () => {
             titulo:"¡Bienvenido!",
             descripcion: "La página TIS es un intermediario entre el usuario y la empresa TIS, nuestro objetivo es el de facilitar la asesoria a los estudiantes",
             link:null,
-            img: './Home/celebración-de-eventos.jpg'
+            img: './Home/celebracion-de-eventos.jpg'
         });
         lc.addDato({
             id:2,
@@ -82,7 +82,7 @@ const HomeContenido = () => {
             titulo:"¡Bienvenido!",
             descripcion: "La página TIS es un intermediario entre el usuario y la empresa TIS, nuestro objetivo es el de facilitar la asesoria a los estudiantes",
             link:null,
-            img: './Home/celebración-de-eventos.jpg'
+            img: './Home/celebracion-de-eventos.jpg'
         });
         lc.addDato({
             id: 2,

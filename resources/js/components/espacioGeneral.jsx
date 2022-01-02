@@ -57,12 +57,13 @@ const EspacioGeneral = () => {
     }
 
     const contenidoDescripcion = () => {
-        const Submit = () =>{
+        const Submit = (e) =>{
+            e.preventDefault();
             const data = new FormData ();
             data.append('idEsp', sessionStorage.getItem('id'));
             data.append('desc',descripciRef.current.value);
             fetch ('api/registrarDescrip',{
-                method: 'POST',
+                method:'POST',
                 body:data
             })
             .then ((response) => {
