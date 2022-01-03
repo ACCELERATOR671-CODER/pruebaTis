@@ -52,7 +52,7 @@ class UserController extends Controller
             ->join('Usuario', 'Usuario.idUsuario','=','Session.idUser')
             ->select('idUser')
             ->where('token','=', $request->token)
-            ->where('Usuario.idGrupo', '=','2')
+            ->where('idRol', '=','2')
             ->first();
         return response()->json($id);
     }
@@ -97,8 +97,8 @@ class UserController extends Controller
 
 
                         $not = new NotificacionController;
-                        $request = new Request(); 
-                        
+                        $request = new Request();
+
                         if($inv->invitacion == true){
                             $request->idUsuario = $usuario->idUsuario;
                             $request->descripcion = $ge->nombre.' Te ha invitado a formar parte de sus socios';
@@ -317,7 +317,7 @@ class UserController extends Controller
 
     public function obtenerConsultores() {
         $rolConsultor = DB::table('Rol')->where('nombreRol','=','Consultor')->first();
-        $consultores = 
+        $consultores =
             DB::table('Usuario')
             ->where('idRol','=',$rolConsultor->idRol)
             ->get();

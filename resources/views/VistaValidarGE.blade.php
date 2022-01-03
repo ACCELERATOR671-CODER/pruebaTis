@@ -18,7 +18,7 @@
         }).then((json) => {
             if(Object.keys(json).length < 1){
                 sessionStorage.clear();
-                location.replace('Login');
+                location.replace('');
             }
         });
     } else {
