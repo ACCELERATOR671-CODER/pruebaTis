@@ -14,11 +14,11 @@ class GEController extends Controller
 {
     public function viewGEValida()
     {
-        return view('VistaGEValida');
+        return view('vistaGEValida');
     }
     public function viewValidarGE()
     {
-        return view('VistaValidarGE');
+        return view('vistaValidarGE');
     }
     public function obtenerGrupoEmpresa(Request $req)
     {
