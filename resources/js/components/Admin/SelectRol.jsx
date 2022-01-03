@@ -33,7 +33,7 @@ const SelectRol = ({ rol, idUsuario }) => {
     }
 
     return (<>
-        {(rol != 'Consultor') ? ((idUsuario != sessionStorage.getItem('id')) ?
+        {(rol && rol != 'Consultor') ? ((idUsuario != sessionStorage.getItem('id') ) ? ((rol=='Consultor') ?
             (<>
                 <select ref={select}
                     defaultValue={rol}
@@ -45,7 +45,7 @@ const SelectRol = ({ rol, idUsuario }) => {
                     Reset
                 </button>
             </>
-            ) : (<p>{rol}</p>)) : (<p>No Registrado</p>)}
+            ) : (<p>{rol}</p>)): (<p>{rol}</p>)): (<p>No Registrado</p>)}
     </>)
 }
 
