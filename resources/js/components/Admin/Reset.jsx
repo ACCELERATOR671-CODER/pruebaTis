@@ -10,7 +10,9 @@ const Reset = ({idUsuario}) => {
             body:id
         })
         .then((response) => {
-            if(!response.ok){
+            if(response.ok){
+                alert("Operacion Exitosa");
+            }else{
                 alert("Usuario no se pudo reestablecer");
             }
         })
