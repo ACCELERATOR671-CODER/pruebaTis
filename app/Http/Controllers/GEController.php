@@ -122,7 +122,7 @@ class GEController extends Controller
                 ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
                 ->first();
             $ge = GrupoEmpresa::find($value->idGE); 
-            if ($integrantes >= 0 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
+            if ($integrantes >= 3 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
                
                 $ge->valido = true;
                 $ge->save();
