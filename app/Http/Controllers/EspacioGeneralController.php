@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
+use App\Models\Documentacion;
 use App\Models\EspaciGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,5 +44,24 @@ class EspacioGeneralController extends Controller
     public function getAnuncios(){
         $anuncios = Anuncio::all();
         return response()->json($anuncios);
+    }
+
+    public function registrarDocumento(Request $req){
+        $elemento = new Documentacion;
+        $elemento->nombre = $req->nombre;
+        $file = $req->file('archivo');
+        $nombre =  time()."_".$file->getClientOriginalName();
+        $file->move('resources/documentos', $nombre);
+        $elemento->documento = $nombre;
+        $elemento->fecha_creacion = date('Y-m-d H:i:s');
+
+        $elemento->save();
+
+        return response(200);
+    }
+
+    public function getDocumentos(){
+        $doc = Documentacion::all();
+        return response()->json($doc);
     }
 }
