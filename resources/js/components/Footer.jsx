@@ -7,7 +7,7 @@ const Footer = () => {
             <FooterStyle>
                 <Label>--- Empresa Tis ---  </Label>
                 <hr/>
-                <Label><b>Correo : <a href="mailto:elcorreoquequieres@correo.com"> corina.flores1@gmail.com</a></b> xxxx ---  <b>Telefono : xxxxxxxx</b>  ----- <b>Direccion :</b>  Av. Oquendo final Jordán</Label>
+                <Label><b>Correo : <a href="mailto:elcorreoquequieres@correo.com"> EmpresaTIS@gmail.com</a></b> ---  <b>Telefonos Administradores : 69449432-76426418</b>  ----- <b>Direccion :</b>  Av. Oquendo Final Jordan, Laboratorios FCYT</Label>
                 <Label>---Mythical Soft SRL<a href="mailto:elcorreoquequieres@correo.com"> mythicalsoftsrl@gmail.com</a>---</Label>
             </FooterStyle>
         </div>
