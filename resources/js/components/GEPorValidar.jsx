@@ -17,7 +17,6 @@ const GEPorValidar = (props) => {
             .then((response) => response.json())
             .then((json) => {
                 setGrupoEmpresa(json);
-                console.log(json);
             });
     }, [])
     const onClick = () => {
@@ -29,7 +28,7 @@ const GEPorValidar = (props) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    alert("Proceso Exitoso, Recuerde que de momento no se esta verificando la validacion de las mismas y se estan tomando como validas todas las grupo empresas");
+                    alert("Proceso Exitoso");
                     location.replace("GEValidas");
                 } else {
                     alert("hubo un error en el servidor, intentelo mas tarde");

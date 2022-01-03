@@ -22,6 +22,7 @@ const EspacioGeneral = () => {
     const [cambio, setCambio] = useState(false);
     const [usuario,setUsuario] = useState (null)
     const formulario = useRef(null);
+    const descripciRef = useRef(null);
     useEffect(()=>{
             const form = new FormData();
             form.append('idUsuario', sessionStorage.getItem('id'));
@@ -56,16 +57,22 @@ const EspacioGeneral = () => {
     }
 
     const contenidoDescripcion = () => {
-        const Submit = () =>{
+        const Submit = (e) =>{
+            e.preventDefault();
             const data = new FormData ();
-            data.append('id', sessionStorage.getItem('id'));
-            data.append('desc',descArea.current.value );
+            data.append('idEsp', sessionStorage.getItem('id'));
+            data.append('desc',descripciRef.current.value);
             fetch ('api/registrarDescrip',{
-                method: 'POST',
+                method:'POST',
                 body:data
             })
-            .then ((response) => response.json()
-            .then ((json) => {alert("DESCRIPCION REGISTRADA")}));        
+            .then ((response) => {
+                if(response.ok){
+                    alert("Descripcion Registrada")
+                } else {
+                    alert("Hubo un error con el servidor, intente mas tarde")
+                }
+            })      
         }
         
         const enviarDescripcion = () => {
@@ -91,10 +98,10 @@ const EspacioGeneral = () => {
                     onSubmit={Submit}
                     method='POST'
                     >
-                <TextArea ref = {descArea} id='anuncioId1'></TextArea>
+                <TextArea ref = {descripciRef} id='anuncioId1'></TextArea>
 
                 <div>
-                    <Boton id='botonSub' type = 'submit'onClick= { Submit } >Enviar</Boton>
+                    <Boton id='botonSub' type = 'submit' >Enviar</Boton>
                 </div>
             </form>):(<p>DESCRIPCION</p>))}    
         </>)

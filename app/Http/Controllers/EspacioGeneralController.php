@@ -14,7 +14,8 @@ class EspacioGeneralController extends Controller
     }
     function RegistroDescripcion(Request $req){
         $Descripcion = new EspaciGeneral;
-        $Descripcion -> idEspAse = $req -> id;
+
+        $Descripcion -> idEspAse = $req -> idEsp;
         $Descripcion -> descripcion = $req -> desc;
         $Descripcion ->save();
 
@@ -22,6 +23,6 @@ class EspacioGeneralController extends Controller
                     ->where ('espaci_generals.idEspAse', '=' , $Descripcion->id)
                     ->where ('espaci_generals.descripcion','=',$Descripcion->desc)
                     ->first();
-        return response ()->json($descip);
+        return response ()->json($Descripcion);
     }
 }

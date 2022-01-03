@@ -4,7 +4,7 @@ import { TD } from '../../elementos/calendarioEG';
 import { Trash } from '../../elementos/calendarioEG';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Fila = ({cambio, setCambio, data, index}) => {
+const Fila = ({cambio, setCambio, data, index, rol}) => {
     const [actividades, setActividades] = useState([[],[],[]]);
 
     useEffect(() => {
@@ -53,9 +53,9 @@ const Fila = ({cambio, setCambio, data, index}) => {
                    <TD >
                        <ul>
                         <div className='d-flex justify-content-end'>
-                            <button onClick={eliminarFila}>
+                            {(rol == 'Consultor') && <button onClick={eliminarFila}>
                                 <Trash icon={ faTrashAlt }/>
-                            </button>
+                            </button>}
                         </div>
                         <div>
                             { actividades[2].map((obj) => <li>{obj.nombreOpcion}</li> ) }
