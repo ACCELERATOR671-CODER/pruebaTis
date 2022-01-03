@@ -106,6 +106,8 @@ Route::post('registrarDescrip', [EspacioGeneralController::class, 'RegistroDescr
 Route::get('getDescripcion', [EspacioGeneralController::class, 'getDescripcion']);
 Route::post('registrarAnuncio', [EspacioGeneralController::class, 'registrarAnuncio']);
 Route::get('getAnuncios', [EspacioGeneralController::class, 'getAnuncios']);
+Route::post('registrarDocumento', [EspacioGeneralController::class, 'registrarDocumento']);
+Route::get('getDocumentos', [EspacioGeneralController::class, 'getDocumentos']);
 
 Route::post('getFullUser', [AdminController::class, 'getFullUser']);
 

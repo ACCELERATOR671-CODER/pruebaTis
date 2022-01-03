@@ -26,14 +26,16 @@ const SelectRol = ({ rol, idUsuario }) => {
             body: id
         })
             .then((response) => {
-                if (!response.ok) {
+                if (response.ok) {
+                    alert("Operacion exitosa");
+                }else{
                     alert("Usuario no se pudo reestablecer");
                 }
             })
     }
 
     return (<>
-        {(rol != 'Consultor') ? ((idUsuario != sessionStorage.getItem('id')) ?
+        {(rol && rol != 'Consultor') ? ((idUsuario != sessionStorage.getItem('id')) ?
             (<>
                 <select ref={select}
                     defaultValue={rol}
@@ -45,7 +47,8 @@ const SelectRol = ({ rol, idUsuario }) => {
                     Reset
                 </button>
             </>
-            ) : (<p>{rol}</p>)) : (<p>No Registrado</p>)}
+            ) : (<><p>{rol}</p></>)) : (<p>{rol}</p>)}
+
     </>)
 }
 

@@ -1,33 +1,30 @@
-import React from 'react'
+import React, {useState, useEffect, useRef} from 'react';
+import 'react-light-accordion/demo/css/index.css';
+import { Boton } from '../../elementos/registro';
 
 const FormularioDocumentos = ({usuario}) => {
 
     const [contenido, setContenido] = useState([]);
     const [cambio, setCambio] = useState(true)
-    const descripciRef = useRef(null);
-    const Submit = () =>{
-        if(descripciRef.current.value.length > 10){
-            const data = new FormData ();
-            data.append('anuncio',(descripciRef.current.value) ? descripciRef.current.value:".");
-            fetch ('api/registrarAnuncio',{
+    const Submit = (e) =>{
+        e.preventDefault();
+            const data = new FormData (document.getElementById('formulario'));
+            fetch ('api/registrarDocumento',{
                 method:'POST',
                 body:data
             })
             .then ((response) => {
                 if(response.ok){
                     setCambio(!cambio);
-                    alert("Anuncio registrado con exito")
+                    alert("Documento registrado con exito")
                 } else {
                     alert("Hubo un error con el servidor, intente mas tarde")
                 }
             })
-        } else {
-            alert("el anuncio debe contener un minimo de 10 caracteres");
-        }
     }
 
     useEffect(() => {
-        fetch('api/getAnuncios')
+        fetch('api/getDocumentos')
         .then(response => response.json())
         .then((json) => {
             setContenido(json);
@@ -37,13 +34,18 @@ const FormularioDocumentos = ({usuario}) => {
     return (<>
     
         { (usuario) && ((usuario.nombreRol == 'Consultor') && 
-            (<>
-        <TextArea ref = {descripciRef} id='anuncioId1'>
-
-        </TextArea>
-        <Boton type='button' onClick={Submit}>Enviar</Boton>
-        </>))}   
-        {contenido.map((data) => <div style={{borderStyle:'solid', padding: '10px'}}>{data.anuncio}<br/> {data.fecha_creacion} </div>)}
+        (<form onSubmit= { Submit } 
+                id='formulario' 
+                method='POST' 
+                encType="multipart/form-data" >
+            <input name = 'nombre' type='text' placeholder='Nombre del archivo' required/>
+            <input name = 'archivo' type='file' accept="application/pdf" required/>
+            <Boton type='submit' onClick={Submit}>Enviar</Boton>
+        </form>))}   
+        {contenido.map((data) => 
+            (<a href={ `resources/documentos/${data.documento}` } target='blank'>
+                {data.nombre} 
+            </a>))}
     </>)
 }
 
