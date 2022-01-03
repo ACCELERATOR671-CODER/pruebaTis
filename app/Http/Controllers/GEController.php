@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Usuario;
 use App\Models\Calendario;
+use Illuminate\Support\Facades\File;
 
 class GEController extends Controller
 {
@@ -98,16 +99,16 @@ class GEController extends Controller
             ->select('Usuario.idGrupo')
             ->where('idUsuario', '=', $req->id)
             ->first();
-        
+
         /*$db = DB::table('Usuario')
                     ->
                     ->where('idGrupo', '=', $grupo->idGrupo)
                     ->whereNotNull('idGE')
-                    ->get();*/    
+                    ->get();*/
 
         $dat = DB::table('Grupo_Empresa')
             ->join('Usuario', 'Usuario.idUsuario', '=', 'Grupo_Empresa.duenio')
-            ->where('Grupo_Empresa.valido', '=' , false)
+            ->where('Grupo_Empresa.valido', '=', false)
             ->where('Usuario.idGrupo', '=', $grupo->idGrupo)
             ->get();
 
@@ -119,14 +120,14 @@ class GEController extends Controller
 
             $fecha = DB::table('Opcion')
                 ->join('Evento', 'Opcion.idEvento', '=', 'Evento.idEvento')
-                ->where('Opcion.nombreOpcion','=','Creación de espacios de trabajo por equipos')
+                ->where('Opcion.nombreOpcion', '=', 'Creación de espacios de trabajo por equipos')
                 ->first();
-            $ge = GrupoEmpresa::find($value->idGE); 
+            $ge = GrupoEmpresa::find($value->idGE);
             if ($integrantes >= 3 /*&& $fecha->fecha_final >= $value->fecha_registro*/) {
-               
+
                 $ge->valido = true;
                 $ge->save();
-                
+
                 $elemento = new Elemento;
                 $elemento->nombre = "Propuestas";
                 $elemento->tipo = "carpeta";
@@ -150,23 +151,21 @@ class GEController extends Controller
                 $elemento3->idGE = $ge->idGE;
                 $elemento3->revisado = 'true';
                 $elemento3->save();
-                
-                $int = DB::table('Usuario')
-                            ->where('idGE', '=', $ge->idGE)
-                            ->get();
-                
 
-                foreach($int as $integrante)
-                {
+                $int = DB::table('Usuario')
+                    ->where('idGE', '=', $ge->idGE)
+                    ->get();
+
+
+                foreach ($int as $integrante) {
                     $not = new NotificacionController;
                     $request = new Request();
                     $request->idUsuario = $integrante->idUsuario;
                     $request->descripcion = 'Se ha marcado tu grupo empresa como Válida, ahora puedes acceder al espacio de asesoramiento';
-                    $request->link = 'Esp-de-Asesoramiento-'.$ge->nombre;
+                    $request->link = 'Esp-de-Asesoramiento-' . $ge->nombre;
                     $request->tipo = 'ge';
                     $not->crearNotificacion($request);
                 }
-                
             } else {
                 $Users = DB::table('Usuario')
                     ->join('Grupo_Empresa', 'Usuario.idGE', '=', 'Grupo_Empresa.idGE')
@@ -178,13 +177,14 @@ class GEController extends Controller
                     $us->save();
                 }
                 $cal = DB::table('Calendario')
-                            ->where('idGE', '=', $ge->idGE)
-                            ->first();
-            
+                    ->where('idGE', '=', $ge->idGE)
+                    ->first();
+
                 $calend = Calendario::findOrFail($cal->idCalendario);
                 $calend->delete();
-                $ge->delete();
 
+                File::delete('resources/' . $ge->logo);
+                $ge->delete();
             }
         }
         return view('vistaGEValida');
