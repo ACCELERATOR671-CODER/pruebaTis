@@ -1,60 +1,45 @@
 import React, {useState, useEffect, useRef} from 'react';
 import 'react-light-accordion/demo/css/index.css';
 import { TextArea } from '../../elementos/espacioGeneral';
-import { Boton } from '../../elementos/registro';
 
 const FormularioDescripcion = ({usuario}) => {
 
-    const [contenido, setContenido] = useState("Descripcion del espacio de asesoramiento");
-    const formulario = useRef(null);
+    const [contenido, setContenido] = useState("");
     const descripciRef = useRef(null);
-    const Submit = (e) =>{
-        e.preventDefault();
+    const Submit = () =>{
         const data = new FormData ();
-        data.append('idEsp', sessionStorage.getItem('id'));
-        data.append('desc',descripciRef.current.value);
+        setContenido(descripciRef.current.value);
+        data.append('descripcion',(descripciRef.current.value) ? descripciRef.current.value:".");
         fetch ('api/registrarDescrip',{
             method:'POST',
             body:data
         })
         .then ((response) => {
-            if(response.ok){
-                alert("Descripcion Registrada")
-            } else {
+            if(!response.ok){
                 alert("Hubo un error con el servidor, intente mas tarde")
             }
-        })      
+        })
     }
-    
-    const enviarDescripcion = () => {
-        
 
-        const valor = document.getElementById('anuncioId1');
-
-        if(valor.value.length<140 && valor.value.length > 0){
-            alert("enviado con exito");
-            desplegarAnuncio();
-        } else {
-            alert("error, contenido debe tener un tamaño inferior 140 caracteres y no debe estar vacio");
-        }
-    }
+    useEffect(() => {
+        fetch('api/getDescripcion')
+        .then(response => response.json())
+        .then((json) => {
+            setContenido(json.descripcion);
+        })
+    }, [])
 
     return (<>
     
         { (usuario) && ((usuario.nombreRol == 'Consultor') ? 
             (
-            <form   
-                ref={formulario}
-                id='formulario'
-                onSubmit={Submit}
-                method='POST'
-                >
-            <TextArea ref = {descripciRef} id='anuncioId1'>{contenido}</TextArea>
-
-            <div>
-                <Boton id='botonSub' type = 'submit' >Enviar</Boton>
-            </div>
-        </form>):(<p>{ contenido }</p>))}    
+        <TextArea ref = {descripciRef} id='anuncioId1' onBlur={ Submit } onkeyup = {(e) => (e.keyCode == 13) &&  Submit() }>
+            {contenido}
+        </TextArea>
+        ):(
+        <p>
+            { contenido }
+        </p>))}    
     </>)
 }
 

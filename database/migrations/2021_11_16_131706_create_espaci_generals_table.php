@@ -13,7 +13,7 @@ class CreateEspaciGeneralsTable extends Migration
      */
     public function up()
     {
-        Schema::create('espaci_generals', function (Blueprint $table) {
+        Schema::create('tablon', function (Blueprint $table) {
             $table->id('idEspAse')->autoincrement();
 
             $table->string('descripcion');

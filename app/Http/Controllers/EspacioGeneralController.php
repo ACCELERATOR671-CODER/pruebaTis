@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anuncio;
 use App\Models\EspaciGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,17 +13,35 @@ class EspacioGeneralController extends Controller
     {
         return view('espaciogeneral');
     }
+
     function RegistroDescripcion(Request $req){
-        $Descripcion = new EspaciGeneral;
+        $descripcion = EspaciGeneral::findOrFail(1);
 
-        $Descripcion -> idEspAse = $req -> idEsp;
-        $Descripcion -> descripcion = $req -> desc;
-        $Descripcion ->save();
+        $descripcion->descripcion = $req->descripcion;
+        $descripcion->save();
+        return response(200);
+    }
 
-        $descip = DB::table ('espaci_generals')
-                    ->where ('espaci_generals.idEspAse', '=' , $Descripcion->id)
-                    ->where ('espaci_generals.descripcion','=',$Descripcion->desc)
-                    ->first();
-        return response ()->json($Descripcion);
+    public function getDescripcion(){
+        $descripcion = EspaciGeneral::findOrFail(1);
+        return response()->json($descripcion);
+    }
+
+    /*
+        anuncio
+    */
+
+    public function registrarAnuncio(Request $req){
+        $anuncio = new Anuncio;
+        $anuncio->anuncio = $req->anuncio;
+        $anuncio->fecha_creacion = date('Y-m-d H:i:s');
+
+        $anuncio->save();
+        return response(200);
+    }
+
+    public function getAnuncios(){
+        $anuncios = Anuncio::all();
+        return response()->json($anuncios);
     }
 }
