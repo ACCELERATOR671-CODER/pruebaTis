@@ -21,7 +21,8 @@ const CalendarioEG = ({user, ges, cambio, setCambio}) => {
                     <Tbody>
                     {(ges) ? 
                             ((ges.length>0) ? 
-                                            (ges.map((data, index) => <Fila data = {data} 
+                                            (ges.map((data, index) => <Fila rol = {user.nombreRol}
+                                                                            data = {data} 
                                                                             index = {index}
                                                                             cambio={cambio}
                                                                             setCambio={setCambio}/>)) 

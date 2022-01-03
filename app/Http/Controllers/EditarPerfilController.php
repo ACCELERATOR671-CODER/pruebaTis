@@ -16,8 +16,7 @@ class EditarPerfilController extends Controller
         $usuario->nombreUsuario = $request->nombreUsuario;
         $usuario->email = $request->email;
         $usuario->telefono = $request->telefono;
-        $usuario->codSis = $request->codSis;
-
+        
         $file = $request->file('imagen');
         if ($file != null){
             $nombre = time()."_".$file->getClientOriginalName();

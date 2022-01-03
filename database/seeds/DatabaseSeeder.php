@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsuarioTableSeeder::class);
         $this->call(OpcionesCalendarioSeeder::class);    
         $this->call(CalendarioG::class);
+        $this->call(Descripcion::class);
     }
 }

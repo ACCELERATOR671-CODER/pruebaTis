@@ -103,6 +103,10 @@ Route::post('actualizarRol', [AdminController::class, 'actualizarRol']);
 Route::post('resetear', [AdminController::class, 'resetear']);
 Route::get('getUsuarios', [AdminController::class, 'getUsuarios']);
 Route::post('registrarDescrip', [EspacioGeneralController::class, 'RegistroDescripcion']);
+Route::get('getDescripcion', [EspacioGeneralController::class, 'getDescripcion']);
+Route::post('registrarAnuncio', [EspacioGeneralController::class, 'registrarAnuncio']);
+Route::get('getAnuncios', [EspacioGeneralController::class, 'getAnuncios']);
+
 Route::post('getFullUser', [AdminController::class, 'getFullUser']);
 
 Route::post('importarExelUsuarios', [ImpExpController::class, 'importarExelUsuarios']);

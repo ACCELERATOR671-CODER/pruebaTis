@@ -46,6 +46,7 @@ const Panel = styled.div`
 const TextArea = styled.textarea`
     resize: none;
     height: 120px;
+    width: 100%;
 `;
 const DescArea = styled.div`
     width: 100%;

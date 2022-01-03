@@ -50,8 +50,10 @@ const Elemento = ({contenido, hijos, setHijos}) => {
             </ContenedorElemento>)}
             {(contenidoInt.tipo == 'pdf') && (
             <ContenedorElemento>
-                <MarcoIcono icon={ faFilePdf } />
-                <div>{ contenidoInt.nombre }</div>
+                <ContenedorElemento>
+                    <MarcoIcono icon={ faFilePdf } />
+                        <a href={ `resources/documentos/${contenidoInt.link}` } target='blank'>{ contenidoInt.nombre }</a>
+                </ContenedorElemento>
             </ContenedorElemento>)}
         </div>
     )

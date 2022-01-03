@@ -4,6 +4,7 @@ faAddressCard,
 faBriefcase,
 faPowerOff,
 faClipboard,
+faRocket,
 faUsersCog,
 faEdit,
 faFileImport,
@@ -23,6 +24,12 @@ const opcionesUsuarioSGE = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
+    onClick: null
+},{
+    link :'EspacioGeneral',
+    name:'espacioGeneral',
+    contenido:'Espacio General',
+    img: faRocket,
     onClick: null
 },{
     link : "RegistroGE",
@@ -51,6 +58,12 @@ const opcionesUsuarioCGE = [{
     img:faUser,
     onClick: null
 },{
+    link :'EspacioGeneral',
+    name:'espacioGeneral',
+    contenido:'Espacio General',
+    img: faRocket,
+    onClick: null
+},{
     link : 'GE-'+sessionStorage.getItem('ge'),
     name:'grupoEmpresa',
     contenido:'Mi Grupo Empresa',
@@ -75,6 +88,12 @@ const opcionesUsuarioCGEV = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
+    onClick: null
+},{
+    link :'EspacioGeneral',
+    name:'espacioGeneral',
+    contenido:'Espacio General',
+    img: faRocket,
     onClick: null
 },{
     link : 'GE-'+sessionStorage.getItem('ge'),
@@ -139,6 +158,12 @@ const opcionesUsuarioC = [{
     name:'perfil',
     contenido:'Mi Perfil',
     img:faUser,
+    onClick: null
+},{
+    link :'EspacioGeneral',
+    name:'espacioGeneral',
+    contenido:'Espacio General',
+    img: faRocket,
     onClick: null
 },{
     link : 'Contrato',

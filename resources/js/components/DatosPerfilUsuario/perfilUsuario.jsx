@@ -174,7 +174,7 @@ const PerfilUsuario = () => {
         document.getElementById('cmpApellido').disabled = false;
         document.getElementById('cmpCorreo').disabled = false;
         document.getElementById('cmpTelefono').disabled = false;
-        document.getElementById('cmpCI').disabled = false;
+
     };
 
     const bloquearCampos = () => {
@@ -184,7 +184,7 @@ const PerfilUsuario = () => {
         document.getElementById('cmpApellido').disabled = true;
         document.getElementById('cmpCorreo').disabled = true;
         document.getElementById('cmpTelefono').disabled = true;
-        document.getElementById('cmpCI').disabled = true;
+        
         location.reload();
     };
 
@@ -204,7 +204,6 @@ const PerfilUsuario = () => {
             formData.append('nombreUsuario',nomUsuario.current.value);
             formData.append('email',correo.current.value);
             formData.append('telefono',telefono.current.value);
-            formData.append('codSis',codSis.current.value);
             formData.append('imagen',imagenCarg.current.files[0])
             fetch('/api/actualizarPerfil', {
                 method: 'POST',
@@ -213,11 +212,12 @@ const PerfilUsuario = () => {
             .then((response) => {
                 if (response.ok) {
                     alert("Actualizado");
+                    bloquearCampos();
                 } else {
                     alert("Algo paso")
                 }
             });
-            bloquearCampos();
+            
         } else {
             alert("Revise que los campos esten correctamente llenados!!");
         }
