@@ -7,8 +7,8 @@ import { Boton } from '../elementos/registro';
 import ItemAcord from './Acordeon/ItemAcord';
 import CalendarioEG from './CalendarioEG/CalendarioEG';
 import FormularioDescripcion from './espacioGeneral/formularioDescripcion';
-
-
+import FormularioAnuncios from './espacioGeneral/FormularioAnuncios';
+import FormularioDocumentos from './espacioGeneral/FormularioDocumentos';
 
           
 
@@ -16,7 +16,7 @@ const EspacioGeneral = () => {
 
     const [datosC, setDatosC] = useState(null);
     const [cambio, setCambio] = useState(false);
-    const [usuario,setUsuario] = useState (null)
+    const [usuario,setUsuario] = useState (null);
     useEffect(()=>{
             const form = new FormData();
             form.append('idUsuario', sessionStorage.getItem('id'));
@@ -70,8 +70,8 @@ const EspacioGeneral = () => {
                     <div className='p-3'>
                         <Accordion atomic = {true}>
                             <ItemAcord titulo='Descripcion' contenido={ () => <FormularioDescripcion usuario = {usuario}/> } />
-                            <ItemAcord titulo='Anuncios' contenido={ contenidoAnuncio }/>
-                            <ItemAcord titulo='Documentacion' contenido={ contenidoDocumentacion }/> 
+                            <ItemAcord titulo='Anuncios' contenido={ () => <FormularioAnuncios usuario = {usuario}/> } />
+                            <ItemAcord titulo='Documentacion' contenido={ () => <FormularioDocumentos usuario = {usuario}/> } /> 
                             <ItemAcord titulo='Calendario' contenido={ () => <CalendarioEG user = { usuario } cambio = { cambio } setCambio = { setCambio } ges={ datosC }/> }/>
                             
                         </Accordion>
