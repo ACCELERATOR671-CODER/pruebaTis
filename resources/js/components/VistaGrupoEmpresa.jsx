@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from '../elementos/card';
 import { BtmEdit, Titulo } from '../elementos/registro';
 import { ContenedorDatos } from '../elementos/registro';
 import BotonSolicitarIngreso from './DatosGrupoEmpresa/BotonSolicitarIngreso';
 import IconoEditar from './Svg/IconoEditar';
 const VistaGrupoEmpresa = () => {
+
+    const [fechaAct, setFechaAct] = useState(null);
+    const [fechaLimite, setFechaLimite] = useState(null);
+
+    const convertirDig = (n) => {
+      return (n < 10) ? '0'+n : n;
+    }
+
+    useEffect(()=>{
+
+      const data = new FormData();
+      data.append('tipoOpcion','Actividad');
+      data.append('nombreOpcion','Entrega de propuestas');
+
+      fetch('api/obtenerEventoGeneral',{
+        method: 'POST',
+        body: data,
+      })
+      .then((res) => res.json())
+      .then((datos) => {
+        if (datos.idEvento) {
+          setFechaLimite(datos.fecha_final);
+        }
+      });
+
+      const date = new Date();
+      const [dia, mes, anio] = [convertirDig(date.getDate()), 
+                                convertirDig(date.getMonth()+1),
+                                convertirDig(date.getFullYear())];
+      
+      setFechaAct(`${anio}-${mes}-${dia}`);
+    },[])
 
     const idUser = sessionStorage.getItem('id');
 
@@ -35,7 +67,10 @@ const VistaGrupoEmpresa = () => {
                         </div>
                         <div>
                             <img id='imagenGER' src = {'resources/'+datos.logo}/>
-                            <BotonSolicitarIngreso />
+                            {
+                                (fechaLimite) && (fechaAct) && (fechaAct <= fechaLimite) &&
+                                (<BotonSolicitarIngreso />)
+                            }
                         </div>
                     </ContenedorDatos>
                 </div>
