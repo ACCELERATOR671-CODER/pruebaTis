@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card } from '../../elementos/card';
 import { Tabla, THead } from '../../elementos/GE';
-import { Icon, InputStyle } from '../../elementos/registro';
+import { Icon, InputStyle, Boton } from '../../elementos/registro';
 import { TBody, TItem } from '../DatosVistaInscritos/estilosVistaInscritos/estilosVistaInscritos';
 import Fecha from '../RegistroGE/Fecha';
 import IconoAtras from '../Svg/IconoAtras';
@@ -213,7 +213,8 @@ const CalendarioGE = () => {
     useEffect(() => {
         obtenerEventos();
     }, [datosGE, agEvento, edEvento, actualizar])
-
+    const [item_back] = useState("./resources/back.png");
+    const [item_save] = useState("./resources/save.png");
     return(
         <Card 
             style={{
@@ -266,14 +267,16 @@ const CalendarioGE = () => {
                                         />                    
                                     </ContLabelInput>
                                 </ContInputs>                 
-                                <ContIconos>
-                                    <ContBtmDerecho onClick={cancEvt}>
-                                        <IconoAtras/>
-                                    </ContBtmDerecho>
-                                    <ContBtmIzquierdo type= 'submit'>
-                                        <IconoGuardar/>
-                                    </ContBtmIzquierdo>
-                                </ContIconos>
+                                
+                                    <div className=' d-flex justify-content-between'>
+                                        <Boton id='botonCan' type='button' onClick={cancEvt}>
+                                            <img src={item_back} alt="" />
+                                        </Boton>
+                                        <Boton id='botonSub' type= 'submit'>
+                                            <img src={item_save} alt="" />
+                                        </Boton>
+                                    </div>
+                                
                             </ContCampos>
                         </form>                     
                     )
