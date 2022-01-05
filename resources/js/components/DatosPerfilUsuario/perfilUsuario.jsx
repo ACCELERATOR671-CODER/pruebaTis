@@ -2,6 +2,7 @@ import React,{ useRef, useState, useEffect } from "react";
 import IconoAtras from "../Svg/IconoAtras";
 import IconoEditar from "../Svg/IconoEditar";
 import IconoGuardar from "../Svg/IconoGuardar";
+import {Boton }from '../../elementos/registro';
 
 const PerfilUsuario = () => {
 
@@ -237,7 +238,8 @@ const PerfilUsuario = () => {
         const url = URL.createObjectURL(image);
         img.src = url;
     }
-
+    const [item_back] = useState("./resources/back.png");
+    const [item_save] = useState("./resources/save.png");
     return(
         <div id="contenedor">
             <div id="tarjeta-datos">
@@ -354,20 +356,29 @@ const PerfilUsuario = () => {
                             maxLength="9"
                             disabled />
                     </div> 
-                </div>
-                {
+                    {
                     editando && (
-                        <div id="cont-iconos-edicion">
-                            <div id="cont-icono-atras" onClick={ bloquearCampos } >
-                                <IconoAtras/>
-                            </div>
-                            <div id="cont-icono-guardar" onClick={ actualizarDatos }>
-                                <IconoGuardar/>
-                            </div>
-                        </div>              
+                        <div className=' d-flex justify-content-between'>
+                        
+                            
+                                <Boton id='botonCan' type='button' onClick={bloquearCampos}>
+                                    <img src={item_back} alt="" />
+                                </Boton>
+                            
+                            
+                                <Boton id='botonSub' type='button' onClick={actualizarDatos}>
+                                    <img src={item_save} alt="" />
+                                </Boton>
+                            
+                        
+                    </div>
+                                     
                     )
                 } 
+                </div>
+                
             </div>
+            
         </div>
         
     );
