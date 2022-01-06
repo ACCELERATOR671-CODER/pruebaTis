@@ -2,6 +2,9 @@ import React, {useState, useEffect, useRef} from 'react';
 import 'react-light-accordion/demo/css/index.css';
 import { TextArea } from '../../elementos/espacioGeneral';
 import { Boton } from '../../elementos/registro';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import {Borrar} from '../../elementos/espacioGeneral'
+
 const FormularioAnuncios = ({usuario}) => {
 
     const [contenido, setContenido] = useState([]);
@@ -19,6 +22,7 @@ const FormularioAnuncios = ({usuario}) => {
                 if(response.ok){
                     setCambio(!cambio);
                     alert("Anuncio registrado con exito")
+                    descripciRef.current.value = "";
                 } else {
                     alert("Hubo un error con el servidor, intente mas tarde")
                 }
@@ -45,7 +49,32 @@ const FormularioAnuncios = ({usuario}) => {
         </TextArea>
         <Boton type='button' onClick={Submit}>Enviar</Boton>
         </>))}   
-        {contenido.map((data) => <div style={{borderStyle:'solid', padding: '10px'}}>{data.anuncio}<br/> {data.fecha_creacion} </div>)}
+        {contenido.map((data) => {
+
+            const eliminar = () => {
+                if(confirm("¿Esta usted seguro de eliminar este Anuncio?")){
+                    const data1 = new FormData();
+                    data1.append('idAnuncio', data.idAnuncio);
+                    fetch('api/borrarAnuncio', {
+                        method:'POST',
+                        body:data1
+                    })
+                    .then((response) => {
+                        if(!response.ok){
+                            alert('Error interno del servidor');
+                        } else {
+                            setCambio(!cambio);
+                        }
+                    })
+                }
+            }
+
+            return (<div className='w-100 d-flex justify-content-center align-items-center'>
+                        <div style={{borderStyle:'solid', padding: '10px', width: '100%'}}>
+                            {data.anuncio}<br/> {data.fecha_creacion} 
+                        </div>
+                        { (usuario) && ((usuario.nombreRol == 'Consultor') && <Borrar className=' ml-2' onClick={ eliminar } icon={ faTimes }/>)}
+                    </div>)})}
     </>)
 }
 

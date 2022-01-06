@@ -217,6 +217,13 @@ const datosNavegador = [
     }
 ];
 
+const datosNavegadorA = [
+    {
+        nombre:'FundaEmpresa',
+        link : "FundaEmpresa"
+    }
+];
+
 export {opcionesUsuarioSGE,
         opcionesUsuarioCGE,
         opcionesUsuarioCGEV,
@@ -224,4 +231,5 @@ export {opcionesUsuarioSGE,
         opcionesUsuarioC,
         registrarse,
         iniciarSession,
-        datosNavegador};
+        datosNavegador,
+        datosNavegadorA};

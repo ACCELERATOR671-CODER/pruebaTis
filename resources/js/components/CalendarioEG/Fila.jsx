@@ -77,6 +77,7 @@ const Fila = ({cambio, setCambio, data, index, rol}) => {
                         </ul>
                     </TD>
                    <TD >
+                       <ul>
                         <div className='d-flex justify-content-end'>
                             {(rol == 'Consultor') && <button onClick={eliminarFila}>
                                 <Trash icon={ faTrashAlt }/>

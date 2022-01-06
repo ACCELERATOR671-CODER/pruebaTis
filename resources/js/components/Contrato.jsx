@@ -111,7 +111,16 @@ const GenContrato = () => {
         setconvocatoria(e.currentTarget.value);
     };
 
-
+    const fecha = new Date();
+    const dia = fecha.getDate();
+    
+    const mes = fecha.getMonth();
+    const anio = fecha.getFullYear();
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    const fechaActual = dia + " de " + monthNames[mes] + " de "+ anio;
+    const mesAnio = monthNames[mes] +" de "+ anio;
     return(<>
             
             <FondoGeneral className='p-4  ' style={{margin:"0 auto"}}>
@@ -133,7 +142,7 @@ const GenContrato = () => {
                 </ContenidoImput>    
                 <FondoContrato className='p-4' id='Contrato'>
                     <h4>CONTRATO DE PRESENTACION DE<br /> SERVICIOS    -    CONSULTORIA</h4><br />
-                    <Subtitulo>AQUI FECHA DE PRESENTACION DE CONTRATOS</Subtitulo>
+                    <Subtitulo>{fechaActual}</Subtitulo>
                     <div className='text-left'>
                     <Letra>
                         Que suscriben la empresa Taller de Ingenieria de Software - TIS,
@@ -186,7 +195,7 @@ const GenContrato = () => {
                     </div>
                     
                     <p></p><br />
-                    <PieDePagina>Cochabamba, <NombreLider>AQUI MES Y AÑO</NombreLider></PieDePagina>
+                    <PieDePagina>Cochabamba, <NombreLider>{mesAnio}</NombreLider></PieDePagina>
                         <div className=' d-flex justify-content-between'>
                             <FirmaGE>  
                                 <Letra>REPRESENTANTE DE LA GRUPOEMPRESA</Letra>

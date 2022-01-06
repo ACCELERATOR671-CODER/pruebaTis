@@ -1,16 +1,35 @@
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Nav, IconNav } from '../elementos/navegador'
 import ItemNavegador from './Navegador/ItemNavegador'
 import Logo from './Navegador/Logo'
 import { faBars, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Session from './Navegador/Session'
-import { datosNavegador } from '../parametros/menus';
+import { datosNavegador, datosNavegadorA } from '../parametros/menus';
 import Notificacion from './Notificacion';
 import Bell from './notificacion/Bell';
 const Navegador = () => {
 
     const session = sessionStorage.getItem('id');
-  
+    const [nav, setNav] = useState([]); 
+
+
+    useEffect(() => {
+        const form = new FormData();
+        form.append('idUsuario', sessionStorage.getItem('id'));
+        fetch('api/getFullUser', {
+            method:'POST',
+            body:form
+        })
+        .then((response) => response.json())
+        .then((json) => {   
+            if(json.nombreRol == 'Administrador'){
+                setNav(datosNavegadorA);
+            } else {
+                setNav(datosNavegador);
+            }
+        })
+    }, [])
+
     return (
         <>
             <Nav className = 'navbar navbar-expand-lg'>
@@ -24,7 +43,7 @@ const Navegador = () => {
                 </button>
                 <div id='navegadorResp' className = "collapse navbar-collapse">    
                     <ul className="navbar-nav">      
-                        {datosNavegador.map((dato) => (<li className="nav-item"><ItemNavegador className='nav-item active' link={dato.link} nombre = {dato.nombre}/></li>))}
+                        {nav.map((dato) => (<li className="nav-item"><ItemNavegador className='nav-item active' link={dato.link} nombre = {dato.nombre}/></li>))}
                     </ul>
                 </div>
                 <Notificacion className=' text-lg-right'/> 
