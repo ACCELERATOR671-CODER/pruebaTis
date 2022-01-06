@@ -174,7 +174,7 @@ const opcionesUsuarioC = [{
 },{
     link : 'EspacioRevision',
     name:'revision',
-    contenido:'DocumentacionGE',
+    contenido:'Propuestas de GE',
     img:faFileAlt,
     onClick: null
 },{
