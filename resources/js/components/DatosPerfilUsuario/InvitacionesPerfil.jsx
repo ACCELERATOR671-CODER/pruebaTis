@@ -7,6 +7,8 @@ import SolicitudRechazada from './SolicitudRechazada';
 const InvitacionesPerfil = () => {
     const [invitaciones, setInvitaciones] = useState(null);
     const id = sessionStorage.getItem('id');
+    const [fechaAct, setFechaAct] = useState(null);
+    const [fechaLimite, setFechaLimite] = useState(null);
 
     useEffect(() => {
         const datoID = new FormData();
@@ -21,6 +23,34 @@ const InvitacionesPerfil = () => {
             setInvitaciones(invUsuario);
         })
     }, []);
+
+    const convertirDig = (n) => {
+      return (n < 10) ? '0'+n : n;
+    }
+
+    useEffect(()=>{
+      const data = new FormData();
+      data.append('tipoOpcion','Actividad');
+      data.append('nombreOpcion','Entrega de propuestas');
+
+      fetch('api/obtenerEventoGeneral',{
+        method: 'POST',
+        body: data,
+      })
+      .then((res) => res.json())
+      .then((datos) => {
+        if (datos.idEvento) {
+          setFechaLimite(datos.fecha_final);
+        }
+      });
+
+      const date = new Date();
+      const [dia, mes, anio] = [convertirDig(date.getDate()), 
+                                convertirDig(date.getMonth()+1),
+                                convertirDig(date.getFullYear())];
+      
+      setFechaAct(`${anio}-${mes}-${dia}`);
+    },[])
 
     const quitar = (idInv, pend, setPend) => {
         const data = new FormData();
@@ -52,16 +82,18 @@ const InvitacionesPerfil = () => {
             if(response.ok){
                 const nuevo = pend.filter((dat) => dat.idInvitacion != idInv);
                 sessionStorage.setItem('ge',nombreGE);
+                alert("Ahora ya formas parte de una grupo empresa");
                 if(nuevo.length>0){
+                    location.replace('/');
                     setPend(nuevo);
                 } else {
+                    location.replace('/');
                     setPend(null);
                 }
             } else {    
                 alert("error, vuelva a intentarlo luego");
             }
         })
-        location.reload();
     }
 
     const eliminar = (id, pend, setPend) => {
@@ -89,34 +121,43 @@ const InvitacionesPerfil = () => {
             <label style={{fontSize: "35px"}}>INVITACIONES</label>
             <ContenedorInvi>
                 {
-                    (invitaciones != null && invitaciones.length != 0) ? 
-                    (invitaciones.map((inv) => (
-                        (inv.invitacion == false && inv.estado == 'Rechazado')?(
-                            <SolicitudRechazada
-                                idInv={ inv.idInvitacion }
-                                nombreGE={ inv.nombre }
-                                logo={ inv.logo }
-                                eliminar={ eliminar }
-                                invitaciones={ invitaciones }
-                                setInvitaciones={ setInvitaciones }
-                            />
-                        ):
-                        (
-                            <Invitacion 
-                                idInv={ inv.idInvitacion }
-                                nombreGE={inv.nombre}
-                                logo={inv.logo}
-                                descripcion={inv.descripcion}
-                                aceptar={ aceptar }
-                                rechazar={ quitar }
-                                invitaciones={ invitaciones }
-                                setInvitaciones={ setInvitaciones }
-                            />
-                        )
-                    )))
-                    : (<div style={{margin: '34% auto'}}>
-                        <p style={{fontSize: '25px'}}>SIN INVITACIONES</p>
-                       </div>)
+                    (fechaLimite)&&(fechaAct)&&(fechaAct<=fechaLimite)?
+                    (
+                        (invitaciones != null && invitaciones.length != 0) ? 
+                        (invitaciones.map((inv) => (
+                            (inv.invitacion == false && inv.estado == 'Rechazado')?(
+                                <SolicitudRechazada
+                                    idInv={ inv.idInvitacion }
+                                    nombreGE={ inv.nombre }
+                                    logo={ inv.logo }
+                                    eliminar={ eliminar }
+                                    invitaciones={ invitaciones }
+                                    setInvitaciones={ setInvitaciones }
+                                />
+                            ):
+                            (
+                                <Invitacion 
+                                    idInv={ inv.idInvitacion }
+                                    nombreGE={inv.nombre}
+                                    logo={inv.logo}
+                                    descripcion={inv.descripcion}
+                                    aceptar={ aceptar }
+                                    rechazar={ quitar }
+                                    invitaciones={ invitaciones }
+                                    setInvitaciones={ setInvitaciones }
+                                />
+                            )
+                        )))
+                        : (<div style={{margin: '34% auto'}}>
+                            <p style={{fontSize: '25px'}}>SIN INVITACIONES</p>
+                        </div>)
+                    )
+                    :
+                    (
+                        <div style={{margin: '34% auto'}}>
+                            <p style={{fontSize: '25px'}}>AUN NO PUEDES VER TUS INVITACIONES</p>
+                        </div>
+                    )
                 }
             </ContenedorInvi>   
         </Card>

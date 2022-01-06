@@ -13,6 +13,10 @@ class PerfilUsuarioController extends Controller
         return view('perfilUsuario');
     }
 
+    public function index_invitaciones(){
+        return view('invitaciones');
+    }
+
     public function show($id)
     {
         $existeUsuario = DB::table('Usuario')->where('idUsuario',$id)->exists();

@@ -10,6 +10,8 @@ const VistaInscritos = () => {
     const [usuarios, setUsuarios] = useState([]);
     const grupoEmp = sessionStorage.getItem('ge');
     const [duenioEmp, setDuenioEmp] = useState(false);
+    const [fechaAct, setFechaAct] = useState(null);
+    const [fechaLimite, setFechaLimite] = useState(null);
 
     useEffect(() => {
         const idUser = sessionStorage.getItem('id');
@@ -27,6 +29,34 @@ const VistaInscritos = () => {
            setDuenioEmp(lider);
         })
     }, [])
+
+    const convertirDig = (n) => {
+        return (n < 10) ? '0'+n : n;
+    }
+  
+      useEffect(()=>{
+        const data = new FormData();
+        data.append('tipoOpcion','Actividad');
+        data.append('nombreOpcion','Entrega de propuestas');
+  
+        fetch('api/obtenerEventoGeneral',{
+          method: 'POST',
+          body: data,
+        })
+        .then((res) => res.json())
+        .then((datos) => {
+          if (datos.idEvento) {
+            setFechaLimite(datos.fecha_final);
+          }
+        });
+  
+        const date = new Date();
+        const [dia, mes, anio] = [convertirDig(date.getDate()), 
+                                  convertirDig(date.getMonth()+1),
+                                  convertirDig(date.getFullYear())];
+        
+        setFechaAct(`${anio}-${mes}-${dia}`);
+      },[])
 
     return(
       <Card style={{margin: '100px auto', height: '500px'}}>
@@ -59,7 +89,8 @@ const VistaInscritos = () => {
                                     {
                                         (grupoEmp != null && grupoEmp != '' 
                                         && duenioEmp == true && usuario.nombre == null
-                                        && usuario.idUsuario != sessionStorage.getItem('id'))? (
+                                        && usuario.idUsuario != sessionStorage.getItem('id')
+                                        && fechaLimite && fechaAct && fechaAct <= fechaLimite)? (
                                             <td style={{padding: '10px'}}>
                                                 <BotonInvitar 
                                                     usuario={ usuario.idUsuario }
@@ -73,7 +104,7 @@ const VistaInscritos = () => {
                             ))
                             :(
                             <TItem>
-                                <td colSpan='4'>No hay usuario we</td>
+                                <td colSpan='4'><h3>No existen usuarios actualmente</h3></td>
                             </TItem>)
                         } 
                     </TBody>

@@ -50,15 +50,7 @@ import HomeContenido from './components/HomeContenido';
 import RegistroUsuarioAdmin from './components/RegistroUsuarioAdmin';
 import GenContrato from './components/Contrato';
 import EspacioRevision from './components/EspacioRevision/EspacioRevision';
-//import Login from "./components/Login/Login"
-
-/*
-
-    if(document.getElementById('login')){
-        ReactDOM.render(<Login/>,document.getElementById('regGE'));
-    }
-
-*/
+import InvitacionesPerfil from './components/DatosPerfilUsuario/InvitacionesPerfil';
 
 if (document.getElementById('viewgevalida')) {
     ReactDOM.render(
@@ -125,14 +117,6 @@ if (document.getElementById('verSolicitudIngresoGE')) {
             <VerSolicitudIngresoGE/>
         </div>, document.getElementById('verSolicitudIngresoGE'));
 }
-
-
-/* if (document.getElementById('comentario')) {
-    ReactDOM.render(
-        <div >
-            <Comentario/>
-        </div>, document.getElementById('comentario'));
-} */
 
 if(document.getElementById('perfil')){
     ReactDOM.render(<div >
@@ -224,4 +208,8 @@ if(document.getElementById('espRev')){
 }
 if(document.getElementById('home')){
     ReactDOM.render(<HomeContenido />,document.getElementById('home'));
+}
+
+if(document.getElementById('invitaciones')){
+    ReactDOM.render(<InvitacionesPerfil />,document.getElementById('invitaciones'));
 }
