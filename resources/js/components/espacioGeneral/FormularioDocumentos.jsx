@@ -10,7 +10,7 @@ const FormularioDocumentos = ({ usuario }) => {
     const [cambio, setCambio] = useState(true)
     const Submit = (e) => {
         e.preventDefault();
-        if (document.getElementById("nombre").value != '') {
+        if (document.getElementById("nombre").value != '' && document.getElementById('archivo').value.length > 0) {
             const data = new FormData(document.getElementById('formulario'));
             fetch('api/registrarDocumento', {
                 method: 'POST',
@@ -50,7 +50,7 @@ const FormularioDocumentos = ({ usuario }) => {
                     {data.nombre}
                 </a>))}
                 <input id='nombre' name='nombre' type='text' placeholder='Nombre del archivo' required />
-                <input name='archivo' type='file' accept="application/pdf" required />
+                <input id='archivo' name='archivo' type='file' accept="application/pdf" required />
                 <Boton type='submit' onClick={Submit}>Enviar</Boton>
             </form>))}
 
