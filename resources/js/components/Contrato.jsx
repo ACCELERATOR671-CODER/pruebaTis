@@ -113,6 +113,8 @@ const GenContrato = () => {
 
     const fecha = new Date();
     const dia = fecha.getDate();
+    const hora = fecha.getHours();
+    console.log(hora);
     
     const mes = fecha.getMonth();
     const anio = fecha.getFullYear();
