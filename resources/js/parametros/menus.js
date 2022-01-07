@@ -197,6 +197,12 @@ const opcionesUsuarioC = [{
     img:faUsers,
     onClick: null
 },{
+    link : "Inscritos",
+    name:'inscritosMateria',
+    contenido:'Inscritos en la Materia',
+    img:faUserFriends,
+    onClick: null
+},{
     link : "#",
     name:'cerrarSession',
     contenido:'Cerrar Session',

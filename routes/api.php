@@ -87,6 +87,7 @@ Route::post('obtenerCarpetasBasicas', [EspacioDeAsesoramientoController::class, 
 Route::post('obtenerGrupoEmpresasValidas', [GEController::class, 'obtenerGrupoEmpresasValidas']);
 Route::post('obtenerTodasGrupoEmpresas', [GEController::class, 'obtenerTodasGrupoEmpresas']);
 Route::post('validarGrupoEmpresas', [GEController::class, 'validarGrupoEmpresas']);
+Route::post('validarGrupoEmpresa', [GEController::class, 'validarGrupoEmpresa']);
 
 Route::post('agregarEvento',[CalendarioController::class, 'agregarEvento']);
 Route::post('obtenerEventos',[CalendarioController::class, 'obtenerEventos']);
@@ -139,6 +140,7 @@ Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNoti
 Route::post('obtenerEventoGeneral',[CalendarioController::class, 'obtenerEventoGeneral']);
 Route::get('obtenerConsultores',[UserController::class, 'obtenerConsultores']);
 
+Route::post('establecerBotonValidar', [GEController::class, 'establecerBotonValidar']);
 
 Route::post('borrarDocumento', [EspacioGeneralController::class, 'borrarDocumento']);
 Route::post('borrarAnuncio', [EspacioGeneralController::class, 'borrarAnuncio']);

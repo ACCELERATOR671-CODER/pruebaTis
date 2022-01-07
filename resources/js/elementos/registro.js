@@ -51,6 +51,28 @@ const Boton = styled.button`
     }
 `;
 
+const BotonSolicitud = styled.button`
+    transition: .3s ease all;
+    border-radius: 5px;
+    color: white;
+    border-style: solid;
+    :hover{
+        color: black;
+        border-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
+        background-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
+    }
+
+    ${props => props.valido ==='false' && css`
+        border-bottom-color: red !important;
+        background-color: red !important;
+    `}
+
+    ${props => props.valido ==='true' && css`
+        background-color: rgb(${colorSecundary.r} , ${colorSecundary.g}, ${colorSecundary.b}) !important;
+        border-color: rgb(${colorSecundary.r} , ${colorSecundary.g}, ${colorSecundary.b}) !important;
+    `}
+`;
+
 const InputStyle = styled.input`
     transition: .3s ease all;
     color: black;
@@ -132,11 +154,12 @@ const BtmEdit = styled.div`
     border: 2px solid rgb(${colorSecundary.r} , ${colorSecundary.g}, ${colorSecundary.b});
 `;
 
-export { ContenedorDatos, 
-    ContenedorBloque, 
-    InputImagen, 
-    Titulo, 
+export { ContenedorDatos,
+    ContenedorBloque,
+    InputImagen,
+    Titulo,
     Boton,
+    BotonSolicitud,
     InputStyle,
     MensajeRGE,
     Icon,
