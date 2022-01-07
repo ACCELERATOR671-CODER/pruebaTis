@@ -6,6 +6,7 @@ use App\Models\Evento;
 use App\Models\Option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class CalendarioController extends Controller
 {
@@ -135,12 +136,17 @@ class CalendarioController extends Controller
     }
 
     public function obtenerEventoGeneral(Request $request) {
-        $eventoG = DB::table('Opcion')
-            ->join('Evento','Evento.idEvento','=','Opcion.idEvento')
-            ->where('tipoOpcion','=',$request->tipoOpcion)
-            ->where('nombreOpcion','=',$request->nombreOpcion)
-            ->first();
-
-        return response()->json($eventoG);
+        try {
+            $eventoG = DB::table('Opcion')
+                ->join('Evento','Evento.idEvento','=','Opcion.idEvento')
+                ->where('tipoOpcion','=',$request->tipoOpcion)
+                ->where('nombreOpcion','=',$request->nombreOpcion)
+                ->first();
+            return response()->json($eventoG);
+        } catch (Throwable $err){
+            report($err);
+            print_r($err);
+            return response(200);
+        }
     }
 }

@@ -64,4 +64,22 @@ class EspacioGeneralController extends Controller
         $doc = Documentacion::all();
         return response()->json($doc);
     }
+
+    public function borrarDocumento(Request $req){
+
+        $documento = Documentacion::findOrFail($req->idDoc);
+
+        $destinationPath = 'resources/documentos/';
+        unlink($destinationPath.$documento->documento);
+
+        $documento->delete();
+        return response(200);
+    }
+
+    public function borrarAnuncio(Request $req){
+
+        $anuncio = Anuncio::findOrFail($req->idAnuncio);
+        $anuncio->delete();
+        return response(200);
+    }
 }

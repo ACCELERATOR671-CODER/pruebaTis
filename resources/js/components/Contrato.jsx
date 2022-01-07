@@ -203,12 +203,15 @@ const GenContrato = () => {
                                 <Letra>REPRESENTANTE DE LA GRUPOEMPRESA</Letra>
                             </FirmaGE> 
                             <div>
-                                <InputImg name = 'foto_perfil' 
-                                                            estado = { imagen }
-                                                            cambiarEstado = { setImagen } 
-                                                            funcValidar = { validarImagen }/>
-                                
-                                
+                                <div style={{maxWidth: '310px'}}>
+                                    <InputImg
+                                        style={{width: '60%', height:'100px'}} 
+                                        name = 'foto_perfil' 
+                                        estado = { imagen }
+                                        cambiarEstado = { setImagen } 
+                                        funcValidar = { validarImagen }                                    
+                                    />       
+                                </div>
                                 <Letra>REPRESENTANTE CONSULTOR TIS</Letra>
                             </div> 
                             

@@ -27,7 +27,7 @@ const CalendarioEG = ({user, ges, cambio, setCambio}) => {
                                                                             cambio={cambio}
                                                                             setCambio={setCambio}/>)) 
                                 : 
-                                (<tr><td colSpan="5">No hay debates</td></tr>))
+                                (<tr><td colSpan="5">No hay Eventos</td></tr>))
                         :
                         (<tr><td colSpan="5">Cargando...</td></tr>)}
                     </Tbody>

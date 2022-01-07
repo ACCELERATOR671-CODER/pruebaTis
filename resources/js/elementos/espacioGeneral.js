@@ -88,5 +88,10 @@ const BotonCancel = styled.button`
     }
 `;
 
+const Borrar = styled(FontAwesomeIcon)`
+    color: red;
+    font-size:15px;
+`;
+
 export {Acordeon, MarcoIcono, Panel, TextArea, CardEG, GrupoCheckBox, ContenedorCheckBox,
-        GrupoBotones, BotonCancel, DescArea};
+        GrupoBotones, BotonCancel, DescArea, Borrar};

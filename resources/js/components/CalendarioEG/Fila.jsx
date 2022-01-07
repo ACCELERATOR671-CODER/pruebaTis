@@ -79,9 +79,9 @@ const Fila = ({cambio, setCambio, data, index, rol}) => {
                    <TD >
                        <ul>
                         <div className='d-flex justify-content-end'>
-                            <button onClick={eliminarFila}>
+                            {(rol == 'Consultor') && <button onClick={eliminarFila}>
                                 <Trash icon={ faTrashAlt }/>
-                            </button>
+                            </button>}
                         </div>
                         <div>
                             { actividades[2].map((obj) => <li>{obj.nombreOpcion}</li> ) }
