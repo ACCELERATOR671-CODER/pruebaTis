@@ -140,7 +140,6 @@ Route::post('eliminarNotificacion',[NotificacionController::class, 'eliminarNoti
 Route::post('obtenerEventoGeneral',[CalendarioController::class, 'obtenerEventoGeneral']);
 Route::get('obtenerConsultores',[UserController::class, 'obtenerConsultores']);
 
-Route::post('puedeValidarGE', [GEController::class, 'puedeValidarGE']);
 Route::post('establecerBotonValidar', [GEController::class, 'establecerBotonValidar']);
 
 Route::post('borrarDocumento', [EspacioGeneralController::class, 'borrarDocumento']);

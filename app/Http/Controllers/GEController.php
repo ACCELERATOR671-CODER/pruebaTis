@@ -268,24 +268,6 @@ class GEController extends Controller
         }
     }
 
-    function puedeValidarGE(Request $req)
-    {
-        $db = DB::table('Opcion')
-            ->join('Evento', 'Evento.idEvento', '=', 'Opcion.idEvento')
-            ->where('Opcion.nombreOpcion', '=', "Entrega de propuestas")
-            ->first();
-        if ($db) {
-            $fecha_actual = strtotime(date("Y-m-d", time()));
-            $fecha_entrada = strtotime($db->fecha_final);
-            error_log($fecha_actual);
-            error_log($fecha_entrada);
-            error_log((int)$fecha_actual >= (int)$fecha_entrada);
-            if ((int)$fecha_actual >= (int)$fecha_entrada) {
-                return response('', 201);
-            }
-        }
-    }
-
     function establecerBotonValidar(Request $req)
     {
         $dat = DB::table('Grupo_Empresa')
