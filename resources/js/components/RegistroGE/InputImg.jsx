@@ -3,7 +3,7 @@ import { InputImagen } from '../../elementos/registro'
 import PropTypes from 'prop-types'
 import MensajeAlerta from './MensajeAlerta'
 
-const InputImg = ({name, estado, cambiarEstado, funcValidar}) => {
+const InputImg = ({name, estado, cambiarEstado, funcValidar, style = null}) => {
     const imagenCarg = useRef(null);
     const [logo, setLogo] = useState("./resources/logoDefecto.png");
 
@@ -21,10 +21,16 @@ const InputImg = ({name, estado, cambiarEstado, funcValidar}) => {
         const url = URL.createObjectURL(image);
         img.src = url;
     }
-
+    console.log(style);
     return (
         <>
-            <img id='imagenGER' className='mb-2' src={logo} alt="" />
+            <img
+                style={style?(style):({position: 'relative'})} 
+                id='imagenGER' 
+                className='mb-2' 
+                src={logo} 
+                alt=""  
+            />
             <InputImagen 
                          name={name} 
                          ref = {imagenCarg} 

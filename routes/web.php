@@ -76,3 +76,4 @@ Route::get('/RegitroUsuarioAdmin', [AdminController::class, 'getViewRegister']);
 Route::get('/Contrato', [ContratosController::class, 'vistaContrato']);
 
 Route::get('/EspacioRevision', [EspacioRevisionController::class, 'index_view']);
+Route::get('/MisInvitaciones', [PerfilUsuarioController::class, 'index_invitaciones']);

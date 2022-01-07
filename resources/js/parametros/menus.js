@@ -11,7 +11,8 @@ faFileImport,
 faUserPlus,
 faUserFriends,
 faFileContract,
-faFileAlt} from '@fortawesome/free-solid-svg-icons'
+faFileAlt,
+faArchive} from '@fortawesome/free-solid-svg-icons'
 import { cerrarSession } from './session';
 
 //SinGrupoEmpresa SGE
@@ -42,6 +43,12 @@ const opcionesUsuarioSGE = [{
     name:'inscritosMateria',
     contenido:'Inscritos en la Materia',
     img:faUserFriends,
+    onClick: null
+},{
+    link : "MisInvitaciones",
+    name:'invitaciones',
+    contenido:'Invitaciones',
+    img:faArchive,
     onClick: null
 },{
     link : "#",
@@ -174,7 +181,7 @@ const opcionesUsuarioC = [{
 },{
     link : 'EspacioRevision',
     name:'revision',
-    contenido:'DocumentacionGE',
+    contenido:'Propuestas de GE',
     img:faFileAlt,
     onClick: null
 },{
@@ -223,6 +230,13 @@ const datosNavegador = [
     }
 ];
 
+const datosNavegadorA = [
+    {
+        nombre:'FundaEmpresa',
+        link : "FundaEmpresa"
+    }
+];
+
 export {opcionesUsuarioSGE,
         opcionesUsuarioCGE,
         opcionesUsuarioCGEV,
@@ -230,4 +244,5 @@ export {opcionesUsuarioSGE,
         opcionesUsuarioC,
         registrarse,
         iniciarSession,
-        datosNavegador};
+        datosNavegador,
+        datosNavegadorA};

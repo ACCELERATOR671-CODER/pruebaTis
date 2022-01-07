@@ -143,3 +143,5 @@ Route::get('obtenerConsultores',[UserController::class, 'obtenerConsultores']);
 Route::post('puedeValidarGE', [GEController::class, 'puedeValidarGE']);
 Route::post('establecerBotonValidar', [GEController::class, 'establecerBotonValidar']);
 
+Route::post('borrarDocumento', [EspacioGeneralController::class, 'borrarDocumento']);
+Route::post('borrarAnuncio', [EspacioGeneralController::class, 'borrarAnuncio']);

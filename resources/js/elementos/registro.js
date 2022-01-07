@@ -62,12 +62,12 @@ const BotonSolicitud = styled.button`
         background-color: rgb(${colorPrimary.r}, ${colorPrimary.g}, ${colorPrimary.b});
     }
 
-    ${props => props.valido ==='true' && css`
+    ${props => props.valido ==='false' && css`
         border-bottom-color: red !important;
         background-color: red !important;
     `}
 
-    ${props => props.valido ==='false' && css`
+    ${props => props.valido ==='true' && css`
         background-color: rgb(${colorSecundary.r} , ${colorSecundary.g}, ${colorSecundary.b}) !important;
         border-color: rgb(${colorSecundary.r} , ${colorSecundary.g}, ${colorSecundary.b}) !important;
     `}

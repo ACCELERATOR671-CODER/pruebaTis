@@ -1,7 +1,5 @@
 import React,{ useRef, useState, useEffect } from "react";
-import IconoAtras from "../Svg/IconoAtras";
 import IconoEditar from "../Svg/IconoEditar";
-import IconoGuardar from "../Svg/IconoGuardar";
 import {Boton }from '../../elementos/registro';
 
 const PerfilUsuario = () => {
@@ -36,7 +34,7 @@ const PerfilUsuario = () => {
             correo.current.value = datoUsuario[0].email;
             telefono.current.value = datoUsuario[0].telefono;
             codSis.current.value = datoUsuario[0].codSis;
-            carrera.current.value = datoUsuario[1].nomCarrera;
+            carrera.current.value = datoUsuario[1]?datoUsuario[1].nomCarrera:'';
             grupo.current.value = datoUsuario[2].nomGrupo;
             if (datoUsuario[0].foto_perfil != null) {
                 imagen.current.src = logo+datoUsuario[0].foto_perfil;
@@ -58,10 +56,10 @@ const PerfilUsuario = () => {
         codSisValido: true, 
     });
 
-    const regexNombre = new RegExp('^[a-zA-Z ]+$');
+    const regexNombre = new RegExp('^[a-zA-ZÀ-ÿ\u00f1\u00d1 ]+$');
     const regexNomUsuario = new RegExp('^[a-zA-Z0-9]+$');
     const regexCorreo = new RegExp('^[0-9]{9}@est+\.umss+\.edu+$');
-    const regexTelefono = new RegExp('^[0-9]{7,8}$');
+    const regexTelefono = new RegExp('^[0-9]{0,8}$');
     const regexCodSis = new RegExp('^[0-9]{9}$');
 
     const verificarNombre = () => {
@@ -129,7 +127,7 @@ const PerfilUsuario = () => {
                 ...valido,
                 telefonoValido: false
             })
-            cmpTelefono.setCustomValidity("Solo numeros, minimo 7 maximo 8");
+            cmpTelefono.setCustomValidity("Solo numeros maximo 8");
             cmpTelefono.reportValidity();
         } else {
             setValidaciones({
@@ -282,7 +280,7 @@ const PerfilUsuario = () => {
                             ref={ nombreC } 
                             onChange={ verificarNombre }
                             onFocus={ verificarNombre }
-                            maxLength="30"
+                            maxLength="80"
                             disabled  
                         /> 
                     </div>
