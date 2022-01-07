@@ -77,3 +77,6 @@ Route::get('/Contrato', [ContratosController::class, 'vistaContrato']);
 
 Route::get('/EspacioRevision', [EspacioRevisionController::class, 'index_view']);
 Route::get('/MisInvitaciones', [PerfilUsuarioController::class, 'index_invitaciones']);
+Route::get('/prueba', function(){
+    return view('notificacion');
+});

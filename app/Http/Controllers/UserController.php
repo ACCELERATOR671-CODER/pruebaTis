@@ -251,6 +251,8 @@ class UserController extends Controller
         $usuario->idRol = $rol->idRol;
 
         $usuario->save();
+        
+        UserMail::enviarMail($usuario -> idUsuario);
 
         return response()->json($usuario);
     }
