@@ -45,10 +45,7 @@ const FormularioDocumentos = ({ usuario }) => {
                 method='POST'
                 encType="multipart/form-data" >
 
-                {contenido.map((data) =>
-                (<a href={`resources/documentos/${data.documento}`} target='blank'>
-                    {data.nombre}
-                </a>))}
+                
                 <input id='nombre' name='nombre' type='text' placeholder='Nombre del archivo' required />
                 <input name='archivo' type='file' accept="application/pdf" required />
                 <Boton type='submit' onClick={Submit}>Enviar</Boton>

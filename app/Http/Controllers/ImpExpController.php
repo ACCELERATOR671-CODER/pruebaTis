@@ -51,6 +51,7 @@ class ImpExpController extends Controller
                     $user->idRol = $rol->idRol;
 
                     $user->save();
+                    
                 }
             }
         }

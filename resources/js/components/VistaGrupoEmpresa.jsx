@@ -128,10 +128,12 @@ const VistaGrupoEmpresa = () => {
                 </ContenedorDatos>
             </div>
             <>
-                {(fechaLimite) && (fechaAct) && (fechaAct <= fechaLimite) &&
+            
+                {(idUser == datos.duenio) && ((fechaLimite) && (fechaAct) && (fechaAct <= fechaLimite) &&
                     (<><BotonSolicitud onClick={onClick} valido={activo} >
                         {(activo == 'true') ? "Validar Grupo Empresa" : "Eliminar Validacion"}
-                    </BotonSolicitud ></>)}
+                    </BotonSolicitud ></>))}
+            
             </>
         </Card>
     )

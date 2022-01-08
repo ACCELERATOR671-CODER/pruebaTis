@@ -11,28 +11,21 @@ const HomeContenido = () => {
         lc.addDato({
             id: 1,
             titulo:"¡Bienvenido!",
-            descripcion: "La página TIS es un intermediario entre el usuario y la empresa TIS, nuestro objetivo es el de facilitar la asesoria a los estudiantes",
+            descripcion: " Bienvenido. La empresa TIS tiene como mision realizar consultorias para la mejora de procesos de desarrollo de software. Con este objetivo, trabaja directamente con las empresas consultadas y su equipo en la prestacion de servicios de ingenieria de software relativo a un producto software (sistema).",
             link:null,
             img: './Home/celebracion-de-eventos.jpg'
         });
         lc.addDato({
-            id:2,
-            titulo:"¡Registrate!",
-            descripcion: "Si estas inscrito a la materia entonces !Ya puedes Registrarte en la página!, utiliza tu còdigo sis para registrarteO comunicate con un administrador en caso de que haya algun problema con tu Registro.",
-            link:null,
-            img: './Home/1600x900_registro.jpg'
-        });
-        lc.addDato({
             id:3,
             titulo:"Crea Tu Grupo Empresa",
-            descripcion: "Crea grupo empresas o únete a una para participar en las asesorías con tu respectivo Consultor",
+            descripcion: "Créa grupo empresas o únete a una para participar en las asesorías con tu respectivo Consultor",
             link:null,
             img: './Home/Grupo Empresa.jpg'
         });
         lc.addDato({
             id:4,
             titulo:"Solicita ingresar a una grupo empresa",
-            descripcion: "Si ya estas registrado entonces puedes solicitar unirte a una grupo empresa en la seccion de grupo empresas ya Registradas.",
+            descripcion: "Puedes solicitar unirte a una grupo empresa en la seccion de grupo empresas ya Registradas.",
             link:'GrupoEmpresas',
             img: './Home/Solicitar.jpg'
         });
@@ -46,7 +39,7 @@ const HomeContenido = () => {
         lc.addDato({
             id:6,
             titulo:"Espacio General",
-            descripcion: "El espacio general sirve para ver los anuncios, el calendario con respecto a las asesorias",
+            descripcion: "El espacio general sirve para ver los anuncios, el calendario con respecto a las asesorias y la documentacion proporcionada por el consultor",
             link:'EspacioGeneral',
             img: './Home/Espacio General.jpg'
         });
@@ -62,7 +55,7 @@ const HomeContenido = () => {
         lc.addDato({
             id:8,
             titulo:"Calendario de la grupo empresa",
-            descripcion: "El calendario de la grupo empresa sirve para planificar tus actividades a futuro con respecto al proyecto que implementarás",
+            descripcion: "Puede registrar eventos y reuniones a futuro de la Grupo Empresa",
             link:'#',
             img: './Home/Calendario.jpg'
         });
@@ -70,7 +63,7 @@ const HomeContenido = () => {
         lc.addDato({
             id:9,
             titulo:"Espacio de asesoramiento",
-            descripcion: "Crea links y pdfs para mantener tu documentación en orden y sigue la metodología que elegiste!",
+            descripcion: "Crea links y pdfs para mantener tu documentación en orden!",
             link:'#',
             img: './Home/Espacio de asesoramiento.jpg'
         });
@@ -80,7 +73,7 @@ const HomeContenido = () => {
         lc.addDato({
             id: 1,
             titulo:"¡Bienvenido!",
-            descripcion: "La página TIS es un intermediario entre el usuario y la empresa TIS, nuestro objetivo es el de facilitar la asesoria a los estudiantes",
+            descripcion: "Bienvenido a la plataforma de apoyo a la empresa TIS, como administrador puede gestionar a los futuros estudiantes y consultores",
             link:null,
             img: './Home/celebracion-de-eventos.jpg'
         });
@@ -108,12 +101,56 @@ const HomeContenido = () => {
         lc.addDato({
             id: 5,
             titulo:"Importa datos",
-            descripcion: "Crea datos en masa como funda empresa o nuevos usuarios desde un archivo externo",
+            descripcion: "Importa datos por lotes como funda empresa o nuevos usuarios desde un archivo externo",
             link:'ImportarDatos',
             img: './Home/importar.jpg'
         });
     }
-
+    const consultor = () => {
+        lc.addDato({
+            id: 1,
+            titulo:"¡Bienvenido!",
+            descripcion: "Bienvenido, como Consultor puedes gestionar, revisar y generar documentos para las Grupo Empresas",
+            link:null,
+            img: './Home/celebracion-de-eventos.jpg'
+        });
+       
+        lc.addDato({
+            id: 2,
+            titulo:"Espacio General",
+            descripcion: "Crea, edita o elimina los anuncios, la documentacion y diferentes eventos en el calendario general!",
+            link:null,
+            img: './Home/Espacio General.jpg'
+        });
+        lc.addDato({
+            id: 3,
+            titulo:"Grupo Empresas ",
+            descripcion: "Visualiza todas las Grupo Empresas Validas que existan en la gestion ",
+            link:null,
+            img: './Home/Grupo Empresa.jpg'
+        });
+        lc.addDato({
+            id: 4,
+            titulo:"Estudiantes en tu grupo",
+            descripcion: "Revisa todos los usuarios registrados en tu grupo",
+            link:null,
+            img: './Home/personasGrupos.jpg'
+        });
+        lc.addDato({
+            id: 5,
+            titulo:"Revisa las Propuestas",
+            descripcion: "Como consultor, revisa todas las propuestas subidas de todas las Grupo Empresas",
+            link:null,
+            img: './Home/propuestas.jpg'
+        });
+        lc.addDato({
+            id: 6,
+            titulo:"Realiza Contratos",
+            descripcion: "Genera contratos de las Grupo Empresas validas con los datos necesarios y una firma del consultor",
+            link:null,
+            img: './Home/contrato.jpg'
+        });
+    }
     useEffect(() => {
         const form = new FormData();
         form.append('idUsuario', sessionStorage.getItem('id'));
@@ -125,11 +162,15 @@ const HomeContenido = () => {
         .then((json) => {   
             if(json.nombreRol == 'Administrador'){
                 administrador();
-                setPreparado(true);
-            } else {
+                
+            } else if(json.nombreRol == 'Estudiante'){
                 estudiante();
-                setPreparado(true);
+                
+            } else {
+                consultor();
+
             }
+            setPreparado(true);
         })
     }, [])
 
